@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 
-function Cabecalho() {
+function cabecalhoLoginEfetuado() {
     return (
         <section className="cabecalho">
 
@@ -37,14 +37,7 @@ function Cabecalho() {
             >
                 Sobre nós
             </button>
-
-            <button
-                className="botao-entrar"
-                type="button"
-            >
-                Entrar
-            </button>
-
+            
             <button
                 className="botao-cadastraUsuario"
                 type="button"
@@ -59,4 +52,4 @@ function Cabecalho() {
 
 
 
-export default Cabecalho;
+export default cabecalhoLoginEfetuado;

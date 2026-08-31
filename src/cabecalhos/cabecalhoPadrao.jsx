@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 
-function cabecalhoCriandoUsuario() {
+function cabecalhoPadrao() {
     return (
         <section className="cabecalho">
 
@@ -45,6 +45,13 @@ function cabecalhoCriandoUsuario() {
                 Entrar
             </button>
 
+            <button
+                className="botao-cadastraUsuario"
+                type="button"
+                onClick={() => navigate("/cadastrarUsuario")}
+            >
+                Cadastrar-se
+            </button>
 
         </section>
     );
@@ -52,4 +59,4 @@ function cabecalhoCriandoUsuario() {
 
 
 
-export default cabecalhoCriandoUsuario;
+export default cabecalhoPadrao;

@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-import Cabecalho from "../cabecalhos/cabecalho";
+import Cabecalho from "../cabecalhos/cabacalhoLoginefetuado";
 
 
 function CadastrarAnimais() {
@@ -57,7 +57,7 @@ function CadastrarAnimais() {
     }
 
     return (
-        <section>
+        <section className="cadastrar-animais">
 
            <Cabecalho />
 
