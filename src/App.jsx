@@ -7,15 +7,17 @@ import {
 
 import CadastrarAnimais from "./Paginas/CadastrarAnimais";
 import CadastrarUsuarios from "./Paginas/CadastrarUsuarios";
+import PaginaInicial from "./Paginas/PaginaInicial";
 
 import "./App.css";
-
 
 function Home() {
     const navigate = useNavigate();
 
     return (
         <>
+            <PaginaInicial />
+
             <button
                 className="botao-cadastro-animal"
                 onClick={() => navigate("/cadastrarAnimais")}
@@ -32,10 +34,6 @@ function Home() {
         </>
     );
 }
-
-
-
-
 
 function App() {
     return (
