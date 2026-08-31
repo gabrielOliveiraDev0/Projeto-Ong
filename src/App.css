@@ -1,0 +1,309 @@
+
+.botao-cadastro {
+  background-color: #00FFFF;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-cadastro:hover {
+  background-color: #00cccc;
+  transform: scale(1.05);
+}
+
+
+/* FORMULÁRIO */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+/* CAMPO DE DESCRIÇÃO */
+
+.campo-descricao {
+  width: 100%;
+  max-width: 750px;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+
+/* FOTO */
+
+.foto {
+  display: block;
+  width: 115px;
+  padding: 2px;
+}
+
+
+/* CAMPOS */
+
+input,
+select {
+  width: 100%;
+  max-width: 750px;
+  padding: 8px;
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+
+
+/* BOTÃO CONFIRMAR */
+
+.botao-confirmar {
+  width: 150px;
+  padding: 15px;
+  font-size: 14px;
+  background-color: #1E90FF;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  align-self: center;
+  transition: 0.3s;
+}
+
+.botao-confirmar:hover {
+  background-color: #00FFFF;
+  transform: scale(1.1);
+}
+
+
+/* BOTÃO NOTÍCIA */
+
+.botao-noticia {
+  background: none;
+  border: 10px solid #1E90FF;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+
+.botao-noticia:hover {
+  background-color: #1E90FF;
+  border-radius: 9px;
+  transform: scale(1.1);
+}
+
+
+/* BOTÃO BUSCAR ONGS */
+
+.botao-buscarOngs {
+  background: none;
+  border: 10px solid #1E90FF;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+
+.botao-buscarOngs:hover {
+  background-color: #1E90FF;
+  border-radius: 9px;
+  transform: scale(1.1);
+}
+
+
+/* BOTÃO VER ANIMAIS */
+
+.botao-verAnimais {
+  background: none;
+  border: 10px solid #1E90FF;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+
+.botao-verAnimais:hover {
+  background-color: #1E90FF;
+  border-radius: 9px;
+  transform: scale(1.1);
+}
+
+
+/* BOTÃO SOBRE NÓS */
+
+.botao-sobreNos {
+  background: none;
+  border: 10px solid #1E90FF;
+  color: #000;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 9px;
+  transition: 0.3s;
+}
+
+.botao-sobreNos:hover {
+  background-color: #1E90FF;
+  border-radius: 9px;
+  transform: scale(1.1);
+}
+
+
+/* BOTÃO ENTRAR */
+
+.botao-entrar {
+  width: 90px;
+  padding: 5px;
+  font-size: 20px;
+  background-color: #6959CD;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-entrar:hover {
+  background-color: #836FFF;
+  transform: scale(1.1);
+}
+
+
+/* BOTÃO CADASTRAR USUÁRIO */
+
+.botao-cadastraUsuario {
+  width: 130px;
+  padding: 5px;
+  font-size: 20px;
+  background-color: #6959CD;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-cadastraUsuario:hover {
+  background-color: #836FFF;
+  transform: scale(1.1);
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 10px;
+    border: 10px solid #1E90FF;
+    background-color: #1E90FF;
+    border-radius: 9px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+/* ÁREA INTERNA DO CADASTRO */
+
+.divCorpoCadastro {
+  width: 90%;
+  max-width: 900px;
+  background-color: #b7d7f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* CORPO DA PÁGINA DE CADASTRO */
+
+.corpoCadastro {
+  min-height: 100vh;
+  padding: 40px 20px;
+  border: 5px solid #1E90FF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+
+
+/* TÍTULO */
+
+.tituloCadastro {
+  font-size: 40px;
+  text-align: center;
+}
+
+
+/* LOGO */
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-right: auto;
+}
+
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 800px) {
+  .cabecalho {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .divCorpoCadastro {
+    width: 95%;
+  }
+
+  .tituloCadastro {
+    font-size: 32px;
+  }
+
+  input,
+  select,
+  .campo-descricao {
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .corpoCadastro {
+    padding: 25px 10px;
+  }
+
+  .divCorpoCadastro {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .tituloCadastro {
+    font-size: 28px;
+  }
+
+  .cabecalho {
+    border-width: 5px;
+  }
+}
+
