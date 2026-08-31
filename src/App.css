@@ -1,5 +1,5 @@
 
-.botao-cadastro {
+.botao-cadastro-animal {
   background-color: #00FFFF;
   color: white;
   border: none;
@@ -10,7 +10,22 @@
   transition: 0.3s;
 }
 
-.botao-cadastro:hover {
+.botao-cadastro-animal:hover {
+  background-color: #00cccc;
+  transform: scale(1.05);
+}
+.botao-cadastro-usuario {
+  background-color: #00FFFF;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.botao-cadastro-usuario:hover {
   background-color: #00cccc;
   transform: scale(1.05);
 }
