@@ -18,6 +18,7 @@ function Rota() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/" element={<PaginaInicial />} />
 
                 <Route
                     path="/cadastrarAnimais"
