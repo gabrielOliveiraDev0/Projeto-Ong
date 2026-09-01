@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
+
 function BotaoCadastrarUsuario() {
     const navigate = useNavigate();
-    return (
 
+    return (
         <button
             className="botao-cadastraUsuario"
             type="button"
@@ -10,8 +11,38 @@ function BotaoCadastrarUsuario() {
         >
             Cadastrar-se
         </button>
-
     );
 }
 
-export default BotaoCadastrarUsuario;
+function BotaoCadastrarAnimal() {
+    const navigate = useNavigate();
+
+    return (
+        <button
+            className="botao-cadastro-animal"
+            type="button"
+            onClick={() => navigate("/cadastrarAnimais")}
+        >
+            Cadastrar Animal
+        </button>
+    );
+}
+function BotaoEntrar() {
+    const navigate = useNavigate();
+
+    return (
+        <button
+            className="botao-entrar"
+            type="button"
+            onClick={() => navigate("/Login")}
+        >
+            Entrar
+        </button>
+    );
+}
+
+export {
+    BotaoCadastrarUsuario,
+    BotaoCadastrarAnimal,
+    BotaoEntrar
+};

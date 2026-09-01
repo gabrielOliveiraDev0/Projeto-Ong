@@ -1,6 +1,6 @@
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
-import BotaoCadastrarUsuario from "../componentes/Botoes";
+import {BotaoCadastrarUsuario,BotaoEntrar} from "../componentes/Botoes";
 
 function cabecalhoPadrao() {
     const navigate = useNavigate();
@@ -41,16 +41,10 @@ function cabecalhoPadrao() {
                 Sobre nós
             </button>
 
-            <button
-                className="botao-entrar"
-                type="button"
-            >
-                Entrar
-            </button>
-
+            <BotaoEntrar />
         
             <BotaoCadastrarUsuario />
-            
+  
         
 
         </section>
