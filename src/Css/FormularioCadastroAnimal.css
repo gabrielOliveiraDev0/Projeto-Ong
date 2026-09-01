@@ -1,0 +1,71 @@
+
+
+/* TÍTULO */
+.tituloCadastro {
+  font-size: 40px;
+  text-align: center;
+}
+/* ÁREA INTERNA DO CADASTRO */
+
+.divCorpoCadastro {
+  width: 90%;
+  max-width: 900px;
+  background-color: #b7d7f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+
+/* CORPO DA PÁGINA DE CADASTRO */
+
+.corpoCadastro {
+  min-height: 100vh;
+  padding: 40px 20px;
+  border: 5px solid #1E90FF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+
+
+/* CAMPOS  esta pegando todos os compos input do projeto arrumar isso*/
+
+input,
+select {
+  width: 100%;
+  max-width: 750px;
+  padding: 8px;
+  border-radius: 9px;
+  box-sizing: border-box;
+}
+
+
+/* CAMPO DE DESCRIÇÃO */
+
+.campo-descricao {
+  width: 100%;
+  max-width: 750px;
+  height: 100px;
+  box-sizing: border-box;
+}
+
+
+
+/* FORMULÁRIO */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+

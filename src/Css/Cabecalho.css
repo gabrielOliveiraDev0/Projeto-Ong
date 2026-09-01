@@ -1,0 +1,69 @@
+
+/* LOGO */
+
+.logo {
+  width: 120px;
+  height: auto;
+  margin-right: auto;
+}
+
+/* RESPONSIVIDADE */
+
+@media (max-width: 800px) {
+  .cabecalho {
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .divCorpoCadastro {
+    width: 95%;
+  }
+
+  .tituloCadastro {
+    font-size: 32px;
+  }
+
+  input,
+  select,
+  .campo-descricao {
+    max-width: 100%;
+  }
+}
+
+
+@media (max-width: 500px) {
+  .corpoCadastro {
+    padding: 25px 10px;
+  }
+
+  .divCorpoCadastro {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .tituloCadastro {
+    font-size: 28px;
+  }
+
+  .cabecalho {
+    border-width: 5px;
+  }
+}
+
+
+/* CABEÇALHO */
+
+.cabecalho {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    padding: 10px;
+    border: 10px solid #1E90FF;
+    background-color: #1E90FF;
+    border-radius: 9px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+

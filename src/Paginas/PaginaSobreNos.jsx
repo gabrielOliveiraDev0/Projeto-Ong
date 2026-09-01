@@ -12,9 +12,7 @@ function PaginaSobreNos() {
                 <p>
                     Nossa equipe é composta por voluntários apaixonados por animais, que trabalham incansavelmente para resgatar, cuidar e encontrar lares permanentes para os animais necessitados. Acreditamos que todos os animais merecem amor, respeito e uma chance de viver uma vida feliz.
                 </p>
-                <p>
-                    Junte-se a nós em nossa missão de fazer a diferença na vida dos animais. Seja um voluntário, faça uma doação ou adote um animal e ajude-nos a criar um mundo melhor para nossos amigos de quatro patas.
-                </p>
+               
             </div>
         </section>
 

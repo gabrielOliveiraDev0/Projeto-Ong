@@ -9,10 +9,11 @@ import CadastrarUsuarios from "../Paginas/PaginaCadastrarUsuarios";
 import PaginaInicial from "../Paginas/PaginaInicial";
 import Login from "../Paginas/PaginaLogin";
 import PaginaNoticias from "../Paginas/PaginaNoticias";
+
 import PaginaBusca from "../Paginas/PaginaBuscarOngs";
 import PaginaSobreNos from "../Paginas/PaginaSobreNos";
 import PaginaVerAnimais from "../Paginas/PaginaVerAnimais";
-
+ 
 function Rota() {
     return (
         <BrowserRouter>
@@ -38,6 +39,7 @@ function Rota() {
                     path="/PaginaNoticias"
                     element={<PaginaNoticias />}
                 />
+                
                 <Route
                     path="/PaginaBusca"
                     element={<PaginaBusca />}
@@ -50,8 +52,7 @@ function Rota() {
                     path="/PaginaVerAnimais"
                     element={<PaginaVerAnimais />}
                 />
-
-
+                
             </Routes>
 
         </BrowserRouter>
