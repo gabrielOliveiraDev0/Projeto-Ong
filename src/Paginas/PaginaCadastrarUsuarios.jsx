@@ -1,5 +1,5 @@
 import React from "react";
-import CabecalhoCriandoUsuario from "../cabecalhos/CabecalhoCriandoUsuario";
+import CabecalhoCriandoUsuario from "../cabecalhos/CabecalhoPadrao";
 
 function CadastrarUsuarios() {
     return (

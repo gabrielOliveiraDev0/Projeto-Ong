@@ -1,50 +1,29 @@
-import logo from "../assets/logo.png";
-import { useNavigate } from "react-router-dom";
-import {BotaoCadastrarUsuario,BotaoEntrar} from "../componentes/Botoes";
 
-function cabecalhoPadrao() {
-    const navigate = useNavigate();
+import {BotaoCadastrarUsuario,
+    BotaoEntrar,BotaoHome, 
+    BotaoNoticias,BotaoBuscarOngs,
+    BotaoVerAnimais, BotaoSobreNos} from "../componentes/Botoes";
+
+
+function CabecalhoPadrao() {
     return (
         <section className="cabecalho">
+            
+            <BotaoHome />
+            
+            <BotaoNoticias/>
 
-            <img
-                className="logo"
-                src={logo}
-                alt="Logo"
-            />
+            <BotaoBuscarOngs />
 
-            <button
-                className="botao-noticia"
-                type="button"
-            >
-                Notícias
-            </button>
+            <BotaoVerAnimais />
 
-            <button
-                className="botao-buscarOngs"
-                type="button"
-            >
-                Buscar ONGs
-            </button>
 
-            <button
-                className="botao-verAnimais"
-                type="button"
-            >
-                Ver animais
-            </button>
-
-            <button
-                className="botao-sobreNos"
-                type="button"
-            >
-                Sobre nós
-            </button>
+            <BotaoSobreNos />
 
             <BotaoEntrar />
         
             <BotaoCadastrarUsuario />
-  
+           
         
 
         </section>
@@ -53,4 +32,4 @@ function cabecalhoPadrao() {
 
 
 
-export default cabecalhoPadrao;
+export default CabecalhoPadrao;

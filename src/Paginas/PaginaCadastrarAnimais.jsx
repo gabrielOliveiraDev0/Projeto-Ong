@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-import Cabecalho from "../cabecalhos/cabacalhoLoginefetuado";
+import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 
 
 function CadastrarAnimais() {

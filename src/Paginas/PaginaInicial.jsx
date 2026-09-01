@@ -1,12 +1,10 @@
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
-import { useNavigate } from "react-router-dom";
+
 import {
-    BotaoCadastrarUsuario,
     BotaoCadastrarAnimal
 } from "../componentes/Botoes";
 
 function PaginaInicial() {
-    const navigate = useNavigate();
     return (
         <section className="pagina-inicial">
 
