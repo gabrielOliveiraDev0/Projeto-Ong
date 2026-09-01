@@ -170,3 +170,9 @@
   background-color: #836FFF;
   transform: scale(1.1);
 }
+.botao-home {
+    margin-right: auto;
+    background: none;
+    border: none;
+    padding: 0;
+}

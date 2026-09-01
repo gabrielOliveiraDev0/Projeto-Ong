@@ -2,9 +2,9 @@
 /* LOGO */
 
 .logo {
-  width: 120px;
-  height: auto;
-  margin-right: auto;
+    width: 120px;
+    height: auto;
+    
 }
 
 /* RESPONSIVIDADE */
@@ -57,13 +57,19 @@
     display: flex;
     align-items: center;
     gap: 50px;
-    padding: 10px;
-    border: 10px solid #1E90FF;
+    padding: 5px;
+    border: 1px solid #1E90FF;
     background-color: #1E90FF;
     border-radius: 9px;
-
+    
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+.cabecalho-botoes {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    margin-left: auto;
 }
 

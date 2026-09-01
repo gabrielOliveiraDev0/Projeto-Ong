@@ -11,20 +11,21 @@ import {
 function CabecalhoPadrao() {
     return (
         <section className="cabecalho">
-
             <BotaoHome />
+            <section className="cabecalho-botoes">
 
-            <BotaoNoticias />
+                <BotaoNoticias />
 
-            <BotaoBuscarOngs />
+                <BotaoBuscarOngs />
 
-            <BotaoVerAnimais />
+                <BotaoVerAnimais />
 
-            <BotaoSobreNos />
+                <BotaoSobreNos />
 
-            <BotaoEntrar />
+                <BotaoEntrar />
 
-            <BotaoCadastrarUsuario />
+                <BotaoCadastrarUsuario />
+            </section>
 
         </section>
     );
