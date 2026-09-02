@@ -2,7 +2,7 @@
 import {
     BotaoCadastrarUsuario,
     BotaoEntrar, BotaoHome,
-    BotaoNoticias, BotaoBuscarOngs,
+    BotaoNoticias,
     BotaoVerAnimais, BotaoSobreNos
 } from "../componentes/Botoes";
 
@@ -15,8 +15,6 @@ function CabecalhoPadrao() {
             <section className="cabecalho-botoes">
 
                 <BotaoNoticias />
-
-                <BotaoBuscarOngs />
 
                 <BotaoVerAnimais />
 

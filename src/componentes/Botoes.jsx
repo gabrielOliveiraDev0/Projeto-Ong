@@ -23,7 +23,7 @@ function BotaoCadastrarAnimal() {
         <button
             className="botao-cadastro-animal"
             type="button"
-            onClick={() => navigate("/cadastrarAnimais")}
+            onClick={() => navigate("/CadastrarAnimais")}
         >
             Cadastrar Animal
         </button>
@@ -71,16 +71,7 @@ function BotaoNoticias() {
         Notícias
     </button>);
 }
-function BotaoBuscarOngs() {
-    const navigate = useNavigate();
-    return (<button
-        className="botao-buscarOngs"
-        type="button"
-        onClick={() => navigate("/PaginaBusca")}
-    >
-        Buscar ONGs
-    </button>);
-}
+
 function BotaoVerAnimais() {
     const navigate = useNavigate();
     return (<button
@@ -109,7 +100,6 @@ export {
     BotaoEntrar,
     BotaoHome,
     BotaoNoticias,
-    BotaoBuscarOngs,
     BotaoVerAnimais,
     BotaoSobreNos
 };

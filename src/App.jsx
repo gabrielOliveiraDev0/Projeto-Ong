@@ -2,6 +2,7 @@ import "./Css/Botoes.css";
 import "./Css/FormularioCadastroAnimal.css";
 import "./Css/Cabecalho.css";
 import "./Css/Imagens.css";
+import "./Css/CardAnimais.css";
 
 import Rota from "./componentes/Rotas";
 
