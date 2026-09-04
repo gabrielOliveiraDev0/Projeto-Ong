@@ -176,3 +176,14 @@
     border: none;
     padding: 0;
 }
+
+.BoataoVeranimaisPaginaInicial{
+  background-color: #00FFFF;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}

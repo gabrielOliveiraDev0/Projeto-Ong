@@ -1,6 +1,7 @@
 
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
-import CardAnimal from "../componentes/Animais";
+import CardAnimal from "../componentes/CardAnimais";
+
 
 function PaginaVerAnimais() {
     return (
@@ -58,6 +59,7 @@ function PaginaVerAnimais() {
                         localizacao="Dourados - MS"  
                     />
                 </div>
+
 
             </section >
         </div >

@@ -1,7 +1,8 @@
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 
 import {
-    BotaoCadastrarAnimal
+    BotaoCadastrarAnimal,
+    BotaoVerAnimais
 } from "../componentes/Botoes";
 
 function PaginaInicial() {
@@ -13,13 +14,18 @@ function PaginaInicial() {
             <h1> Bem vindo a nossa ONG </h1>
 
             <div className="informacoes-ong">
-                
+
                 <p>
                     Somos uma organização sem fins lucrativos dedicada a ajudar animais em situação de vulnerabilidade. Nosso objetivo é proporcionar um lar seguro e amoroso para todos os animais que resgatamos, promovendo a adoção responsável e conscientizando a comunidade sobre a importância do cuidado com os animais.
                 </p>
             </div>
-            <BotaoCadastrarAnimal />
             
+            <div> <BotaoCadastrarAnimal /> </div>
+
+            <div> <br /> <BotaoVerAnimais className="BoataoVeranimaisPaginaInicial" /> </div>
+
+
+
 
         </section>
     );

@@ -20,9 +20,13 @@ function CabecalhoPadrao() {
 
                 <BotaoSobreNos />
 
-                <BotaoEntrar />
+            </section>
+            <section className="BotaoInteracaoUsuario"> 
+
+                 <BotaoEntrar />
 
                 <BotaoCadastrarUsuario />
+                
             </section>
 
         </section>

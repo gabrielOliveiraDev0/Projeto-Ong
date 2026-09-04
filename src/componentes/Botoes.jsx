@@ -72,15 +72,18 @@ function BotaoNoticias() {
     </button>);
 }
 
-function BotaoVerAnimais() {
+function BotaoVerAnimais({ className = "" }) {
     const navigate = useNavigate();
-    return (<button
-        className="botao-verAnimais"
-        type="button"
-        onClick={() => navigate("/PaginaVerAnimais")}
-    >
-        Ver Animais
-    </button>);
+
+    return (
+        <button
+            className={`botao-verAnimais ${className}`}
+            type="button"
+            onClick={() => navigate("/PaginaVerAnimais")}
+        >
+            Ver Animais
+        </button>
+    );
 }
 function BotaoSobreNos() {
     const navigate = useNavigate();
@@ -92,6 +95,18 @@ function BotaoSobreNos() {
         Sobre Nós
     </button>);
 }
+function BotaoDetalheAnimais() {
+    const navigate = useNavigate();
+    return (
+        <button className="botao-detalhes"
+            type="button"
+            onClick={() => navigate("/DetalhesAnimais")}>
+            Ver detalhes
+        </button>
+
+
+    );
+}
 
 
 export {
@@ -101,5 +116,6 @@ export {
     BotaoHome,
     BotaoNoticias,
     BotaoVerAnimais,
-    BotaoSobreNos
+    BotaoSobreNos,
+    BotaoDetalheAnimais
 };

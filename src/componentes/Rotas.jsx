@@ -9,6 +9,7 @@ import CadastrarUsuarios from "../Paginas/PaginaCadastrarUsuarios";
 import PaginaInicial from "../Paginas/PaginaInicial";
 import Login from "../Paginas/PaginaLogin";
 import PaginaNoticias from "../Paginas/PaginaNoticias";
+import DetalhesAnimais from "../Paginas/DetalhesAnimais";
 
 
 import PaginaSobreNos from "../Paginas/PaginaSobreNos";
@@ -50,6 +51,11 @@ function Rota() {
                     path="/PaginaVerAnimais"
                     element={<PaginaVerAnimais />}
                 />
+                <Route
+                    path="/DetalhesAnimais"
+                    element={<DetalhesAnimais />}
+                />
+
                 
             </Routes>
 

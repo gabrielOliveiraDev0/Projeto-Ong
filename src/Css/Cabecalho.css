@@ -69,7 +69,10 @@
 .cabecalho-botoes {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 45px;
-    margin-left: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
