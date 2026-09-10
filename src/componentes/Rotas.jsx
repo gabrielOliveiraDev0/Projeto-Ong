@@ -4,16 +4,16 @@ import {
     Route
 } from "react-router-dom";
 
-import CadastrarAnimais from "../Paginas/PaginaCadastrarAnimais";
-import CadastrarUsuarios from "../Paginas/PaginaCadastrarUsuarios";
-import PaginaInicial from "../Paginas/PaginaInicial";
-import Login from "../Paginas/PaginaLogin";
-import PaginaNoticias from "../Paginas/PaginaNoticias";
-import DetalhesAnimais from "../Paginas/DetalhesAnimais";
+import CadastrarAnimais from "../paginas/PaginaCadastrarAnimais";
+import CadastrarUsuarios from "../paginas/PaginaCadastrarUsuarios";
+import PaginaInicial from "../paginas/PaginaInicial";
+import Login from "../paginas/PaginaLogin";
+import PaginaNoticias from "../paginas/PaginaNoticias";
+import DetalhesAnimais from "../paginas/DetalhesAnimais";
 
 
-import PaginaSobreNos from "../Paginas/PaginaSobreNos";
-import PaginaVerAnimais from "../Paginas/PaginaVerAnimais";
+import PaginaSobreNos from "../paginas/PaginaSobreNos";
+import PaginaVerAnimais from "../paginas/PaginaVerAnimais";
  
 function Rota() {
     return (

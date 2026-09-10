@@ -1,8 +1,8 @@
-import "./Css/Botoes.css";
-import "./Css/FormularioCadastroAnimal.css";
-import "./Css/Cabecalho.css";
-import "./Css/Imagens.css";
-import "./Css/CardAnimais.css";
+import "./css/Botoes.css";
+import "./css/FormularioCadastroAnimal.css";
+import "./css/Cabecalho.css";
+import "./css/Imagens.css";
+import "./css/CardAnimais.css";
 
 import Rota from "./componentes/Rotas";
 
