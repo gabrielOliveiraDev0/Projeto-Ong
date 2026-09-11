@@ -17,14 +17,27 @@ function FormularioCadastroAnimal() {
 
     async function salvarAnimal(event) {
         event.preventDefault();
-
+        const animalParaEnviar = {
+            nomeAnimal: animal.nome,
+            tipoAnimal: animal.tipo,
+            sexoAnimal: animal.sexo,
+            idadeAnimal: Number(animal.idade),
+            regiaoAnimal: animal.regiao,
+            pesoAnimal: Number(animal.peso),
+            estadoSaudeAnimal: animal.estadoSaude,
+            castracaoAnimal: animal.castrado === "Sim",
+            descricaoAnimal: animal.descricao,
+            telefoneAnimal: animal.telefone,
+            pessoaParaContatoAnimal: animal.contato
+        }
+        
         try {
-            const resposta = await fetch("http://localhost:3001/animais", {
+            const resposta = await fetch("http://localhost:8080/animais", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(animal)
+                body: JSON.stringify(animalParaEnviar)
             });
 
             if (!resposta.ok) {

@@ -2,6 +2,7 @@ package com.projetoong.backend.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projetoong.backend.model.Animal;
 import com.projetoong.backend.service.AnimalService;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class AnimalController {
 
