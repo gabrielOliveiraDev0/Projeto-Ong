@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projetoong.backend.model.Animal;
 import com.projetoong.backend.service.AnimalService;
 
+import java.io.IOException;
+
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class AnimalController {
@@ -29,5 +35,13 @@ public class AnimalController {
     @PostMapping("/animais")
     public Animal salvarAnimal(@RequestBody Animal animal) {
         return animalService.salvarAnimal(animal);
+    }
+
+    @PostMapping("/animais/{id}/imagem")
+    public Animal salvarImagem(
+            @PathVariable Long id,
+            @RequestParam("imagem") MultipartFile imagem) throws IOException {
+
+        return animalService.salvarImagem(id, imagem);
     }
 }

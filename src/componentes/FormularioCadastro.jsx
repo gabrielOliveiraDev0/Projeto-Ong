@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+
+
 function FormularioCadastroAnimal() {
     const [animal, setAnimal] = useState({
         nome: "",
@@ -14,9 +16,11 @@ function FormularioCadastroAnimal() {
         telefone: "",
         contato: ""
     });
+    const [imagem, setImagem] = useState(null);
 
     async function salvarAnimal(event) {
         event.preventDefault();
+        
         const animalParaEnviar = {
             nomeAnimal: animal.nome,
             tipoAnimal: animal.tipo,
@@ -30,7 +34,7 @@ function FormularioCadastroAnimal() {
             telefoneAnimal: animal.telefone,
             pessoaParaContatoAnimal: animal.contato
         }
-        
+
         try {
             const resposta = await fetch("http://localhost:8080/animais", {
                 method: "POST",
@@ -45,6 +49,17 @@ function FormularioCadastroAnimal() {
             }
 
             const dados = await resposta.json();
+
+            if (imagem) {
+                const formularioImagem = new FormData();
+
+                formularioImagem.append("imagem", imagem);
+
+                await fetch(`http://localhost:8080/animais/${dados.idAnimal}/imagem`, {
+                    method: "POST",
+                    body: formularioImagem
+                });
+            }
 
             console.log("Animal cadastrado:", dados);
 
@@ -213,6 +228,7 @@ function FormularioCadastroAnimal() {
                     className="foto"
                     type="file"
                     accept="image/*"
+                    onChange={(event) => setImagem(event.target.files[0])}
                 />
             </label>
 

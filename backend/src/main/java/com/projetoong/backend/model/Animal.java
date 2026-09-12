@@ -12,7 +12,10 @@ import jakarta.persistence.Table;
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAnimal;
+    
+    private Long idAnimal; 
+    
+    private String imagemAnimal;
     private Integer idadeAnimal;
     private String nomeAnimal;
     private String tipoAnimal;
@@ -115,6 +118,14 @@ public class Animal {
 
     public void setPessoaParaContatoAnimal(String pessoaParaContatoAnimal) {
         this.pessoaParaContatoAnimal = pessoaParaContatoAnimal;
+    }
+
+    public String getImagemAnimal() {
+        return imagemAnimal;
+    }
+
+    public void setImagemAnimal(String imagemAnimal) {
+        this.imagemAnimal = imagemAnimal;
     }
 
 }
