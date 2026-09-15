@@ -70,21 +70,9 @@ O **PostgreSQL** é utilizado para armazenar os dados da aplicação.
 
 ```text
 Projeto-Ong/
-│
-├── src/                 # Frontend React
-│
-├── backend/             # Backend Spring Boot
-│   ├── src/
-│   │   ├── main/
-│   │   │   ├── java/
-│   │   │   └── resources/
-│   │   └── test/
-│   │
-│   ├── pom.xml
-│   └── mvnw
-│
-├── package.json
-├── vite.config.js
+├── frontend/
+├── backend/
+├── uploads/
 └── README.md
 ```
 

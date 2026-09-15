@@ -1,13 +1,13 @@
 import ImgExemplo from "../assets/ImgExemplo.png";
 import { BotaoDetalheAnimais } from "./Botoes";
-function Animais() {
+function Animais({ animal }) {
     return (
         <div className="card-animal">
 
             <div className="foto-animal">
                 <img
                     src={ImgExemplo}
-                    alt="Gatolino"
+                    alt="Imagem de um gato"
                 />
 
                 <button className="favorito">
@@ -21,24 +21,25 @@ function Animais() {
 
             <div className="dados-animal">
 
-                <h2>Gatolino</h2>
+                <h2>{animal.nomeAnimal}</h2>
 
                 <p className="descricao">
-                    Gatolino é um gato muito dócil e brincalhão
-                    que procura uma família para chamar de lar.
+                    <p className="descricao">
+                        {animal.descricaoAnimal}
+                    </p>
                 </p>
 
                 <div className="caracteristicas">
-                    <span>🐱 Gato</span>
-                    <span>♂ Macho</span>
-                    <span>3 anos</span>
+                    <span>{animal.tipoAnimal}</span>
+                    <span>{animal.sexoAnimal}</span>
+                    <span>{animal.idadeAnimal} anos</span>
                 </div>
 
                 <p className="localizacao">
-                    📍 Dourados - MS
+                    📍 {animal.regiaoAnimal}
                 </p>
 
-               <BotaoDetalheAnimais/>
+                <BotaoDetalheAnimais />
 
             </div>
 

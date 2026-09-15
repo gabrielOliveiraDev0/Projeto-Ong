@@ -1,9 +1,23 @@
 
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 import CardAnimal from "../componentes/CardAnimais";
+import { useEffect, useState } from "react";
 
 
 function PaginaVerAnimais() {
+    const [animais, setAnimais] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/animais")
+            .then((resposta) => resposta.json())
+            .then((dados) => {
+                setAnimais(dados);
+            })
+            .catch((erro) => {
+                console.error("Erro ao buscar animais:", erro);
+            });
+    }, []);
+
     return (
         <div>
             <Cabecalho />
@@ -51,13 +65,12 @@ function PaginaVerAnimais() {
 
                 <div className="resultado-busca">
                     <h4>Resultado da busca</h4>
-                    <CardAnimal
-                        nome="Gatolino"
-                        tipo="Gato"
-                        sexo="Macho"
-                        idade="3 anos"
-                        localizacao="Dourados - MS"  
-                    />
+                    {animais.map((animal) => (
+                        <CardAnimal
+                            key={animal.idAnimal}
+                            animal={animal}
+                        />
+                    ))}
                 </div>
 
 
