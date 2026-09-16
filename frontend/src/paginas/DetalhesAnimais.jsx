@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 import { useEffect, useState } from "react";
+import ImgExemplo from "../assets/ImgExemplo.png";
 
 
 function DetalhesAnimais() {

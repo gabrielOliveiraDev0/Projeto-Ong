@@ -1,5 +1,6 @@
-import ImgExemplo from "../assets/ImgExemplo.png";
+
 import { BotaoDetalheAnimais } from "./Botoes";
+import ImgExemplo from "../assets/ImgExemplo.png";
 function Animais({ animal }) {
     return (
         <div className="card-animal">
