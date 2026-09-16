@@ -44,4 +44,9 @@ public class AnimalController {
 
         return animalService.salvarImagem(id, imagem);
     }
+
+    @GetMapping("/animais/{id}")
+    public Animal buscarAnimalPorId(@PathVariable Long id) {
+        return animalService.buscarAnimalPorId(id);
+    }
 }

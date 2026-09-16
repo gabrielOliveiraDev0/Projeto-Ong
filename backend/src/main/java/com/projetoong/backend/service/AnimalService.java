@@ -33,26 +33,29 @@ public class AnimalService {
 
     public Animal salvarImagem(Long idAnimal, MultipartFile imagem) throws IOException {
 
-    Animal animal = animalRepository.findById(idAnimal)
-            .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+        Animal animal = animalRepository.findById(idAnimal)
+                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
 
-    Path pasta = Paths.get("../uploads/animais");
+        Path pasta = Paths.get("../uploads/animais");
 
-    Files.createDirectories(pasta);
+        Files.createDirectories(pasta);
 
-    String nomeArquivo =
-            UUID.randomUUID() + "_" + imagem.getOriginalFilename();
+        String nomeArquivo = UUID.randomUUID() + "_" + imagem.getOriginalFilename();
 
-    Path caminhoArquivo = pasta.resolve(nomeArquivo);
+        Path caminhoArquivo = pasta.resolve(nomeArquivo);
 
-    Files.copy(
-            imagem.getInputStream(),
-            caminhoArquivo,
-            StandardCopyOption.REPLACE_EXISTING
-    );
+        Files.copy(
+                imagem.getInputStream(),
+                caminhoArquivo,
+                StandardCopyOption.REPLACE_EXISTING);
 
-    animal.setImagemAnimal(nomeArquivo);
+        animal.setImagemAnimal(nomeArquivo);
 
-    return animalRepository.save(animal);
-}
+        return animalRepository.save(animal);
+    }
+
+    public Animal buscarAnimalPorId(Long idAnimal) {
+        return animalRepository.findById(idAnimal)
+                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+    }
 }

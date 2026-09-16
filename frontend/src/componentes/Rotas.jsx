@@ -14,7 +14,7 @@ import DetalhesAnimais from "../paginas/DetalhesAnimais";
 
 import PaginaSobreNos from "../paginas/PaginaSobreNos";
 import PaginaVerAnimais from "../paginas/PaginaVerAnimais";
- 
+
 function Rota() {
     return (
         <BrowserRouter>
@@ -41,8 +41,6 @@ function Rota() {
                     path="/PaginaNoticias"
                     element={<PaginaNoticias />}
                 />
-                
-               
                 <Route
                     path="/PaginaSobreNos"
                     element={<PaginaSobreNos />}
@@ -52,11 +50,11 @@ function Rota() {
                     element={<PaginaVerAnimais />}
                 />
                 <Route
-                    path="/DetalhesAnimais"
+                    path="/DetalhesAnimais/:id"
                     element={<DetalhesAnimais />}
                 />
 
-                
+
             </Routes>
 
         </BrowserRouter>

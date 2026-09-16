@@ -43,7 +43,7 @@ function Animais({ animal }) {
                     📍 {animal.regiaoAnimal}
                 </p>
 
-                <BotaoDetalheAnimais />
+                <BotaoDetalheAnimais idAnimal={animal.idAnimal} />
 
             </div>
 

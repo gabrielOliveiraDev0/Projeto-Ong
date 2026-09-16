@@ -1,32 +1,63 @@
-
+import { useParams } from "react-router-dom";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
+import { useEffect, useState } from "react";
 
 
 function DetalhesAnimais() {
+    const { id } = useParams();
+    const [animal, setAnimal] = useState(null);
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/animais/${id}`)
+            .then((resposta) => resposta.json())
+            .then((dados) => {
+                setAnimal(dados);
+            })
+            .catch((erro) => {
+                console.error("Erro ao buscar animal:", erro);
+            });
+    }, [id]);
+
+    if (!animal) {
+        return <p>Carregando...</p>;
+    }
     return (
         <div>
             <Cabecalho />
             <section className="detalhes">
-                <h1>Gatolino</h1>
-                <strong> Tipo: </strong>
+                <h1>{animal.nomeAnimal}</h1>
+                <img
+                    src={
+                        animal.imagemAnimal
+                            ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                            : ImgExemplo
+                    }
+                    alt={`Imagem de ${animal.nomeAnimal}`}
+                />
 
-                <strong> Idade: </strong>
+                <strong>Tipo: {animal.tipoAnimal}</strong>
 
-                <strong> Sexo: </strong>
+                <strong>Idade: {animal.idadeAnimal} anos</strong>
 
-                <strong> Porte: </strong>
+                <strong>Sexo: {animal.sexoAnimal}</strong>
 
-                <strong> Estado de Saúde: </strong>
+                <strong>Peso: {animal.pesoAnimal} kg</strong>
 
-                <strong>Esterelizacao:</strong>
+                <strong>Estado de Saúde: {animal.estadoSaudeAnimal}</strong>
 
-                <strong> Alimatacao:</strong>
+                <strong> Esterilização: {animal.castracaoAnimal ? "Sim" : "Não"} </strong>
 
-                <strong> Descricao: </strong>
+                <strong>Alimentação: </strong>
+
+                <strong>Descrição: {animal.descricaoAnimal}</strong>
+
+                <strong>Região: {animal.regiaoAnimal}</strong>
+
+                <strong>Telefone: {animal.telefoneAnimal}</strong>
 
             </section>
 
-            
+
         </div>
     );
 }

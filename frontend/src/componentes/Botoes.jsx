@@ -95,16 +95,17 @@ function BotaoSobreNos() {
         Sobre Nós
     </button>);
 }
-function BotaoDetalheAnimais() {
+
+function BotaoDetalheAnimais({ idAnimal }) {
     const navigate = useNavigate();
+
     return (
-        <button className="botao-detalhes"
+        <button
+            className="botao-detalhes"
             type="button"
-            onClick={() => navigate("/DetalhesAnimais")}>
+            onClick={() => navigate(`/DetalhesAnimais/${idAnimal}`)}>
             Ver detalhes
         </button>
-
-
     );
 }
 
