@@ -136,14 +136,7 @@ function PaginaVerAnimais() {
                     </select>
 
                 </div>
-                <div className="CampoDeBusca">
                     <h2>Animais estão à procura de um lar.</h2>
-
-                    <button className="botao-buscar" type="submit">
-                        Buscar
-                    </button>
-
-                </div>
 
                 <div className="resultado-busca">
                     <h4>Resultado da busca</h4>
