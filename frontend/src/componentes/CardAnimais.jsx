@@ -6,8 +6,12 @@ function Animais({ animal }) {
 
             <div className="foto-animal">
                 <img
-                    src={ImgExemplo}
-                    alt="Imagem de um gato"
+                    src={
+                        animal.imagemAnimal
+                            ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                            : ImgExemplo
+                    }
+                    alt={`Imagem de ${animal.nomeAnimal}`}
                 />
 
                 <button className="favorito">
