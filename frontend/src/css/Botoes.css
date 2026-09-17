@@ -1,189 +1,94 @@
-.botao-cadastro-animal {
-  background-color: #00FFFF;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+button {
+  border: 0;
+  border-radius: 10px;
+  min-height: 44px;
+  padding: 10px 22px;
+  background: var(--azul);
+  color: #fff;
+  font-weight: 600;
+  line-height: 1.3;
+  transition: background-color .18s ease, box-shadow .18s ease;
 }
 
-.botao-cadastro-animal:hover {
-  background-color: #00cccc;
-  transform: scale(1.05);
-}
-.botao-cadastro-usuario {
-  background-color: #00FFFF;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+button:hover {
+  background-color: #0074d6;
 }
 
-.botao-cadastro-usuario:hover {
-  background-color: #00cccc;
-  transform: scale(1.05);
+button:active {
+  box-shadow: inset 0 2px 4px #0003;
 }
 
+.botao-home {
+  flex-shrink: 0;
+  border-radius: 8px;
+}
 
+.cabecalho-botoes button {
+  color: #050505;
+  background: transparent;
+  padding: 10px 8px;
+  font-size: 17px;
+  white-space: nowrap;
+}
 
-/* BOTÃO CONFIRMAR */
+.cabecalho-botoes button:hover {
+  background: #ffffff30;
+}
+
+.botao-entrar,
+.botao-cadastraUsuario {
+  background: var(--roxo);
+  font-size: 14px;
+  padding: 10px 22px;
+}
+
+.botao-entrar:hover,
+.botao-cadastraUsuario:hover {
+  background: #5140d5;
+}
+
+.botao-cadastro-animal,
+.botao-cadastro-usuario,
+.BoataoVeranimaisPaginaInicial {
+  background: var(--turquesa);
+  padding: 14px 26px;
+}
+
+.botao-cadastro-animal:hover,
+.botao-cadastro-usuario:hover,
+.BoataoVeranimaisPaginaInicial:hover {
+  background: #009aa7;
+}
 
 .botao-confirmar {
-  width: 150px;
-  padding: 15px;
-  font-size: 14px;
-  background-color: #1E90FF;
-  color: white;
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
   align-self: center;
-  transition: 0.3s;
+  min-width: 200px;
+  margin-top: 10px;
+  padding: 15px 30px;
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
-.botao-confirmar:hover {
-  background-color: #00FFFF;
-  transform: scale(1.1);
+.botao-login,
+.botao-cadastrar {
+  width: 100%;
+  min-height: 60px;
+  border-radius: 20px;
+  font-size: 18px;
 }
 
-
-/* BOTÃO NOTÍCIA */
-
-.botao-noticia {
-  background: none;
-  border: 10px solid #1E90FF;
-  color: #000;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0;
-  border-radius: 9px;
-  transition: 0.3s;
+.botao-detalhes {
+  width: 100%;
+  margin-top: 10px;
 }
 
-.botao-noticia:hover {
-  background-color: #1E90FF;
-  border-radius: 9px;
-  transform: scale(1.1);
-}
+@media (max-width: 700px) {
+  .cabecalho-botoes button {
+    font-size: 15px;
+  }
 
-
-/* BOTÃO BUSCAR ONGS */
-
-.botao-buscarOngs {
-  background: none;
-  border: 10px solid #1E90FF;
-  color: #000;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0;
-  border-radius: 9px;
-  transition: 0.3s;
-}
-
-.botao-buscarOngs:hover {
-  background-color: #1E90FF;
-  border-radius: 9px;
-  transform: scale(1.1);
-}
-
-
-/* BOTÃO VER ANIMAIS */
-
-.botao-verAnimais {
-  background: none;
-  border: 10px solid #1E90FF;
-  color: #000;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0;
-  border-radius: 9px;
-  transition: 0.3s;
-}
-
-.botao-verAnimais:hover {
-  background-color: #1E90FF;
-  border-radius: 9px;
-  transform: scale(1.1);
-}
-
-
-/* BOTÃO SOBRE NÓS */
-
-.botao-sobreNos {
-  background: none;
-  border: 10px solid #1E90FF;
-  color: #000;
-  font-size: 20px;
-  cursor: pointer;
-  padding: 0;
-  border-radius: 9px;
-  transition: 0.3s;
-}
-
-.botao-sobreNos:hover {
-  background-color: #1E90FF;
-  border-radius: 9px;
-  transform: scale(1.1);
-}
-
-
-/* BOTÃO ENTRAR */
-
-.botao-entrar {
-  width: 90px;
-  padding: 5px;
-  font-size: 20px;
-  background-color: #6959CD;
-  color: white;
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.botao-entrar:hover {
-  background-color: #836FFF;
-  transform: scale(1.1);
-}
-
-
-/* BOTÃO CADASTRAR USUÁRIO */
-
-.botao-cadastraUsuario {
-  width: 130px;
-  padding: 5px;
-  font-size: 20px;
-  background-color: #6959CD;
-  color: white;
-  border: none;
-  border-radius: 9px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.botao-cadastraUsuario:hover {
-  background-color: #836FFF;
-  transform: scale(1.1);
-}
-.botao-home {
-    margin-right: auto;
-    background: none;
-    border: none;
-    padding: 0;
-}
-
-.BoataoVeranimaisPaginaInicial{
-  background-color: #00FFFF;
-  color: white;
-  border: none;
-  padding: 8px 15px;
-  border-radius: 5px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: 0.3s;
+  .botao-entrar,
+  .botao-cadastraUsuario {
+    padding-inline: 14px;
+  }
 }

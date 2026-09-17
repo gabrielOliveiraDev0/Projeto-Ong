@@ -1,7 +1,57 @@
 import React from "react";
 import CabecalhoCriandoUsuario from "../cabecalhos/CabecalhoPadrao";
+import { useState } from "react";
 
 function CadastrarUsuarios() {
+    const [usuario, setUsuario] = useState({
+        nome: "",
+        sobrenome: "",
+        email: "",
+        numeroTelefone: "",
+        senha: "",
+        confirmarSenha: ""
+    });
+    async function cadastrarUsuario(evento) {
+        evento.preventDefault();
+
+        if (usuario.senha !== usuario.confirmarSenha) {
+            alert("As senhas não são iguais.");
+            return;
+        }
+
+        const usuarioParaEnviar = {
+            nomeUsuario: usuario.nome,
+            sobrenomeUsuario: usuario.sobrenome,
+            emailUsuario: usuario.email,
+            telefoneUsuario: usuario.numeroTelefone,
+            senhaUsuario: usuario.senha
+        };
+
+        try {
+            const resposta = await fetch("http://localhost:8080/usuarios", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(usuarioParaEnviar)
+            });
+
+            if (resposta.status === 409) {
+                alert("E-mail já cadastrado.");
+                return;
+            }
+
+            if (!resposta.ok) {
+                throw new Error("Erro ao cadastrar usuário");
+            }
+
+            alert("Usuário cadastrado com sucesso!");
+
+        } catch (erro) {
+            console.error(erro);
+            alert("Erro ao cadastrar usuário.");
+        }
+    }
     return (
         <section className="cadastrar-usuarios">
 
@@ -20,59 +70,108 @@ function CadastrarUsuarios() {
             </div>
             <div className="cadastro-usuario-via-formulario">
                 <h2> ou prencha os campos a baixo </h2>
-                <form className="formulario-cadastro-usuario">
-                    <label for="nome">
+                <form className="formulario-cadastro-usuario"
+                    onSubmit={cadastrarUsuario}
+                >
+                    <label htmlFor="nome">
                         Nome
                         <input
                             id="nome"
                             name="nome"
                             type="text"
                             placeholder="Ex: Digite seu nome"
+                            value={usuario.nome}
+                            onChange={(evento) =>
+                                setUsuario({
+                                    ...usuario,
+                                    nome: evento.target.value
+                                })
+                            }
                         />
                     </label>
 
-                    <label for="email">
+                    <label htmlFor="sobrenome">
+                        Sobrenome
+                        <input
+                            id="sobrenome"
+                            name="sobrenome"
+                            type="text"
+                            placeholder="Ex: Digite seu sobrenome"
+                            value={usuario.sobrenome}
+                            onChange={(evento) =>
+                                setUsuario({
+                                    ...usuario,
+                                    sobrenome: evento.target.value
+                                })
+                            }
+                        />
+                    </label>
+
+                    <label htmlFor="email">
                         Email
                         <input
                             id="email"
                             name="email"
                             type="email"
-                            placeholder="Ex: exemplo@exemplo.com"
+                            placeholder="Ex: email@email.com"
+                            value={usuario.email}
+                            onChange={(evento) =>
+                                setUsuario({
+                                    ...usuario,
+                                    email: evento.target.value
+                                })
+                            }
                         />
                     </label>
-                    <label for="numeroTelefone">
-                        Número de telefone
+
+                    <label htmlFor="numeroTelefone">
+                        Telefone
                         <input
                             id="numeroTelefone"
                             name="numeroTelefone"
-                            type="text"
-                            placeholder="Ex: (11) 99999-9999"
+                            type="tel"
+                            placeholder="Ex: (67) 99999-9999"
+                            value={usuario.numeroTelefone}
+                            onChange={(evento) =>
+                                setUsuario({
+                                    ...usuario,
+                                    numeroTelefone: evento.target.value
+                                })
+                            }
                         />
                     </label>
-                    <label for="ragiao">
-                        Região
-                        <select id="regiao" name="regiao">
-                            <option value="regiao1">Região 1</option>
-                            <option value="regiao2">Região 2</option>
-                            <option value="regiao3">Região 3</option>
-                        </select>
-                    </label>
-                    <label for="senha">
+
+                    <label htmlFor="senha">
                         Senha
                         <input
                             id="senha"
                             name="senha"
                             type="password"
-                            placeholder="Ex: Digite sua senha"
+                            placeholder="Digite sua senha"
+                            value={usuario.senha}
+                            onChange={(evento) =>
+                                setUsuario({
+                                    ...usuario,
+                                    senha: evento.target.value
+                                })
+                            }
                         />
                     </label>
-                    <label for="confirmarSenha">
+
+                    <label htmlFor="confirmarSenha">
                         Confirmar senha
                         <input
                             id="confirmarSenha"
                             name="confirmarSenha"
                             type="password"
-                            placeholder="Ex: Confirme sua senha"
+                            placeholder="Confirme sua senha"
+                            value={usuario.confirmarSenha}
+                            onChange={(evento) =>
+                                setUsuario({
+                                    ...usuario,
+                                    confirmarSenha: evento.target.value
+                                })
+                            }
                         />
                     </label>
 
@@ -82,7 +181,7 @@ function CadastrarUsuarios() {
                 </form>
             </div>
             <div className="jatem conta">
-                
+
                 <a href="/login" className="link-login">
                     Já tenho conta, fazer login.
                 </a>

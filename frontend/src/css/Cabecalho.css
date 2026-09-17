@@ -1,78 +1,68 @@
-
-/* LOGO */
+/* Navegação em fluxo normal para evitar sobreposição em telas menores. */
+.cabecalho {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  min-height: 96px;
+  padding: 10px max(32px, calc((100% - 1200px) / 2));
+  background: var(--azul);
+}
 
 .logo {
-    width: 120px;
-    height: auto;
-    
+  display: block;
+  width: 65px;
+  height: 72px;
+  object-fit: contain;
 }
 
-/* RESPONSIVIDADE */
+.cabecalho-botoes,
+.BotaoInteracaoUsuario {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
 
-@media (max-width: 800px) {
+.BotaoInteracaoUsuario {
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
   .cabecalho {
-    gap: 20px;
+    padding-inline: 24px;
+    gap: 18px;
+  }
+
+  .cabecalho-botoes {
+    gap: 8px;
+  }
+
+  .BotaoInteracaoUsuario {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 700px) {
+  .cabecalho {
     flex-wrap: wrap;
+    padding: 12px 16px;
+    gap: 10px 16px;
   }
 
-  .divCorpoCadastro {
-    width: 95%;
+  .logo {
+    width: 48px;
+    height: 56px;
   }
 
-  .tituloCadastro {
-    font-size: 32px;
-  }
-
-  input,
-  select,
-  .campo-descricao {
-    max-width: 100%;
-  }
-}
-
-
-@media (max-width: 500px) {
-  .corpoCadastro {
-    padding: 25px 10px;
-  }
-
-  .divCorpoCadastro {
+  .cabecalho-botoes {
+    order: 3;
     width: 100%;
-    padding: 15px;
-  }
-
-  .tituloCadastro {
-    font-size: 28px;
-  }
-
-  .cabecalho {
-    border-width: 5px;
-  }
-}
-
-
-/* CABEÇALHO */
-
-.cabecalho {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    padding: 5px;
-    border: 1px solid #1E90FF;
-    background-color: #1E90FF;
-    border-radius: 9px;
-    
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.cabecalho-botoes {
-    display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 45px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
 
+  .BotaoInteracaoUsuario {
+    margin-left: auto;
+  }
+}

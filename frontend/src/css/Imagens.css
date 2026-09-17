@@ -1,7 +1,23 @@
-/* FOTO */
+/* O seletor de arquivo mantém nome, foco e controle nativos. */
+input.foto {
+    display: block;
+    width: 100%;
+    padding: 0;
+    line-height: 46px;
+    background: #fff;
+}
 
-.foto {
-  display: block;
-  width: 115px;
-  padding: 2px;
+.foto::file-selector-button {
+    min-height: 46px;
+    padding: 10px 18px;
+    margin-right: 14px;
+    border: 0;
+    background: var(--turquesa);
+    color: #072f33;
+    font: inherit;
+    cursor: pointer;
+}
+
+.foto::file-selector-button:hover {
+    background: #00a5b4;
 }

@@ -1,0 +1,207 @@
+/* Somente Inicial e Sobre Nós: nenhum seletor global ou alteração de rotas. */
+.institucional {
+  --institucional-azul: #008cff;
+  --institucional-turquesa: #00bccb;
+  --institucional-roxo: #6550ff;
+  --institucional-largura: 1180px;
+}
+
+.institucional .cabecalho {
+  min-height: 100px;
+  padding-inline: max(24px, calc((100% - var(--institucional-largura)) / 2));
+}
+
+.institucional .cabecalho-botoes {
+  gap: clamp(12px, 2.2vw, 32px);
+}
+
+.institucional .cabecalho-botoes button {
+  font-size: 16px;
+}
+
+.institucional .logo {
+  width: 60px;
+  height: 72px;
+}
+
+.institucional .BotaoInteracaoUsuario button {
+  min-height: 36px;
+  border-radius: 10px;
+}
+
+.institucional a,
+.institucional button {
+  transition: background-color .18s ease, color .18s ease, box-shadow .18s ease;
+}
+
+.institucional a:focus-visible,
+.institucional button:focus-visible {
+  outline: 3px solid #152f57;
+  outline-offset: 5px;
+}
+
+.institucional-indicadores {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 6vw, 90px);
+}
+
+.institucional-indicador {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  text-align: center;
+}
+
+.institucional-indicador svg {
+  width: 90px;
+  height: 90px;
+  color: #050505;
+  flex-shrink: 0;
+}
+
+.institucional-indicador strong {
+  display: block;
+  margin-top: 20px;
+  font-size: clamp(30px, 3.5vw, 48px);
+  line-height: 1.2;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.institucional .institucional-indicador p {
+  margin: 26px 0 0;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.institucional-dados-nota {
+  display: block;
+  margin-top: 14px;
+  font-size: 12px;
+  text-align: right;
+  color: #545d67;
+}
+
+.institucional-rodape {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 40px;
+  background: var(--institucional-azul);
+  padding: 44px max(24px, calc((100% - 1300px) / 2));
+  color: #082a44;
+}
+
+.institucional-rodape nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+}
+
+.institucional-rodape span {
+  display: block;
+  margin-bottom: 14px;
+  font-size: 13px;
+}
+
+.institucional-rodape nav>span {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+.institucional-rodape a {
+  display: block;
+  color: #061a2b;
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 1.5;
+}
+
+.institucional-rodape a:hover {
+  text-decoration: underline;
+}
+
+.institucional-rodape p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.institucional-rodape>div:last-child a+a {
+  margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+  .institucional .cabecalho {
+    padding-inline: 20px;
+    gap: 12px;
+  }
+
+  .institucional .cabecalho-botoes {
+    gap: 6px;
+  }
+
+  .institucional .institucional-indicador p {
+    font-size: 17px;
+  }
+
+  .institucional-indicador svg {
+    width: 72px;
+    height: 72px;
+  }
+
+  .institucional-indicadores {
+    gap: 24px;
+  }
+}
+
+@media (max-width: 700px) {
+  .institucional .cabecalho {
+    padding: 12px 16px;
+    min-height: 0;
+  }
+
+  .institucional .logo {
+    width: 48px;
+    height: 56px;
+  }
+
+  .institucional .cabecalho-botoes {
+    gap: 8px 16px;
+  }
+
+  .institucional .cabecalho-botoes button {
+    font-size: 15px;
+  }
+
+  .institucional .BotaoInteracaoUsuario button {
+    min-height: 44px;
+  }
+
+  .institucional-indicadores {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .institucional-indicador strong {
+    font-size: 38px;
+  }
+
+  .institucional .institucional-indicador p {
+    margin-top: 18px;
+    font-size: 20px;
+  }
+
+  .institucional-dados-nota {
+    text-align: center;
+  }
+
+  .institucional-rodape {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 30px;
+  }
+}

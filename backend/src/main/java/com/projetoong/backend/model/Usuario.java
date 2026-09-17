@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "usuarios")
@@ -24,6 +25,7 @@ public class Usuario {
     private String emailUsuario;
     private String telefoneUsuario;
     private String regiaoUsuario;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senhaUsuario;
 
     public Long getIdUsuario() {

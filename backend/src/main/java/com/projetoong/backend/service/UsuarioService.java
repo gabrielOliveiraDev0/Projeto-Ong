@@ -1,11 +1,13 @@
 package com.projetoong.backend.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import com.projetoong.backend.model.TipoUsuario;
 import com.projetoong.backend.model.Usuario;
 import com.projetoong.backend.repository.UsuarioRepository;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
 @Service
 public class UsuarioService {
 
@@ -17,6 +19,12 @@ public class UsuarioService {
     }
 
     public Usuario salvarUsuario(Usuario usuario) {
+
+        if (usuarioRepository.existsByEmailUsuario(usuario.getEmailUsuario())) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "E-mail já cadastrado");
+        }
 
         usuario.setTipoUsuario(TipoUsuario.USUARIO);
 

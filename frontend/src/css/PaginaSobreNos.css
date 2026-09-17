@@ -1,0 +1,250 @@
+/* Página 2 do protótipo: faixas azuis e fotos originais recortadas. */
+.pagina-sobre-nos.institucional {
+  min-height: 100vh;
+  background: #008cff;
+}
+
+.pagina-sobre-nos.institucional>.cabecalho {
+  background: #63a8db;
+}
+
+.pagina-sobre-nos.institucional .cabecalho-botoes button {
+  color: #fff;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.pagina-sobre-nos.institucional .BotaoInteracaoUsuario button {
+  background: transparent;
+  color: #fff;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.pagina-sobre-nos.institucional .BotaoInteracaoUsuario button:hover {
+  background: #ffffff26;
+}
+
+.pagina-sobre-nos .sobre-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-start;
+  gap: 36px;
+  min-height: 300px;
+  padding: 20px 24px 80px;
+  overflow: hidden;
+  background: #63a8db;
+  border-radius: 0 0 280px 0;
+}
+
+.pagina-sobre-nos .sobre-logo {
+  width: clamp(140px, 15vw, 220px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  padding: 14px;
+  border-radius: 50%;
+  background: #00b8d5;
+  flex-shrink: 0;
+}
+
+.pagina-sobre-nos .sobre-hero h1 {
+  position: relative;
+  z-index: 1;
+  margin: 34px 0 0;
+  font-size: clamp(32px, 4vw, 60px);
+  font-weight: 500;
+  line-height: 1.12;
+  color: #9a8172;
+  letter-spacing: .5px;
+  max-width: 800px;
+}
+
+.pagina-sobre-nos .sobre-hero h1 span {
+  display: block;
+  margin-bottom: 10px;
+  color: #264e71;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.pagina-sobre-nos .sobre-companheiros {
+  position: absolute;
+  z-index: 0;
+  width: 360px;
+  height: auto;
+  right: 17%;
+  bottom: -195px;
+}
+
+.pagina-sobre-nos .institucional-impacto {
+  width: min(1160px, calc(100% - 80px));
+  margin-inline: auto;
+  padding: 105px 0 70px;
+}
+
+.pagina-sobre-nos .institucional-indicador {
+  min-height: 250px;
+}
+
+.pagina-sobre-nos .institucional-indicador strong {
+  font-size: clamp(36px, 4vw, 52px);
+}
+
+.pagina-sobre-nos .institucional-dados-nota {
+  color: #083d68;
+  margin-top: 25px;
+}
+
+.pagina-sobre-nos .sobre-missao {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 260px;
+  padding: 42px max(22%, calc((100% - 760px) / 2));
+  border-radius: 260px 0 0 0;
+  background: #a0bdcb;
+}
+
+.pagina-sobre-nos .sobre-missao-texto {
+  position: relative;
+  z-index: 1;
+}
+
+.pagina-sobre-nos .sobre-missao p {
+  max-width: none;
+  margin: 0;
+  text-align: center;
+  color: #795640;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.pagina-sobre-nos .sobre-missao p+p {
+  margin-top: 20px;
+}
+
+.pagina-sobre-nos .sobre-gato {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 420px;
+  height: auto;
+  z-index: -1;
+}
+
+.pagina-sobre-nos .sobre-caes {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 240px;
+  height: auto;
+  z-index: -1;
+}
+
+@media (min-width: 1600px) {
+  .pagina-sobre-nos .sobre-hero {
+    padding-inline: max(24px, calc((100% - 1480px) / 2));
+  }
+}
+
+@media (max-width: 1000px) {
+  .pagina-sobre-nos .sobre-hero {
+    min-height: 340px;
+    gap: 22px;
+    border-bottom-right-radius: 180px;
+  }
+
+  .pagina-sobre-nos .sobre-hero h1 {
+    margin-top: 24px;
+    max-width: 570px;
+  }
+
+  .pagina-sobre-nos .sobre-companheiros {
+    right: 9%;
+    bottom: -140px;
+    width: 290px;
+  }
+
+  .pagina-sobre-nos .institucional-impacto {
+    padding-block: 64px 46px;
+  }
+
+  .pagina-sobre-nos .sobre-missao {
+    padding: 48px 20%;
+    border-top-left-radius: 160px;
+  }
+
+  .pagina-sobre-nos .sobre-gato {
+    width: 280px;
+  }
+
+  .pagina-sobre-nos .sobre-caes {
+    width: 160px;
+  }
+}
+
+@media (max-width: 700px) {
+  .pagina-sobre-nos .sobre-hero {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    align-items: center;
+    min-height: 370px;
+    gap: 20px;
+    padding: 26px 20px 160px;
+    border-bottom-right-radius: 120px;
+  }
+
+  .pagina-sobre-nos .sobre-logo {
+    width: 100px;
+    padding: 6px;
+  }
+
+  .pagina-sobre-nos .sobre-hero h1 {
+    margin: 0;
+    font-size: clamp(28px, 6vw, 40px);
+  }
+
+  .pagina-sobre-nos .sobre-hero h1 span {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+
+  .pagina-sobre-nos .sobre-companheiros {
+    right: 10%;
+    width: 230px;
+    bottom: -125px;
+  }
+
+  .pagina-sobre-nos .institucional-impacto {
+    width: calc(100% - 40px);
+    padding-block: 40px;
+  }
+
+  .pagina-sobre-nos .institucional-indicadores {
+    gap: 30px;
+  }
+
+  .pagina-sobre-nos .institucional-indicador {
+    min-height: 230px;
+  }
+
+  .pagina-sobre-nos .sobre-missao {
+    padding: 120px 28px 160px;
+    border-top-left-radius: 100px;
+  }
+
+  .pagina-sobre-nos .sobre-missao p {
+    font-size: 17px;
+  }
+
+  .pagina-sobre-nos .sobre-gato {
+    width: 220px;
+  }
+
+  .pagina-sobre-nos .sobre-caes {
+    width: 190px;
+  }
+}
