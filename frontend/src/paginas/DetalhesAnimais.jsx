@@ -52,7 +52,7 @@ function DetalhesAnimais() {
 
                 <strong>Descrição: {animal.descricaoAnimal}</strong>
 
-                <strong>Região: {animal.regiaoAnimal}</strong>
+                <strong>Endereço: {animal.regiaoAnimal}</strong>
 
                 <strong>Telefone: {animal.telefoneAnimal}</strong>
 

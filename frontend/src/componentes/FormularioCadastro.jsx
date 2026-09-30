@@ -147,7 +147,7 @@ function FormularioCadastroAnimal() {
             </label>
 
             <label>
-                Região
+                Endereço
 
                 <input
                     name="regiao"

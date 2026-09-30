@@ -60,6 +60,20 @@ function BotaoHome() {
         </button>
     );
 }
+function BotaoHomeText() {
+    const navigate = useNavigate();
+
+    return (
+        <button
+            className="botao-home"
+            type="button"
+            onClick={() => navigate("/PaginaInicial")}
+            style={{ background: "none", border: "none", padding: 0 }}
+        >
+            Home
+        </button>
+    );
+}
 
 function BotaoNoticias() {
     const navigate = useNavigate();
@@ -118,5 +132,6 @@ export {
     BotaoNoticias,
     BotaoVerAnimais,
     BotaoSobreNos,
-    BotaoDetalheAnimais
+    BotaoDetalheAnimais,
+    BotaoHomeText
 };

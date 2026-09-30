@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 import { BotaoCadastrarAnimal, BotaoVerAnimais } from "../componentes/Botoes";
-import { Indicadores, RodapeInstitucional } from "./ComponentesInstitucionais";
-import acolhimento from "../assets/prototipo/acolhimento.webp";
+import { Indicadores, RodapeInstitucional } from "../componentes/ComponentesInstitucionais";
+import acolhimento from "../assets/prototipo/acolhimento.gif";
 import abrigo from "../assets/prototipo/abrigo.webp";
 import noticiaGato from "../assets/prototipo/noticia-gato.webp";
 import noticiaDescanso from "../assets/prototipo/noticia-descanso.webp";

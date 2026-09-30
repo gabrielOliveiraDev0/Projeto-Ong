@@ -3,7 +3,8 @@ import {
     BotaoCadastrarUsuario,
     BotaoEntrar, BotaoHome,
     BotaoNoticias,
-    BotaoVerAnimais, BotaoSobreNos
+    BotaoVerAnimais, BotaoSobreNos, 
+    BotaoHomeText
 } from "../componentes/Botoes";
 
 
@@ -14,11 +15,15 @@ function CabecalhoPadrao() {
             <BotaoHome />
             <section className="cabecalho-botoes">
 
+                <BotaoHomeText />
+                
                 <BotaoNoticias />
 
                 <BotaoVerAnimais />
 
                 <BotaoSobreNos />
+
+               
 
             </section>
             <section className="BotaoInteracaoUsuario"> 

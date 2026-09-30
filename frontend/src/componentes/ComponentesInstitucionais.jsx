@@ -60,6 +60,8 @@ export function RodapeInstitucional() {
             </nav>
             <div><span>Amigos de quatro patas</span><p>Juntos por um lar seguro e cheio de amor.</p></div>
             <div><span>Faça parte</span><Link to="/CadastrarUsuarios">Cadastrar-se</Link><Link to="/Login">Entrar na conta</Link></div>
+         
         </footer>
+        
     );
 }

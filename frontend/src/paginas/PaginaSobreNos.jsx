@@ -1,5 +1,5 @@
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
-import { Indicadores } from "./ComponentesInstitucionais";
+import { Indicadores } from "../componentes/ComponentesInstitucionais";
 import logo from "../assets/logo.png";
 import caoEGato from "../assets/prototipo/cao-e-gato.webp";
 import gatoCurioso from "../assets/prototipo/gato-curioso.webp";

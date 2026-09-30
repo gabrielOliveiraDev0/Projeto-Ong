@@ -52,7 +52,7 @@ label {
   width: min(100%, var(--largura-conteudo));
   margin-inline: auto;
   padding: 38px 30px 24px;
-  background: var(--azul-suave);
+  background: rgba(220, 239, 252, 1);
   border-radius: 16px 16px 0 0;
 }
 
