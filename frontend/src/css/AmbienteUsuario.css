@@ -1,0 +1,289 @@
+/* =========================
+   AMBIENTE DO USUÁRIO
+========================= */
+
+.ambiente-usuario {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  width: min(1400px, 100%);
+  min-height: calc(100vh - 96px);
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+/* =========================
+   CONTEÚDO PRINCIPAL
+========================= */
+
+.ambiente-conteudo {
+  padding: 42px 36px 60px;
+  min-width: 0;
+}
+
+/* Botões exclusivos do administrador */
+
+.acoes-administrador {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 42px;
+}
+
+.acoes-administrador button {
+  min-width: 170px;
+  padding: 11px 28px;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+.acoes-administrador button:first-child {
+  background: #ffffff;
+  color: var(--azul);
+  border: 3px solid var(--azul);
+}
+
+.acoes-administrador button:first-child:hover {
+  background: #eef7ff;
+}
+
+.acoes-administrador button:last-child {
+  background: var(--azul);
+  color: #ffffff;
+}
+
+/* =========================
+   LISTAS DOS ANIMAIS
+========================= */
+.listas-usuario {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  min-height: 600px;
+}
+.lista-principal,
+.lista-adocao,
+.lista-solicitacoes-adocao,
+.lista-favoritos {
+  position: relative;
+  padding: 0 30px 40px;
+  min-width: 0;
+}
+/* linha vertical igual ao protótipo */
+
+.lista-principal::before,
+.lista-adocao::before,
+.lista-solicitacoes-adocao::before,
+.lista-favoritos::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 4px;
+  border-radius: 10px;
+  background: #6254ff;
+}
+
+.lista-principal h2,
+.lista-adocao h2,
+.lista-solicitacoes-adocao h2,
+.lista-favoritos h2 {
+  width: 100%;
+  margin: 0 0 34px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  background: var(--azul);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+.lista-principal > p,
+.lista-adocao > p,
+.lista-solicitacoes-adocao > p,
+.lista-favoritos > p {
+  color: #666666;
+  text-align: center;
+  margin-top: 40px;
+}
+
+/* =========================
+   PERFIL LATERAL
+========================= */
+
+.perfil-usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 36px 24px 24px;
+  background: #eef3ef;
+  min-height: calc(100vh - 96px);
+}
+
+.perfil-cabecalho {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.foto-perfil {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+
+  border: 6px solid #6254ff;
+  border-radius: 50%;
+
+  background: #ffffff;
+  font-size: 56px;
+}
+
+.perfil-cabecalho h2 {
+  margin: 0 0 4px;
+  font-size: 24px;
+  color: #111111;
+}
+
+.perfil-cabecalho p {
+  margin: 0;
+  color: #555555;
+  font-size: 14px;
+}
+
+/* =========================
+   INFORMAÇÕES DO USUÁRIO
+========================= */
+
+.informacoes-usuario {
+  padding: 24px 20px;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.informacoes-usuario h3 {
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.informacoes-usuario p {
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+  color: #333333;
+  font-size: 14px;
+}
+
+/* =========================
+   OPÇÕES DO PERFIL
+========================= */
+
+.opcoes-usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding: 16px;
+  border-radius: 12px;
+  background: var(--azul);
+}
+
+.opcoes-usuario button {
+  width: 100%;
+  background: transparent;
+  color: #ffffff;
+  text-align: left;
+  font-size: 16px;
+}
+
+.opcoes-usuario button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* =========================
+   RESPONSIVIDADE
+========================= */
+
+@media (max-width: 1050px) {
+  .ambiente-usuario {
+    grid-template-columns: minmax(0, 1fr) 290px;
+  }
+
+  .ambiente-conteudo {
+    padding-inline: 24px;
+  }
+
+  .listas-usuario {
+    grid-template-columns: 1fr;
+  }
+
+  .foto-perfil {
+    width: 95px;
+    height: 95px;
+    font-size: 44px;
+  }
+
+  .perfil-cabecalho {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 750px) {
+  .ambiente-usuario {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .perfil-usuario {
+    order: -1;
+    min-height: auto;
+  }
+
+  .perfil-cabecalho {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .acoes-administrador {
+    flex-wrap: wrap;
+  }
+
+  .acoes-administrador button {
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .ambiente-conteudo {
+    padding: 30px 18px;
+  }
+
+  .lista-principal,
+  .lista-adocao {
+    padding-right: 10px;
+    padding-left: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .perfil-cabecalho {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .listas-usuario {
+    grid-template-columns: 1fr;
+  }
+
+  .acoes-administrador {
+    flex-direction: column;
+  }
+
+  .acoes-administrador button {
+    width: 100%;
+  }
+}

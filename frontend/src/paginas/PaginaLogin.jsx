@@ -35,11 +35,13 @@ function Login() {
                 throw new Error("Erro ao realizar login");
             }
 
-            const usuario = await resposta.json();
+            const dados = await resposta.json();
+
+            localStorage.setItem("token", dados.token);
 
             localStorage.setItem(
                 "usuarioLogado",
-                JSON.stringify(usuario)
+                JSON.stringify(dados.usuario)
             );
 
             alert("Login realizado com sucesso!");
