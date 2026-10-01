@@ -19,7 +19,7 @@ public class Animal {
 
     @Enumerated(EnumType.STRING)
     private StatusAnimal statusAnimal;
-    
+
     private String imagemAnimal;
     private Integer idadeAnimal;
     private String nomeAnimal;
@@ -113,7 +113,7 @@ public class Animal {
         return telefoneAnimal;
     }
 
-    public void setsTelefoneAnimal(String telefoneAnimal) {
+    public void setTelefoneAnimal(String telefoneAnimal) {
         this.telefoneAnimal = telefoneAnimal;
     }
 
@@ -140,5 +140,8 @@ public class Animal {
     public void setStatusAnimal(StatusAnimal statusAnimal) {
         this.statusAnimal = statusAnimal;
     }
+
+    
+    
 
 }

@@ -14,7 +14,7 @@ function PaginaVerAnimais() {
     const [pesoSelecionado, setPesoSelecionado] = useState("Todos");
 
     useEffect(() => {
-        fetch("http://localhost:8080/animais")
+        fetch("http://localhost:8080/animais/disponiveis")
             .then((resposta) => resposta.json())
             .then((dados) => {
                 setAnimais(dados);

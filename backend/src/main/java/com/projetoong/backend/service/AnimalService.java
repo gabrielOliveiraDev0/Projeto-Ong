@@ -68,4 +68,39 @@ public class AnimalService {
         return animalRepository.findByStatusAnimal(
                 StatusAnimal.DISPONIVEL);
     }
+
+    public Animal atualizarStatusAnimal(
+            Long idAnimal,
+            StatusAnimal novoStatus) {
+
+        Animal animal = animalRepository.findById(idAnimal)
+                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+
+        animal.setStatusAnimal(novoStatus);
+
+        return animalRepository.save(animal);
+    }
+
+    public Animal atualizarAnimal(Long idAnimal, Animal dadosAtualizados) {
+
+        Animal animal = animalRepository.findById(idAnimal)
+                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+
+        animal.setNomeAnimal(dadosAtualizados.getNomeAnimal());
+        animal.setTipoAnimal(dadosAtualizados.getTipoAnimal());
+        animal.setSexoAnimal(dadosAtualizados.getSexoAnimal());
+        animal.setIdadeAnimal(dadosAtualizados.getIdadeAnimal());
+        animal.setRegiaoAnimal(dadosAtualizados.getRegiaoAnimal());
+        animal.setPesoAnimal(dadosAtualizados.getPesoAnimal());
+        animal.setEstadoSaudeAnimal(dadosAtualizados.getEstadoSaudeAnimal());
+        animal.setCastracaoAnimal(dadosAtualizados.getCastracaoAnimal());
+        animal.setDescricaoAnimal(dadosAtualizados.getDescricaoAnimal());
+        animal.setTelefoneAnimal(dadosAtualizados.getTelefoneAnimal());
+        animal.setPessoaParaContatoAnimal(
+                dadosAtualizados.getPessoaParaContatoAnimal());
+
+        animal.setStatusAnimal(dadosAtualizados.getStatusAnimal());
+
+        return animalRepository.save(animal);
+    }
 }
