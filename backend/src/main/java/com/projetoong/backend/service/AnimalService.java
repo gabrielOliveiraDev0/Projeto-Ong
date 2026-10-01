@@ -11,7 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.UUID;
-
+import com.projetoong.backend.model.StatusAnimal;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
@@ -28,6 +28,11 @@ public class AnimalService {
     }
 
     public Animal salvarAnimal(Animal animal) {
+
+        if (animal.getStatusAnimal() == null) {
+            animal.setStatusAnimal(StatusAnimal.RESGATADO);
+        }
+
         return animalRepository.save(animal);
     }
 
@@ -57,5 +62,10 @@ public class AnimalService {
     public Animal buscarAnimalPorId(Long idAnimal) {
         return animalRepository.findById(idAnimal)
                 .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+    }
+
+    public List<Animal> listarAnimaisDisponiveis() {
+        return animalRepository.findByStatusAnimal(
+                StatusAnimal.DISPONIVEL);
     }
 }

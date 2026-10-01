@@ -6,14 +6,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 @Entity
 @Table(name = "animais")
 
 public class Animal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    
-    private Long idAnimal; 
+    private Long idAnimal;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAnimal statusAnimal;
     
     private String imagemAnimal;
     private Integer idadeAnimal;
@@ -108,7 +113,7 @@ public class Animal {
         return telefoneAnimal;
     }
 
-    public void setTelefoneAnimal(String telefoneAnimal) {
+    public void setsTelefoneAnimal(String telefoneAnimal) {
         this.telefoneAnimal = telefoneAnimal;
     }
 
@@ -126,6 +131,14 @@ public class Animal {
 
     public void setImagemAnimal(String imagemAnimal) {
         this.imagemAnimal = imagemAnimal;
+    }
+
+    public StatusAnimal getStatusAnimal() {
+        return statusAnimal;
+    }
+
+    public void setStatusAnimal(StatusAnimal statusAnimal) {
+        this.statusAnimal = statusAnimal;
     }
 
 }

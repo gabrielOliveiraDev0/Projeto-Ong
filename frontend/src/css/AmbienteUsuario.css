@@ -5,7 +5,7 @@
 .pagina-ambiente {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 28px;
+  gap: 36px;
 
   width: min(1450px, calc(100% - 48px));
   margin: 34px auto 60px;
@@ -18,6 +18,10 @@
 
 .dashboard {
   min-width: 0;
+
+  padding-right: 36px;
+
+  border-right: 1px solid #e8edf1;
 }
 
 .dashboard-topo {
@@ -514,3 +518,4 @@
   }
 
 }
+

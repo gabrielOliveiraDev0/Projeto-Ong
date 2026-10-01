@@ -67,4 +67,9 @@ public class AnimalController {
     public Animal buscarAnimalPorId(@PathVariable Long id) {
         return animalService.buscarAnimalPorId(id);
     }
+
+    @GetMapping("/animais/disponiveis")
+public List<Animal> listarAnimaisDisponiveis() {
+    return animalService.listarAnimaisDisponiveis();
+}
 }
