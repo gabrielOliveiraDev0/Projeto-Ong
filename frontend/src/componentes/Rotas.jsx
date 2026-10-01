@@ -12,11 +12,10 @@ import Login from "../paginas/PaginaLogin";
 import PaginaNoticias from "../paginas/PaginaNoticias";
 import DetalhesAnimais from "../paginas/DetalhesAnimais";
 import AmbienteUsuario from "../paginas/AmbienteUsuario";
-
-
+import PaginaEditarAnimal from "../paginas/PaginaEditarAnimal";
+import PaginaSolicitarAdocao from "../paginas/PaginaSolicitarAdocao";
 import PaginaSobreNos from "../paginas/PaginaSobreNos";
 import PaginaVerAnimais from "../paginas/PaginaVerAnimais";
-
 function Rota() {
     const usuarioLogado = JSON.parse(
         localStorage.getItem("usuarioLogado")
@@ -67,6 +66,15 @@ function Rota() {
                 <Route
                     path="/AmbienteUsuario"
                     element={<AmbienteUsuario />}
+                />
+
+                <Route
+                    path="/EditarAnimal/:id"
+                    element={<PaginaEditarAnimal />}
+                />
+                <Route
+                    path="/SolicitarAdocao/:idAnimal"
+                    element={<PaginaSolicitarAdocao />}
                 />
 
 

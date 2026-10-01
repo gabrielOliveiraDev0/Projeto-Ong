@@ -20,7 +20,8 @@ function FormularioCadastroAnimal() {
 
     async function salvarAnimal(event) {
         event.preventDefault();
-        
+        const token = localStorage.getItem("token");
+
         const animalParaEnviar = {
             nomeAnimal: animal.nome,
             tipoAnimal: animal.tipo,
@@ -39,7 +40,8 @@ function FormularioCadastroAnimal() {
             const resposta = await fetch("http://localhost:8080/animais", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 },
                 body: JSON.stringify(animalParaEnviar)
             });

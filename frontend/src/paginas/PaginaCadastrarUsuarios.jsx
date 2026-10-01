@@ -28,15 +28,12 @@ function CadastrarUsuarios() {
         };
 
         try {
-            const token = localStorage.getItem("token");
-
-            const resposta = await fetch("http://localhost:8080/animais", {
+            const resposta = await fetch("http://localhost:8080/usuarios", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
+                    "Content-Type": "application/json"
                 },
-                body: JSON.stringify(animalParaEnviar)
+                body: JSON.stringify(usuarioParaEnviar)
             });
 
             if (resposta.status === 409) {

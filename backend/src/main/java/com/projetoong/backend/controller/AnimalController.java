@@ -21,9 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import com.projetoong.backend.model.StatusAnimalRequest;
+
 import com.projetoong.backend.service.JwtService;
 
 @CrossOrigin(origins = "http://localhost:5173")

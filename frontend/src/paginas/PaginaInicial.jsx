@@ -20,7 +20,7 @@ function PaginaInicial() {
                         <h1 id="inicial-titulo">Ajude a encontrar um lar para animais</h1>
                         <div className="inicial-acoes">
                             <BotaoVerAnimais className="BoataoVeranimaisPaginaInicial" />
-                            <BotaoCadastrarAnimal/>
+                            
                         </div>
                     </div>
                     <img className="inicial-hero-imagem" src={acolhimento} alt="Ilustração de uma mulher acolhendo um cachorro" width="3000" height="2000" />
