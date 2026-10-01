@@ -1,281 +1,492 @@
 /* =========================
-   AMBIENTE DO USUÁRIO
+   PÁGINA
 ========================= */
 
-.ambiente-usuario {
+.pagina-ambiente {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
-  width: min(1400px, 100%);
-  min-height: calc(100vh - 96px);
-  margin: 0 auto;
-  background: #ffffff;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 28px;
+
+  width: min(1450px, calc(100% - 48px));
+  margin: 34px auto 60px;
 }
 
+
 /* =========================
-   CONTEÚDO PRINCIPAL
+   DASHBOARD
 ========================= */
 
-.ambiente-conteudo {
-  padding: 42px 36px 60px;
+.dashboard {
   min-width: 0;
 }
 
-/* Botões exclusivos do administrador */
+.dashboard-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+
+  margin-bottom: 28px;
+  padding: 28px 32px;
+
+  background:
+    linear-gradient(
+      120deg,
+      var(--azul),
+      #38b6ff
+    );
+
+  border-radius: 20px;
+
+  color: white;
+
+  box-shadow: 0 8px 26px rgba(0, 123, 255, 0.14);
+}
+
+.dashboard-topo h1 {
+  margin: 3px 0 8px;
+
+  font-size: 30px;
+}
+
+.dashboard-topo p {
+  margin: 0;
+
+  max-width: 650px;
+
+  line-height: 1.5;
+}
+
+.dashboard-subtitulo {
+  font-size: 13px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  opacity: 0.8;
+}
+
+.botao-explorar {
+  flex-shrink: 0;
+
+  background: white;
+  color: var(--azul);
+
+  padding: 12px 22px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.botao-explorar:hover {
+  transform: translateY(-1px);
+
+  background: #f4faff;
+}
+
+
+/* =========================
+   AÇÕES ADMIN
+========================= */
 
 .acoes-administrador {
   display: flex;
-  justify-content: center;
-  gap: 24px;
-  margin-bottom: 42px;
+  justify-content: flex-end;
+  gap: 12px;
+
+  margin-bottom: 24px;
 }
 
 .acoes-administrador button {
-  min-width: 170px;
-  padding: 11px 28px;
-  border-radius: 9px;
-  font-size: 16px;
+  min-width: 150px;
 }
 
-.acoes-administrador button:first-child {
-  background: #ffffff;
-  color: var(--azul);
-  border: 3px solid var(--azul);
-}
-
-.acoes-administrador button:first-child:hover {
-  background: #eef7ff;
-}
-
-.acoes-administrador button:last-child {
-  background: var(--azul);
-  color: #ffffff;
-}
 
 /* =========================
-   LISTAS DOS ANIMAIS
+   LISTAS
 ========================= */
-.listas-usuario {
+
+.dashboard-listas {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  min-height: 600px;
-}
-.lista-principal,
-.lista-adocao,
-.lista-solicitacoes-adocao,
-.lista-favoritos {
-  position: relative;
-  padding: 0 30px 40px;
-  min-width: 0;
-}
-/* linha vertical igual ao protótipo */
-
-.lista-principal::before,
-.lista-adocao::before,
-.lista-solicitacoes-adocao::before,
-.lista-favoritos::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 4px;
-  border-radius: 10px;
-  background: #6254ff;
+  gap: 22px;
 }
 
-.lista-principal h2,
-.lista-adocao h2,
-.lista-solicitacoes-adocao h2,
-.lista-favoritos h2 {
-  width: 100%;
-  margin: 0 0 34px;
-  padding: 12px 20px;
-  border-radius: 10px;
-  background: var(--azul);
-  color: #ffffff;
-  font-size: 20px;
-  font-weight: 600;
-  text-align: center;
-}
-.lista-principal > p,
-.lista-adocao > p,
-.lista-solicitacoes-adocao > p,
-.lista-favoritos > p {
-  color: #666666;
-  text-align: center;
-  margin-top: 40px;
-}
-
-/* =========================
-   PERFIL LATERAL
-========================= */
-
-.perfil-usuario {
+.painel-lista {
   display: flex;
   flex-direction: column;
-  gap: 26px;
-  padding: 36px 24px 24px;
-  background: #eef3ef;
-  min-height: calc(100vh - 96px);
+
+  min-height: 365px;
+
+  padding: 24px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7ebef;
+  border-radius: 18px;
+
+  box-shadow:
+    0 5px 20px rgba(25, 45, 65, 0.06);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-.perfil-cabecalho {
+.painel-lista:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 12px 28px rgba(25, 45, 65, 0.1);
+}
+
+
+/* Título */
+
+.painel-titulo {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 13px;
+
+  padding-bottom: 18px;
+
+  border-bottom: 1px solid #eef1f4;
 }
 
-.foto-perfil {
+.icone-painel {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 120px;
-  height: 120px;
+  width: 42px;
+  height: 42px;
+
   flex-shrink: 0;
 
-  border: 6px solid #6254ff;
-  border-radius: 50%;
+  border-radius: 12px;
 
-  background: #ffffff;
-  font-size: 56px;
+  background: #e8f4ff;
+  color: var(--azul);
+
+  font-size: 20px;
+  font-weight: 700;
 }
 
-.perfil-cabecalho h2 {
-  margin: 0 0 4px;
-  font-size: 24px;
-  color: #111111;
+.painel-titulo h2 {
+  margin: 0 0 3px;
+
+  color: #1c2733;
+
+  font-size: 18px;
 }
 
-.perfil-cabecalho p {
+.painel-titulo p {
   margin: 0;
-  color: #555555;
-  font-size: 14px;
+
+  color: #7a8490;
+
+  font-size: 13px;
+  line-height: 1.4;
 }
 
-/* =========================
-   INFORMAÇÕES DO USUÁRIO
-========================= */
 
-.informacoes-usuario {
-  padding: 24px 20px;
-  border-radius: 12px;
-  background: #ffffff;
-}
+/* Estado vazio */
 
-.informacoes-usuario h3 {
-  margin: 0 0 22px;
-  text-align: center;
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.informacoes-usuario p {
-  margin: 12px 0;
-  overflow-wrap: anywhere;
-  color: #333333;
-  font-size: 14px;
-}
-
-/* =========================
-   OPÇÕES DO PERFIL
-========================= */
-
-.opcoes-usuario {
+.estado-vazio {
   display: flex;
+  flex: 1;
+
   flex-direction: column;
-  gap: 10px;
-  margin-top: auto;
-  padding: 16px;
-  border-radius: 12px;
-  background: var(--azul);
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px 10px;
+
+  text-align: center;
 }
 
-.opcoes-usuario button {
-  width: 100%;
-  background: transparent;
-  color: #ffffff;
-  text-align: left;
+.estado-vazio > span {
+  margin-bottom: 14px;
+
+  font-size: 42px;
+
+  opacity: 0.75;
+}
+
+.estado-vazio strong {
+  margin-bottom: 8px;
+
+  color: #303b46;
+
   font-size: 16px;
 }
 
-.opcoes-usuario button:hover {
-  background: rgba(255, 255, 255, 0.15);
+.estado-vazio p {
+  max-width: 240px;
+
+  margin: 0;
+
+  color: #89929b;
+
+  font-size: 14px;
+  line-height: 1.5;
 }
+
+.estado-vazio button {
+  margin-top: 18px;
+
+  padding: 9px 18px;
+
+  font-size: 13px;
+}
+
+
+/* =========================
+   PERFIL
+========================= */
+
+.painel-perfil {
+  position: sticky;
+  top: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  padding: 26px;
+
+  background: #f4f8f6;
+
+  border: 1px solid #e3e9e5;
+  border-radius: 20px;
+
+  box-shadow:
+    0 6px 20px rgba(25, 45, 65, 0.06);
+}
+
+
+/* Identidade */
+
+.perfil-identidade {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid #dfe7e2;
+
+  text-align: center;
+}
+
+.avatar-usuario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 96px;
+  height: 96px;
+
+  margin-bottom: 14px;
+
+  border: 5px solid #6254ff;
+  border-radius: 50%;
+
+  background: white;
+
+  color: var(--azul);
+
+  font-size: 38px;
+  font-weight: 700;
+}
+
+.perfil-identidade h2 {
+  margin: 0 0 6px;
+
+  color: #17202a;
+
+  font-size: 22px;
+}
+
+.tipo-usuario {
+  display: inline-block;
+
+  padding: 5px 12px;
+
+  background: #e6f3ff;
+  color: var(--azul);
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+
+/* Informações */
+
+.perfil-informacoes {
+  padding: 20px;
+
+  background: white;
+
+  border-radius: 14px;
+}
+
+.perfil-informacoes h3 {
+  margin: 0 0 18px;
+
+  color: #202c36;
+
+  font-size: 16px;
+}
+
+.informacao-item {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  margin-top: 14px;
+}
+
+.informacao-item span {
+  color: #89929b;
+
+  font-size: 12px;
+}
+
+.informacao-item strong {
+  color: #3e4852;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  overflow-wrap: anywhere;
+}
+
+
+/* Editar perfil */
+
+.botao-editar-perfil {
+  width: 100%;
+
+  background: white;
+  color: var(--azul);
+
+  border: 1px solid var(--azul);
+}
+
+.botao-editar-perfil:hover {
+  background: #eef7ff;
+}
+
+
+/* Menu */
+
+.perfil-menu {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 5px;
+}
+
+.perfil-menu button {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  background: transparent;
+
+  color: #404b55;
+
+  text-align: left;
+
+  border-radius: 9px;
+}
+
+.perfil-menu button:hover {
+  background: #e4ece8;
+}
+
+.perfil-menu .botao-sair-perfil {
+  color: #d84343;
+}
+
+
+/* =========================
+   ADMINISTRADOR
+========================= */
+
+.acoes-administrador button:first-child {
+  background: var(--azul);
+  color: white;
+}
+
+.acoes-administrador button:nth-child(2) {
+  background: white;
+  color: var(--azul);
+
+  border: 1px solid var(--azul);
+}
+
+.acoes-administrador button:last-child {
+  background: #fff0f0;
+  color: #d33d3d;
+
+  border: 1px solid #ffd0d0;
+}
+
 
 /* =========================
    RESPONSIVIDADE
 ========================= */
 
-@media (max-width: 1050px) {
-  .ambiente-usuario {
-    grid-template-columns: minmax(0, 1fr) 290px;
+@media (max-width: 1200px) {
+
+  .dashboard-listas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .ambiente-conteudo {
-    padding-inline: 24px;
-  }
+}
 
-  .listas-usuario {
+
+@media (max-width: 950px) {
+
+  .pagina-ambiente {
     grid-template-columns: 1fr;
   }
 
-  .foto-perfil {
-    width: 95px;
-    height: 95px;
-    font-size: 44px;
-  }
+  .painel-perfil {
+    position: static;
 
-  .perfil-cabecalho {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-@media (max-width: 750px) {
-  .ambiente-usuario {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .perfil-usuario {
     order: -1;
-    min-height: auto;
   }
 
-  .perfil-cabecalho {
-    flex-direction: row;
-    text-align: left;
-  }
-
-  .acoes-administrador {
-    flex-wrap: wrap;
-  }
-
-  .acoes-administrador button {
-    flex: 1;
-    min-width: 140px;
-  }
-
-  .ambiente-conteudo {
-    padding: 30px 18px;
-  }
-
-  .lista-principal,
-  .lista-adocao {
-    padding-right: 10px;
-    padding-left: 22px;
-  }
 }
 
-@media (max-width: 480px) {
-  .perfil-cabecalho {
-    flex-direction: column;
-    text-align: center;
+
+@media (max-width: 700px) {
+
+  .pagina-ambiente {
+    width: calc(100% - 28px);
+
+    margin-top: 20px;
   }
 
-  .listas-usuario {
+  .dashboard-topo {
+    align-items: flex-start;
+    flex-direction: column;
+
+    padding: 24px;
+  }
+
+  .dashboard-listas {
     grid-template-columns: 1fr;
   }
 
@@ -286,4 +497,20 @@
   .acoes-administrador button {
     width: 100%;
   }
+
+}
+
+
+@media (max-width: 450px) {
+
+  .dashboard-topo h1 {
+    font-size: 24px;
+  }
+
+  .painel-lista {
+    min-height: 320px;
+
+    padding: 18px;
+  }
+
 }

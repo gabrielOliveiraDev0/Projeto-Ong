@@ -16,15 +16,24 @@ import java.io.IOException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.server.ResponseStatusException;
+
+import com.projetoong.backend.service.JwtService;
 
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 public class AnimalController {
 
     private final AnimalService animalService;
+    private final JwtService jwtService;
 
-    public AnimalController(AnimalService animalService) {
+    public AnimalController(
+            AnimalService animalService,
+            JwtService jwtService) {
         this.animalService = animalService;
+        this.jwtService = jwtService;
     }
 
     @GetMapping("/animais")
@@ -33,7 +42,16 @@ public class AnimalController {
     }
 
     @PostMapping("/animais")
-    public Animal salvarAnimal(@RequestBody Animal animal) {
+    public Animal salvarAnimal(
+            @RequestBody Animal animal,
+            @RequestHeader(value = "Authorization", required = false) String authorization) {
+
+        if (!jwtService.ehAdministrador(authorization)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Apenas administradores podem cadastrar animais");
+        }
+
         return animalService.salvarAnimal(animal);
     }
 

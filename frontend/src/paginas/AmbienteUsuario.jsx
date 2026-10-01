@@ -28,139 +28,301 @@ function AmbienteUsuario() {
         <>
             <Cabecalho />
 
-            <main className="ambiente-usuario">
+            <main className="pagina-ambiente">
 
-                <section className="ambiente-conteudo">
+                <section className="dashboard">
+
+                    <header className="dashboard-topo">
+
+                        <div>
+                            <p className="dashboard-subtitulo">
+                                Minha conta
+                            </p>
+
+                            <h1>
+                                Bem-vindo, {usuarioLogado.nomeUsuario}
+                            </h1>
+
+                            <p>
+                                {ehAdministrador
+                                    ? "Gerencie os animais e acompanhe as atividades da ONG."
+                                    : "Acompanhe suas adoções, solicitações e animais favoritos."}
+                            </p>
+                        </div>
+
+                        {!ehAdministrador && (
+                            <button
+                                className="botao-explorar"
+                                type="button"
+                                onClick={() => navigate("/PaginaVerAnimais")}
+                            >
+                                Explorar animais
+                            </button>
+                        )}
+
+                        {ehAdministrador && (
+                            <button
+                                className="botao-explorar"
+                                type="button"
+                                onClick={() => navigate("/cadastrarAnimais")}
+                            >
+                                + Cadastrar animal
+                            </button>
+                        )}
+
+                    </header>
+
 
                     {ehAdministrador && (
-                        <div className="acoes-administrador">
-
-                            <button type="button">
-                                Remover
-                            </button>
+                        <section className="acoes-administrador">
 
                             <button
                                 type="button"
                                 onClick={() => navigate("/cadastrarAnimais")}
                             >
-                                + Adicionar
+                                + Adicionar animal
                             </button>
 
-                        </div>
+                            <button type="button">
+                                Editar animal
+                            </button>
+
+                            <button type="button">
+                                Remover animal
+                            </button>
+
+                        </section>
                     )}
 
-                   <section className="listas-usuario">
 
-    <div className="lista-principal">
+                    <section className="dashboard-listas">
 
-        <h2>
-            {ehAdministrador
-                ? "Lista de animais em tratamento"
-                : "Lista de animais adotados"}
-        </h2>
+                        {!ehAdministrador && (
+                            <>
+                                <article className="painel-lista">
 
-        <p>
-            Os animais serão exibidos aqui.
-        </p>
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">
+                                            ✓
+                                        </div>
 
-    </div>
+                                        <div>
+                                            <h2>Animais adotados</h2>
+                                            <p>
+                                                Animais que já fazem parte da sua família.
+                                            </p>
+                                        </div>
+                                    </div>
 
-    {ehAdministrador && (
-        <div className="lista-adocao">
+                                    <div className="estado-vazio">
+                                        <span>🐾</span>
 
-            <h2>
-                Lista de animais para adoção
-            </h2>
+                                        <strong>
+                                            Nenhum animal adotado
+                                        </strong>
 
-            <p>
-                Os animais disponíveis serão exibidos aqui.
-            </p>
+                                        <p>
+                                            Quando uma adoção for concluída,
+                                            ela aparecerá aqui.
+                                        </p>
+                                    </div>
 
-        </div>
-    )}
+                                </article>
 
-    {!ehAdministrador && (
-        <>
-            <div className="lista-solicitacoes-adocao">
 
-                <h2>
-                    Lista de adoção solicitada
-                </h2>
+                                <article className="painel-lista">
 
-                <p>
-                    Suas solicitações de adoção serão exibidas aqui.
-                </p>
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">
+                                            ⏱
+                                        </div>
 
-            </div>
+                                        <div>
+                                            <h2>Adoções solicitadas</h2>
+                                            <p>
+                                                Acompanhe o andamento das suas solicitações.
+                                            </p>
+                                        </div>
+                                    </div>
 
-            <div className="lista-favoritos">
+                                    <div className="estado-vazio">
+                                        <span>📋</span>
 
-                <h2>
-                    Lista de favoritos
-                </h2>
+                                        <strong>
+                                            Nenhuma solicitação
+                                        </strong>
 
-                <p>
-                    Seus animais favoritos serão exibidos aqui.
-                </p>
+                                        <p>
+                                            As solicitações de adoção aparecerão aqui.
+                                        </p>
+                                    </div>
 
-            </div>
-        </>
-    )}
+                                </article>
 
-</section>
+
+                                <article className="painel-lista">
+
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">
+                                            ♥
+                                        </div>
+
+                                        <div>
+                                            <h2>Favoritos</h2>
+                                            <p>
+                                                Animais que chamaram sua atenção.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="estado-vazio">
+                                        <span>♡</span>
+
+                                        <strong>
+                                            Nenhum favorito
+                                        </strong>
+
+                                        <p>
+                                            Favorite animais para encontrá-los
+                                            rapidamente depois.
+                                        </p>
+
+                                        <button
+                                            type="button"
+                                            onClick={() =>
+                                                navigate("/PaginaVerAnimais")
+                                            }
+                                        >
+                                            Ver animais
+                                        </button>
+                                    </div>
+
+                                </article>
+                            </>
+                        )}
+
+
+                        {ehAdministrador && (
+                            <>
+                                <article className="painel-lista">
+
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">
+                                            +
+                                        </div>
+
+                                        <div>
+                                            <h2>Animais em tratamento</h2>
+                                            <p>
+                                                Animais ainda não disponíveis para adoção.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="estado-vazio">
+                                        <span>🐾</span>
+                                        <strong>Animais serão exibidos aqui</strong>
+                                    </div>
+
+                                </article>
+
+
+                                <article className="painel-lista">
+
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">
+                                            ✓
+                                        </div>
+
+                                        <div>
+                                            <h2>Disponíveis para adoção</h2>
+                                            <p>
+                                                Animais atualmente disponíveis no site.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div className="estado-vazio">
+                                        <span>🏠</span>
+                                        <strong>Animais serão exibidos aqui</strong>
+                                    </div>
+
+                                </article>
+                            </>
+                        )}
+
+                    </section>
 
                 </section>
 
-                <aside className="perfil-usuario">
 
-                    <div className="perfil-cabecalho">
+                <aside className="painel-perfil">
 
-                        <div className="foto-perfil">
-                            👤
+                    <section className="perfil-identidade">
+
+                        <div className="avatar-usuario">
+                            {usuarioLogado.nomeUsuario
+                                ?.charAt(0)
+                                .toUpperCase()}
                         </div>
 
-                        <div>
-                            <h2>
-                                {usuarioLogado.nomeUsuario}
-                            </h2>
+                        <h2>
+                            {usuarioLogado.nomeUsuario}
+                        </h2>
 
-                            <p>
-                                {ehAdministrador
-                                    ? "Administrador"
-                                    : "Usuário"}
-                            </p>
+                        <span className="tipo-usuario">
+                            {ehAdministrador
+                                ? "Administrador"
+                                : "Usuário"}
+                        </span>
+
+                    </section>
+
+
+                    <section className="perfil-informacoes">
+
+                        <h3>Informações pessoais</h3>
+
+                        <div className="informacao-item">
+                            <span>Telefone</span>
+                            <strong>
+                                {usuarioLogado.telefoneUsuario || "Não informado"}
+                            </strong>
                         </div>
 
-                    </div>
+                        <div className="informacao-item">
+                            <span>E-mail</span>
+                            <strong>
+                                {usuarioLogado.emailUsuario}
+                            </strong>
+                        </div>
 
-                    <div className="informacoes-usuario">
+                    </section>
 
-                        <h3>Suas informações</h3>
 
-                        <p>
-                            Telefone: {usuarioLogado.telefoneUsuario}
-                        </p>
+                    <button
+                        className="botao-editar-perfil"
+                        type="button"
+                    >
+                        Editar perfil
+                    </button>
 
-                        <p>
-                            E-mail: {usuarioLogado.emailUsuario}
-                        </p>
 
-                    </div>
-
-                    <div className="opcoes-usuario">
+                    <section className="perfil-menu">
 
                         <button type="button">
-                            Configurações
+                            ⚙ Configurações
                         </button>
 
                         <button
+                            className="botao-sair-perfil"
                             type="button"
                             onClick={sair}
                         >
-                            Sair da conta
+                            ↪ Sair da conta
                         </button>
 
-                    </div>
+                    </section>
 
                 </aside>
 

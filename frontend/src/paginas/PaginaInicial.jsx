@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
-import { BotaoCadastrarAnimal, BotaoVerAnimais } from "../componentes/Botoes";
+import { BotaoVerAnimais,BotaoCadastrarAnimal } from "../componentes/Botoes";
 import { Indicadores, RodapeInstitucional } from "../componentes/ComponentesInstitucionais";
 import acolhimento from "../assets/prototipo/acolhimento.gif";
 import abrigo from "../assets/prototipo/abrigo.webp";
@@ -20,6 +20,7 @@ function PaginaInicial() {
                         <h1 id="inicial-titulo">Ajude a encontrar um lar para animais</h1>
                         <div className="inicial-acoes">
                             <BotaoVerAnimais className="BoataoVeranimaisPaginaInicial" />
+                            <BotaoCadastrarAnimal/>
                         </div>
                     </div>
                     <img className="inicial-hero-imagem" src={acolhimento} alt="Ilustração de uma mulher acolhendo um cachorro" width="3000" height="2000" />
