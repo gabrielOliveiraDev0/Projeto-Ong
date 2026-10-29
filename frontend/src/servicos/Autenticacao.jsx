@@ -67,7 +67,7 @@ export function Autenticacao({ children }) {
         }
 
         atualizar();
-        const intervalo = setInterval(atualizar, 5000);
+        const intervalo = setInterval(atualizar, 30000);
 
         return () => {
             ativo = false;

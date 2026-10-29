@@ -24,6 +24,8 @@ import com.projetoong.backend.repository.UsuarioRepository;
 
 @Service
 public class UsuarioService {
+    @org.springframework.beans.factory.annotation.Autowired
+    private UploadService uploads;
 
     private final UsuarioRepository usuarioRepository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -150,7 +152,7 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(autenticado.getIdUsuario())
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 
-        Path pasta = Paths.get("../uploads/perfis");
+        Path pasta = uploads.pasta("perfis");
 
         try {
             Files.createDirectories(pasta);
@@ -187,6 +189,7 @@ public class UsuarioService {
     }
 
     private void validarImagem(MultipartFile imagem) {
+        uploads.validar(imagem);
         String tipo = imagem == null || imagem.getContentType() == null ? "" : imagem.getContentType();
 
         if (
@@ -207,6 +210,6 @@ public class UsuarioService {
 
     private void removerFotoLocal(String nome) throws IOException {
         if (nome == null || nome.isBlank()) return;
-        Files.deleteIfExists(Paths.get("../uploads/perfis").resolve(nome));
+        Files.deleteIfExists(uploads.arquivo("perfis", nome));
     }
 }

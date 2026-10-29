@@ -1,3 +1,5 @@
+import { API_URL } from "../servicos/api";
+import MenuRelatorios from "../componentes/MenuRelatorios";
 import Painel from "../componentes/Painel";
 import ImgExemplo from "../assets/ImgExemplo.png";
 import { useConsulta } from "../servicos/useConsulta";
@@ -12,7 +14,7 @@ const nomesStatus = {
 
 function imagemAnimal(animal) {
     return animal.imagemAnimal
-        ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+        ? `${API_URL}/uploads/animais/${animal.imagemAnimal}`
         : ImgExemplo;
 }
 
@@ -22,6 +24,7 @@ export default function PaginaRelatorioAnimais() {
     if (!relatorio) {
         return (
             <Painel titulo="Relatório de animais" erro={erro}>
+            <MenuRelatorios />
                 <p>Carregando...</p>
             </Painel>
         );
@@ -39,6 +42,7 @@ export default function PaginaRelatorioAnimais() {
 
     return (
         <Painel titulo="Relatório de animais" erro={erro}>
+            <MenuRelatorios />
             <p className="relatorio-animais-intro">
                 Acompanhe o estoque atual de animais da ONG e o histórico de entradas e saídas.
             </p>

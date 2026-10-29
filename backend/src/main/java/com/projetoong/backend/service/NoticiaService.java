@@ -20,6 +20,8 @@ import java.util.UUID;
 
 @Service
 public class NoticiaService {
+    @org.springframework.beans.factory.annotation.Autowired
+    private UploadService uploads;
     private final NoticiaRepository noticias;
 
     public NoticiaService(NoticiaRepository noticias) {
@@ -44,6 +46,7 @@ public class NoticiaService {
     }
 
     public Noticia salvarImagem(Long id, MultipartFile imagem) throws IOException {
+        uploads.validar(imagem);
         Noticia noticia = buscar(id);
         String tipo = imagem.getContentType() == null ? "" : imagem.getContentType();
 
@@ -51,7 +54,7 @@ public class NoticiaService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Envie JPG, PNG ou WebP até 5 MB");
         }
 
-        Path pasta = Paths.get("../uploads/noticias");
+        Path pasta = uploads.pasta("noticias");
         Files.createDirectories(pasta);
 
         String extensao = "image/png".equals(tipo) ? ".png" : "image/webp".equals(tipo) ? ".webp" : ".jpg";
@@ -65,7 +68,7 @@ public class NoticiaService {
         Noticia salva = noticias.save(noticia);
 
         if (imagemAnterior != null && !imagemAnterior.isBlank()) {
-            Files.deleteIfExists(pasta.resolve(imagemAnterior));
+            Files.deleteIfExists(uploads.arquivo("noticias", imagemAnterior));
         }
 
         return salva;
@@ -77,7 +80,7 @@ public class NoticiaService {
         noticias.delete(noticia);
 
         if (imagem != null && !imagem.isBlank()) {
-            Files.deleteIfExists(Paths.get("../uploads/noticias").resolve(imagem));
+            Files.deleteIfExists(uploads.arquivo("noticias", imagem));
         }
     }
 }

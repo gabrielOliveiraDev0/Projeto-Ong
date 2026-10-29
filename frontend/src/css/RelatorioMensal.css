@@ -1,0 +1,31 @@
+.gestao .mensal-filtro { display:flex; align-items:end; flex-wrap:wrap; gap:16px; }
+.gestao .mensal-filtro label { margin:0; min-width:150px; }
+.gestao .mensal-filtro button { min-height:43px; margin:0; }
+.mensal-indicadores { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; }
+.mensal-indicadores div { padding:12px; border-radius:8px; background:#f5f9fc; }
+.mensal-indicadores dt { color:#526573; }
+.mensal-indicadores dd { margin:8px 0 0; font-size:24px; font-weight:700; color:#203a4b; }
+.mensal-cabecalho p,.mensal-notas { color:#526573; font-size:14px; }
+.mensal-notas li { margin-bottom:10px; line-height:1.5; }
+.relatorio-mensal caption { text-align:left; padding:10px 0; font-weight:700; }
+@media print {
+    @page { size:A4; margin:15mm; }
+    body:has(.relatorio-mensal) { background:white; color:black; font-size:10pt; }
+    body:has(.relatorio-mensal) .cabecalho,
+    body:has(.relatorio-mensal) .gestao > a,
+    .relatorio-mensal .menu-relatorios,
+    .relatorio-mensal .mensal-filtro,
+    .relatorio-mensal .mensal-instrucao { display:none !important; }
+    body:has(.relatorio-mensal) .gestao { max-width:none; width:100%; padding:0; margin:0; }
+    .relatorio-mensal .relatorio-bloco { box-shadow:none; border:1px solid #bbb; padding:12px; margin:14px 0; }
+    .relatorio-mensal .relatorio-cards { grid-template-columns:repeat(2,1fr); }
+    .relatorio-mensal .relatorio-cards article { min-height:70px; box-shadow:none; }
+    .relatorio-mensal .mensal-indicadores { grid-template-columns:repeat(2,1fr); }
+    .relatorio-mensal h2,.relatorio-mensal h3 { break-after:avoid; }
+    .relatorio-mensal tr,.relatorio-mensal article,.relatorio-mensal .mensal-indicadores div { break-inside:avoid; }
+    .relatorio-mensal .rolagem { overflow:visible; }
+    .relatorio-mensal table { width:100%; table-layout:fixed; }
+    .relatorio-mensal td { overflow-wrap:anywhere; }
+    .relatorio-mensal thead { display:table-header-group; }
+    .relatorio-mensal .mensal-notas { font-size:9pt; }
+}

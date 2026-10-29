@@ -82,7 +82,7 @@ function PaginaSolicitarAdocao() {
             formulario.append("holerite", holerite);
 
             const resposta = await requisicao(
-                "http://localhost:8080/adocoes/com-holerite",
+                "/adocoes/com-holerite",
                 {
                     method: "POST",
                     body: formulario

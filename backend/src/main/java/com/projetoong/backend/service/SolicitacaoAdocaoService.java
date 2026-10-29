@@ -28,6 +28,11 @@ import com.projetoong.backend.repository.UsuarioRepository;
 @Service
 @org.springframework.transaction.annotation.Transactional
 public class SolicitacaoAdocaoService {
+    @org.springframework.beans.factory.annotation.Autowired
+    private UploadService uploads;
+
+    @jakarta.persistence.PersistenceContext
+    private jakarta.persistence.EntityManager entityManager;
 
     private final SolicitacaoAdocaoRepository solicitacaoRepository;
     private final UsuarioRepository usuarioRepository;
@@ -120,7 +125,7 @@ public class SolicitacaoAdocaoService {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Holerite não enviado");
         }
 
-        Path arquivo = Paths.get("../uploads/holerites").resolve(solicitacao.getHoleriteImagem()).normalize();
+        Path arquivo = uploads.arquivo("holerites", solicitacao.getHoleriteImagem());
 
         if (!Files.exists(arquivo)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Arquivo do holerite não encontrado");
@@ -132,17 +137,20 @@ public class SolicitacaoAdocaoService {
     public SolicitacaoAdocao aprovar(Long id) {
         estoque.processarAntesAlteracao();
 
-        SolicitacaoAdocao solicitacao = solicitacaoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Solicitação não encontrada"));
+        Long animalId = solicitacaoRepository.animalId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Solicitação não encontrada"));
+        Animal bloqueado = animalRepository.bloquear(animalId).orElseThrow();
+        entityManager.refresh(bloqueado, jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);
+        SolicitacaoAdocao solicitacao = solicitacaoRepository.findById(id).orElseThrow();
+        entityManager.refresh(solicitacao);
 
-        Animal bloqueado = animalRepository.bloquear(solicitacao.getAnimal().getIdAnimal()).orElseThrow();
+
 
         if (
             solicitacao.getStatusSolicitacao() != StatusSolicitacaoAdocao.PENDENTE ||
             bloqueado.getStatusAnimal() != StatusAnimal.DISPONIVEL ||
             bloqueado.isRemovido()
         ) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Solicitação ou animal indisponível");
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Este animal já foi adotado ou não está mais disponível, ou a solicitação já foi analisada.");
         }
 
         estoque.encerrar(bloqueado.getIdAnimal());
@@ -153,10 +161,12 @@ public class SolicitacaoAdocaoService {
                 outra.getAnimal().getIdAnimal().equals(bloqueado.getIdAnimal())
             ) {
                 outra.setStatusSolicitacao(StatusSolicitacaoAdocao.RECUSADA);
+                outra.setDataDecisao(java.time.Instant.now());
             }
         }
 
         solicitacao.setStatusSolicitacao(StatusSolicitacaoAdocao.APROVADA);
+        solicitacao.setDataDecisao(java.time.Instant.now());
 
         Animal animal = solicitacao.getAnimal();
         animal.setStatusAnimal(StatusAnimal.ADOTADO);
@@ -170,18 +180,23 @@ public class SolicitacaoAdocaoService {
     public SolicitacaoAdocao recusar(Long id) {
         estoque.processarAntesAlteracao();
 
-        SolicitacaoAdocao solicitacao = solicitacaoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Solicitação não encontrada"));
+        Long animalId = solicitacaoRepository.animalId(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Solicitação não encontrada"));
+        Animal bloqueado = animalRepository.bloquear(animalId).orElseThrow();
+        entityManager.refresh(bloqueado, jakarta.persistence.LockModeType.PESSIMISTIC_WRITE);
+        SolicitacaoAdocao solicitacao = solicitacaoRepository.findById(id).orElseThrow();
+        entityManager.refresh(solicitacao);
 
         if (solicitacao.getStatusSolicitacao() != StatusSolicitacaoAdocao.PENDENTE) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "Solicitação já analisada");
         }
 
         solicitacao.setStatusSolicitacao(StatusSolicitacaoAdocao.RECUSADA);
+        solicitacao.setDataDecisao(java.time.Instant.now());
         return solicitacaoRepository.save(solicitacao);
     }
 
     private void validarHolerite(MultipartFile holerite) {
+        uploads.validar(holerite);
         String tipo = holerite == null || holerite.getContentType() == null ? "" : holerite.getContentType();
 
         if (
@@ -201,7 +216,7 @@ public class SolicitacaoAdocaoService {
         validarHolerite(holerite);
 
         try {
-            Path pasta = Paths.get("../uploads/holerites");
+            Path pasta = uploads.pasta("holerites");
             Files.createDirectories(pasta);
 
             String tipo = holerite.getContentType();

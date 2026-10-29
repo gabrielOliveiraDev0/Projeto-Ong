@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { useConsulta } from "../servicos/useConsulta";
 import { useAutenticacao } from "../servicos/contextoAutenticacao";
 import { useNavigate, useParams } from "react-router-dom";
@@ -34,7 +35,7 @@ function DetalhesAnimais() {
                 <img
                     src={
                         animal.imagemAnimal
-                            ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                            ? `${API_URL}/uploads/animais/${animal.imagemAnimal}`
                             : ImgExemplo
                     }
                     alt={`Imagem de ${animal.nomeAnimal}`}

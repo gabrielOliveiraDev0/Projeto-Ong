@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.projetoong.backend.model.Favorito;
 import com.projetoong.backend.service.FavoritoService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RestController
 public class FavoritoController {
 

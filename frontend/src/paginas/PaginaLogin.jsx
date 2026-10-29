@@ -18,7 +18,7 @@ function Login() {
         evento.preventDefault();
 
         try {
-            const resposta = await requisicao("http://localhost:8080/login", {
+            const resposta = await requisicao("/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

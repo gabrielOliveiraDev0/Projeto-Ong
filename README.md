@@ -1,244 +1,100 @@
+# Projeto ONG
 
-# 🐾 Projeto ONG
+Sistema acadêmico para gestão de animais, adoções, estoque e alimentação, notícias, chat e relatórios administrativos. Mantém os perfis USUARIO, VETERINARIO e ADMINISTRADOR.
 
-Aplicação web desenvolvida para auxiliar uma ONG no gerenciamento de animais e no processo de adoção.
+## Tecnologias e arquitetura
 
-O projeto está sendo desenvolvido como uma aplicação **Full Stack**, utilizando React no frontend, Java com Spring Boot no backend e PostgreSQL para armazenamento dos dados.
+React 19, Vite, React Router, Java 21, Spring Boot, JPA/Hibernate, PostgreSQL, BCrypt e JWT.
 
-> 🚧 Projeto em desenvolvimento.
+`Usuários → React (Render Static Site) → Spring Boot (Render Web Service) → PostgreSQL compartilhado`
 
-## 🎯 Objetivo
+A configuração prevê uma instância do backend e vários usuários simultâneos. Os arquivos ficam em disco persistente separado do banco.
 
-O objetivo do sistema é facilitar o gerenciamento dos animais da ONG e disponibilizar informações para pessoas interessadas em adoção.
+## Execução local
 
-O projeto também está sendo utilizado para colocar em prática conhecimentos de desenvolvimento web, APIs REST, Java, React e banco de dados.
+Requisitos: Java 21, Node compatível com Vite 8 (22.12+), npm e PostgreSQL. Crie o banco `projeto_ong`.
 
-## 🚀 Tecnologias
-
-### Frontend
-
-- React
-- JavaScript
-- Vite
-- React Router
-- HTML
-- CSS
-
-### Backend
-
-- Java 21
-- Spring Boot
-- Spring Web
-- Spring Data JPA
-- Jakarta Validation
-- Maven
-
-### Banco de dados
-
-- PostgreSQL
-- pgAdmin
-
-### Ferramentas
-
-- Git
-- GitHub
-- VS Code
-
-## 🏗️ Arquitetura
-
-A aplicação está dividida em três partes principais:
-
-```text
-React
-  │
-  │ HTTP / JSON
-  ▼
-Spring Boot
-  │
-  │ JPA
-  ▼
-PostgreSQL
-```
-
-O **frontend** é responsável pela interface utilizada pelo usuário.
-
-O **backend** disponibiliza uma API REST responsável pelas regras de negócio e comunicação com o banco de dados.
-
-O **PostgreSQL** é utilizado para armazenar os dados da aplicação.
-
-## 📂 Estrutura do projeto
-
-```text
-Projeto-Ong/
-├── frontend/
-├── backend/
-├── uploads/
-└── README.md
-```
-
-No backend, o projeto segue uma separação em camadas:
-
-```text
-Controller
-    ↓
-Service
-    ↓
-Repository
-    ↓
-Database
-```
-
-### Controller
-
-Responsável por receber as requisições HTTP e retornar as respostas da API.
-
-### Service
-
-Responsável pelas regras de negócio da aplicação.
-
-### Repository
-
-Responsável pela comunicação com o banco de dados através do Spring Data JPA.
-
-### Model
-
-Contém as entidades que representam os dados da aplicação.
-
-## 🐶 Funcionalidades
-
-Algumas funcionalidades planejadas para o sistema:
-
-- Cadastro de animais
-- Listagem de animais
-- Cadastro de usuários
-- Visualização de animais disponíveis
-- Gerenciamento das informações dos animais
-- Processo de adoção
-
-Novas funcionalidades serão adicionadas durante o desenvolvimento.
-
-## ⚙️ Como executar o projeto
-
-### Pré-requisitos
-
-Para executar o projeto é necessário possuir:
-
-- Node.js
-- npm
-- Java 21
-- Maven
-- PostgreSQL
-
-## 💻 Frontend
-
-Na raiz do projeto, instale as dependências:
-
-```bash
-npm install
-```
-
-Execute o servidor de desenvolvimento:
-
-```bash
-npm run dev
-```
-
-O Vite mostrará no terminal o endereço em que o frontend está disponível.
-
-## ☕ Backend
-
-Entre na pasta do backend:
+Backend:
 
 ```bash
 cd backend
+cp .env.example .env
 ```
 
-Execute a aplicação Spring Boot:
-
-```bash
-mvn spring-boot:run
-```
-
-Também é possível utilizar o Maven Wrapper:
+Preencha a senha do seu PostgreSQL e uma `JWT_SECRET` aleatória de pelo menos 32 bytes. Pode gerar a chave com `openssl rand -hex 32`. Mantenha-a entre reinicializações. Não compartilhe nem versione o `.env`. O backend lê esse arquivo automaticamente quando iniciado na pasta `backend`.
 
 ```bash
 ./mvnw spring-boot:run
 ```
 
-## 🗄️ Banco de dados
+Frontend, em outro terminal:
 
-O projeto utiliza PostgreSQL.
-
-O banco utilizado durante o desenvolvimento é:
-
-```text
-projeto_ong
+```bash
+cd frontend
+cp .env.example .env
+npm install
+npm run dev
 ```
 
-As configurações de conexão com o banco ficam no arquivo:
+## Variáveis de ambiente
 
-```text
-backend/src/main/resources/application.properties
+| Backend | Valor/uso |
+| --- | --- |
+| DATABASE_URL | URL JDBC: `jdbc:postgresql://localhost:5432/projeto_ong` |
+| DATABASE_USER | Usuário do PostgreSQL |
+| DATABASE_PASSWORD | Senha do PostgreSQL |
+| JWT_SECRET | Segredo estável, aleatório, mínimo de 32 bytes; obrigatório inclusive localmente |
+| FRONTEND_URL | Origem exata, sem barra final; local `http://localhost:5173` |
+| UPLOAD_DIR | Local `./uploads`; produção `/var/data/uploads` |
+| SPRING_PROFILES_ACTIVE | `local` ou `prod` |
+| DB_POOL_MAX / DB_POOL_MIN | `10` / `2` |
+| PORT | Opcional, padrão `8080`; Render fornece automaticamente |
+
+Frontend: `VITE_API_URL=http://localhost:8080` localmente; URL HTTPS do backend em produção. É aplicada no build: alterou a URL, reconstrua o frontend.
+
+## Uploads e dados
+
+`UPLOAD_DIR` contém `animais/`, `noticias/`, `perfis/` e `holerites/`. JPG, PNG e WebP têm limite de 5 MB, validação de extensão, MIME e assinatura do arquivo, além de nomes gerados pelo servidor. Holerites são acessíveis somente pelo endpoint autenticado, ao próprio solicitante ou administrador.
+
+Iniciando em `backend`, `./uploads` corresponde a `backend/uploads`. Os 16 arquivos locais anteriores foram copiados para essa pasta, sem remover os originais de `uploads/`. Em outro checkout, copie seus arquivos antigos para o diretório configurado mantendo nomes e subpastas. O banco guarda os nomes, não o conteúdo dos arquivos.
+
+O esquema usa `ddl-auto=update`; não apaga o banco ao iniciar. Banco e arquivos precisam de backup. Os testes abaixo utilizam um PostgreSQL temporário separado.
+
+## Build e testes
+
+Frontend:
+
+```bash
+cd frontend
+npm run build
+npm run lint
 ```
 
-Por segurança, senhas e outras informações sensíveis não devem ser adicionadas ao repositório público.
+Backend, com ambiente e banco configurados:
 
-## 🔗 API
-
-A API está sendo desenvolvida utilizando Spring Boot.
-
-Os endpoints serão documentados aqui conforme forem implementados.
-
-Exemplo da estrutura planejada:
-
-```text
-GET     /animais
-POST    /animais
-GET     /animais/{id}
-PUT     /animais/{id}
-DELETE  /animais/{id}
+```bash
+cd backend
+./mvnw clean test
+./mvnw clean package
+java -jar target/backend-0.0.1-SNAPSHOT.jar
 ```
 
-## 📌 Status
+Para executar as verificações em banco temporário, a partir da raiz, sem usar o banco da aplicação:
 
-🚧 **Em desenvolvimento**
+```bash
+python3 scripts/validar_producao.py
+```
 
-O projeto está sendo desenvolvido gradualmente e novas funcionalidades serão adicionadas conforme a evolução do sistema.
+Requer Python 3, `psql`, `pg_isready` e binários PostgreSQL 18. Defina `PG_BIN` se estiverem em outra pasta. Utiliza as portas locais 15439 e 18089, que devem estar livres. `MAVEN_TEST_CACHE` permite indicar outro cache Maven. O script executa `clean test`, `clean package`, testes HTTP concorrentes, uploads, CORS, reinicialização e encerra seus processos ao terminar. Não é um teste de carga.
 
-## 📚 Aprendizados
+## Concorrência
 
-Este projeto também tem como objetivo praticar conceitos como:
+O estoque mantém bloqueios pessimistas em ordem de ID antes do processamento e das alterações. Adoções bloqueiam e recarregam o animal antes de decidir, inclusive quando o estoque está vazio. Aprovação, recusa das concorrentes e encerramento da alimentação pertencem à mesma transação. Atualizações clínicas e administrativas seguem a ordem estoque → animal.
 
-- Desenvolvimento Full Stack
-- React
-- Componentização
-- Rotas com React Router
-- APIs REST
-- Java
-- Spring Boot
-- Arquitetura em camadas
-- Spring Data JPA
-- PostgreSQL
-- Git e GitHub
+O scheduler permanece a cada 60 segundos; usa o mesmo processamento transacional validado em paralelo com movimentação e atualização veterinária. `processadoAte` é atualizado junto com a baixa. Chat mantém autorização por participante e bloqueio para criação de conversa. Polling: chat 5 s, demais consultas 30 s, notícias 60 s.
 
-## 👨‍💻 Autor
+Mais de uma instância exigirá revisão do scheduler e coordenação adicional; não habilite escalabilidade horizontal nesta configuração.
 
-Desenvolvido como projeto de estudo e aplicação prática de desenvolvimento Full Stack.
+## Deploy
 
-
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+Veja [DEPLOY.md](DEPLOY.md). `render.yaml` prepara banco, backend Docker, disco e frontend com rewrite SPA. O endpoint público `GET /health` retorna apenas `{"status":"UP"}`; não é um diagnóstico do banco.

@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { api } from "../servicos/api";
 import { useAutenticacao } from "../servicos/contextoAutenticacao";
 import { requisicao } from "../servicos/api";
@@ -50,7 +51,7 @@ function AmbienteUsuario() {
             } catch(e) { console.error(e); } finally { ocupado = false; }
         }
         atualizar();
-        const intervalo = setInterval(atualizar, 5000);
+        const intervalo = setInterval(atualizar, 30000);
         return () => { ativo = false; clearInterval(intervalo); };
     }, [idUsuarioLogado, ehAdministrador, ehVeterinario]);
 
@@ -80,7 +81,7 @@ function AmbienteUsuario() {
         try {
 
             const resposta = await requisicao(
-                `http://localhost:8080/favoritos?idUsuario=${usuarioLogado.idUsuario}&idAnimal=${idAnimal}`,
+                `/favoritos?idUsuario=${usuarioLogado.idUsuario}&idAnimal=${idAnimal}`,
                 {
                     method: "DELETE"
                 }
@@ -112,7 +113,7 @@ function AmbienteUsuario() {
         try {
 
             const resposta = await requisicao(
-                `http://localhost:8080/adocoes/${idSolicitacao}/${acao}`,
+                `/adocoes/${idSolicitacao}/${acao}`,
                 {
                     method: "PATCH",
                     headers: {
@@ -136,7 +137,7 @@ function AmbienteUsuario() {
             );
 
             const respostaAnimais = await requisicao(
-                "http://localhost:8080/animais"
+                "/animais"
             );
 
             if (respostaAnimais.ok) {
@@ -204,7 +205,7 @@ function AmbienteUsuario() {
         try {
 
             const resposta = await requisicao(
-                `http://localhost:8080/animais/${idAnimal}`,
+                `/animais/${idAnimal}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -387,7 +388,7 @@ function AmbienteUsuario() {
                                                                 solicitacao
                                                                     .animal
                                                                     .imagemAnimal
-                                                                    ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
+                                                                    ? `${API_URL}/uploads/animais/${solicitacao.animal.imagemAnimal}`
                                                                     : ImgExemplo
                                                             }
                                                             alt={`Imagem de ${solicitacao.animal.nomeAnimal}`}
@@ -496,7 +497,7 @@ function AmbienteUsuario() {
                                                                 solicitacao
                                                                     .animal
                                                                     .imagemAnimal
-                                                                    ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
+                                                                    ? `${API_URL}/uploads/animais/${solicitacao.animal.imagemAnimal}`
                                                                     : ImgExemplo
                                                             }
                                                             alt={`Imagem de ${solicitacao.animal.nomeAnimal}`}
@@ -616,7 +617,7 @@ function AmbienteUsuario() {
                                                                 favorito
                                                                     .animal
                                                                     .imagemAnimal
-                                                                    ? `http://localhost:8080/uploads/animais/${favorito.animal.imagemAnimal}`
+                                                                    ? `${API_URL}/uploads/animais/${favorito.animal.imagemAnimal}`
                                                                     : ImgExemplo
                                                             }
                                                             alt={`Imagem de ${favorito.animal.nomeAnimal}`}
@@ -708,7 +709,7 @@ function AmbienteUsuario() {
                                                     <div className="animal-admin-item" key={animal.idAnimal}>
                                                         <img
                                                             className="animal-admin-imagem"
-                                                            src={animal.imagemAnimal ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}` : ImgExemplo}
+                                                            src={animal.imagemAnimal ? `${API_URL}/uploads/animais/${animal.imagemAnimal}` : ImgExemplo}
                                                             alt={animal.nomeAnimal}
                                                         />
                                                         <div className="animal-admin-conteudo">
@@ -746,7 +747,7 @@ function AmbienteUsuario() {
                                                     <div className="animal-admin-item" key={animal.idAnimal}>
                                                         <img
                                                             className="animal-admin-imagem"
-                                                            src={animal.imagemAnimal ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}` : ImgExemplo}
+                                                            src={animal.imagemAnimal ? `${API_URL}/uploads/animais/${animal.imagemAnimal}` : ImgExemplo}
                                                             alt={animal.nomeAnimal}
                                                         />
                                                         <div className="animal-admin-conteudo">
@@ -827,7 +828,7 @@ function AmbienteUsuario() {
                                                                     solicitacao
                                                                         .animal
                                                                         .imagemAnimal
-                                                                        ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
+                                                                        ? `${API_URL}/uploads/animais/${solicitacao.animal.imagemAnimal}`
                                                                         : ImgExemplo
                                                                 }
                                                                 alt={`Imagem de ${solicitacao.animal.nomeAnimal}`}
@@ -1077,7 +1078,7 @@ function AmbienteUsuario() {
                                                         className="animal-admin-imagem"
                                                         src={
                                                             animal.imagemAnimal
-                                                                ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                                                                ? `${API_URL}/uploads/animais/${animal.imagemAnimal}`
                                                                 : ImgExemplo
                                                         }
                                                         alt={`Imagem de ${animal.nomeAnimal}`}
@@ -1180,7 +1181,7 @@ function AmbienteUsuario() {
                                                         className="animal-admin-imagem"
                                                         src={
                                                             animal.imagemAnimal
-                                                                ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                                                                ? `${API_URL}/uploads/animais/${animal.imagemAnimal}`
                                                                 : ImgExemplo
                                                         }
                                                         alt={`Imagem de ${animal.nomeAnimal}`}
@@ -1256,7 +1257,7 @@ function AmbienteUsuario() {
                         <div className="avatar-usuario">
                             {usuarioLogado.imagemPerfilUsuario ? (
                                 <img
-                                    src={`http://localhost:8080/uploads/perfis/${usuarioLogado.imagemPerfilUsuario}`}
+                                    src={`${API_URL}/uploads/perfis/${usuarioLogado.imagemPerfilUsuario}`}
                                     alt={`Foto de ${usuarioLogado.nomeUsuario}`}
                                 />
                             ) : (

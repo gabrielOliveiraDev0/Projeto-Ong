@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Painel from "../componentes/Painel";
@@ -20,7 +21,7 @@ function opcoesStatus(status) {
 
 function imagemAnimal(animal) {
     return animal.imagemAnimal
-        ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+        ? `${API_URL}/uploads/animais/${animal.imagemAnimal}`
         : ImgExemplo;
 }
 

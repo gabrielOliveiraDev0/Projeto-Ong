@@ -37,6 +37,18 @@ public class SolicitacaoAdocao {
     private BigDecimal rendaMensal;
     private String holeriteImagem;
 
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private java.time.Instant dataCriacao;
+    @com.fasterxml.jackson.annotation.JsonProperty(access = com.fasterxml.jackson.annotation.JsonProperty.Access.READ_ONLY)
+    private java.time.Instant dataDecisao;
+
+    @jakarta.persistence.PrePersist
+    void registrarCriacao() { dataCriacao = java.time.Instant.now(); }
+
+    public java.time.Instant getDataCriacao() { return dataCriacao; }
+    public java.time.Instant getDataDecisao() { return dataDecisao; }
+    public void setDataDecisao(java.time.Instant data) { dataDecisao = data; }
+
     public Long getIdSolicitacao() {
         return idSolicitacao;
     }

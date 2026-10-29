@@ -1,3 +1,4 @@
+import MenuRelatorios from "../componentes/MenuRelatorios";
 import { Link } from "react-router-dom";
 import Painel from "../componentes/Painel";
 import { useConsulta } from "../servicos/useConsulta";
@@ -9,7 +10,8 @@ export default function PaginaRelatorios() {
     if (!r) {
         return (
             <Painel titulo="Relatórios financeiros" erro={erro}>
-                <p>Carregando...</p>
+                <MenuRelatorios />
+                <p>{erro ? "Não foi possível carregar a visão geral." : "Carregando..."}</p>
             </Painel>
         );
     }
@@ -28,6 +30,7 @@ export default function PaginaRelatorios() {
 
     return (
         <Painel titulo="Relatórios financeiros" erro={erro}>
+            <MenuRelatorios />
             <div className="acoes relatorio-acoes">
                 <Link to="/RelatorioAnimais">Relatório de animais</Link>
                 <Link to="/Estoque">Voltar ao estoque</Link>
@@ -42,7 +45,7 @@ export default function PaginaRelatorios() {
                 ))}
             </div>
 
-            <section className="relatorio-bloco">
+            <section className="relatorio-bloco" id="relatorio-estoque">
                 <div className="relatorio-bloco-titulo">
                     <div>
                         <h2>Valor atual por categoria</h2>

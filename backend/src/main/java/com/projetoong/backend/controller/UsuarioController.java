@@ -25,7 +25,7 @@ import com.projetoong.backend.model.UsuarioResponse;
 import com.projetoong.backend.service.JwtService;
 import com.projetoong.backend.service.UsuarioService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RestController
 public class UsuarioController {
 

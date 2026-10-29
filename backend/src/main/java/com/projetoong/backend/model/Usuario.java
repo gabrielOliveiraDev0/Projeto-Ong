@@ -30,6 +30,14 @@ public class Usuario {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senhaUsuario;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private java.time.Instant dataCadastro;
+
+    @jakarta.persistence.PrePersist
+    void registrarCadastro() { dataCadastro = java.time.Instant.now(); }
+
+    public java.time.Instant getDataCadastro() { return dataCadastro; }
+
     public Long getIdUsuario() {
         return idUsuario;
     }

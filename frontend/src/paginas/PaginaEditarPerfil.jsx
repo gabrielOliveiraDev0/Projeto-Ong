@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
@@ -32,7 +33,7 @@ export default function PaginaEditarPerfil() {
     }, [usuario]);
 
     const fotoAtual = usuario?.imagemPerfilUsuario
-        ? `http://localhost:8080/uploads/perfis/${usuario.imagemPerfilUsuario}`
+        ? `${API_URL}/uploads/perfis/${usuario.imagemPerfilUsuario}`
         : null;
 
     const previa = useMemo(() => {

@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { useConsulta } from "../servicos/useConsulta";
 import { useAutenticacao } from "../servicos/contextoAutenticacao";
 import { requisicao } from "../servicos/api";
@@ -25,7 +26,7 @@ function Animais({ animal }) {
         if (favorito) {
 
             const resposta = await requisicao(
-                `http://localhost:8080/favoritos?idUsuario=${usuario.idUsuario}&idAnimal=${animal.idAnimal}`,
+                `/favoritos?idUsuario=${usuario.idUsuario}&idAnimal=${animal.idAnimal}`,
                 {
                     method: "DELETE"
                 }
@@ -39,7 +40,7 @@ function Animais({ animal }) {
         }
 
         const resposta = await requisicao(
-            `http://localhost:8080/favoritos?idUsuario=${usuario.idUsuario}&idAnimal=${animal.idAnimal}`,
+            `/favoritos?idUsuario=${usuario.idUsuario}&idAnimal=${animal.idAnimal}`,
             {
                 method: "POST"
             }
@@ -58,7 +59,7 @@ function Animais({ animal }) {
                 <img
                     src={
                         animal.imagemAnimal
-                            ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                            ? `${API_URL}/uploads/animais/${animal.imagemAnimal}`
                             : ImgExemplo
                     }
                     alt={`Imagem de ${animal.nomeAnimal}`}

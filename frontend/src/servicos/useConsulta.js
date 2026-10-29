@@ -15,8 +15,8 @@ export function useConsulta(url, inicial = []) {
     const invalidar = useCallback(() => { ++versao.current; }, []);
     useEffect(() => {
         atualizar();
-        const intervalo = setInterval(atualizar, 5000);
+        const intervalo = setInterval(atualizar, url?.startsWith("/chat/") ? 5000 : url?.startsWith("/noticias") ? 60000 : 30000);
         return () => { invalidar(); clearInterval(intervalo); };
-    }, [atualizar, invalidar]);
+    }, [atualizar, invalidar, url]);
     return { dados, setDados, erro, carregando, atualizar };
 }

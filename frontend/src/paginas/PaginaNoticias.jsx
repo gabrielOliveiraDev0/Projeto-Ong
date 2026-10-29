@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { useState } from "react";
 import Painel from "../componentes/Painel";
 import { useAutenticacao } from "../servicos/contextoAutenticacao";
@@ -15,7 +16,7 @@ export default function PaginaNoticias() {
     const admin = usuario?.tipoUsuario === "ADMINISTRADOR";
 
     function enderecoImagem(nome) {
-        return nome ? `http://localhost:8080/uploads/noticias/${nome}` : null;
+        return nome ? `${API_URL}/uploads/noticias/${nome}` : null;
     }
 
     async function salvar(e) {

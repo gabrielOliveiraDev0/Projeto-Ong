@@ -25,3 +25,10 @@ dist-ssr
 
 # Uploads
 uploads/
+
+.env
+.env.*
+!.env.example
+backend/target/
+*.iml
+.Rhistory

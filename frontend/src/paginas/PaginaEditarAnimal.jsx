@@ -20,7 +20,7 @@ function PaginaEditarAnimal() {
 
     useEffect(() => {
 
-        requisicao(`http://localhost:8080/animais/${id}`)
+        requisicao(`/animais/${id}`)
             .then((resposta) => resposta.json())
             .then((dados) => {
                 setAnimal(dados);
@@ -69,7 +69,7 @@ function PaginaEditarAnimal() {
         try {
 
             const resposta = await requisicao(
-                `http://localhost:8080/animais/${id}`,
+                `/animais/${id}`,
                 {
                     method: "PUT",
 

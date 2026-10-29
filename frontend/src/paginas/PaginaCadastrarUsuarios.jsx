@@ -29,7 +29,7 @@ function CadastrarUsuarios() {
         };
 
         try {
-            const resposta = await requisicao("http://localhost:8080/usuarios", {
+            const resposta = await requisicao("/usuarios", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

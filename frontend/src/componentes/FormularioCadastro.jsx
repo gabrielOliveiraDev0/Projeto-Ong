@@ -38,7 +38,7 @@ function FormularioCadastroAnimal() {
         }
 
         try {
-            const resposta = await requisicao("http://localhost:8080/animais", {
+            const resposta = await requisicao("/animais", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -58,7 +58,7 @@ function FormularioCadastroAnimal() {
 
                 formularioImagem.append("imagem", imagem);
 
-                const envioImagem = await requisicao(`http://localhost:8080/animais/${dados.idAnimal}/imagem`, {
+                const envioImagem = await requisicao(`/animais/${dados.idAnimal}/imagem`, {
                     method: "POST",
                     body: formularioImagem
                 });

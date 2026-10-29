@@ -24,7 +24,8 @@ public class JwtService {
 
     public JwtService(@Value("${app.jwt.secret}") String secret, com.projetoong.backend.repository.UsuarioRepository usuarios) {
         this.usuarios = usuarios;
-        this.chave = secret.isBlank() ? Jwts.SIG.HS256.key().build() : Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        if (secret == null || secret.getBytes(StandardCharsets.UTF_8).length < 32) throw new IllegalStateException("Configure JWT_SECRET com pelo menos 32 bytes; mantenha a mesma chave entre reinicializações.");
+        this.chave = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String gerarToken(Usuario usuario) {

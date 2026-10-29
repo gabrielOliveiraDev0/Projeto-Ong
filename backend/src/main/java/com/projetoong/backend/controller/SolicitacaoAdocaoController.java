@@ -30,7 +30,7 @@ import com.projetoong.backend.model.Usuario;
 import com.projetoong.backend.service.JwtService;
 import com.projetoong.backend.service.SolicitacaoAdocaoService;
 
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RestController
 @RequestMapping("/adocoes")
 public class SolicitacaoAdocaoController {
@@ -85,6 +85,8 @@ public class SolicitacaoAdocaoController {
         String tipo = Files.probeContentType(arquivo);
 
         return ResponseEntity.ok()
+            .header(HttpHeaders.CACHE_CONTROL, "no-store")
+            .header("X-Content-Type-Options", "nosniff")
             .contentType(MediaType.parseMediaType(tipo == null ? "application/octet-stream" : tipo))
             .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"holerite\"")
             .body(resource);

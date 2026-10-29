@@ -1,3 +1,4 @@
+import { API_URL } from "../servicos/api";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { QRCodeSVG } from "qrcode.react";
@@ -22,7 +23,7 @@ function enderecoImagemNoticia(imagem) {
         return null;
     }
 
-    return `http://localhost:8080/uploads/noticias/${imagem}`;
+    return `${API_URL}/uploads/noticias/${imagem}`;
 }
 
 function PaginaInicial() {
