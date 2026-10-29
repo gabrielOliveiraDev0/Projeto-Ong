@@ -1,3 +1,4 @@
+import { requisicao } from "../servicos/api";
 import { useState } from "react";
 
 
@@ -37,7 +38,7 @@ function FormularioCadastroAnimal() {
         }
 
         try {
-            const resposta = await fetch("http://localhost:8080/animais", {
+            const resposta = await requisicao("http://localhost:8080/animais", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -57,10 +58,11 @@ function FormularioCadastroAnimal() {
 
                 formularioImagem.append("imagem", imagem);
 
-                await fetch(`http://localhost:8080/animais/${dados.idAnimal}/imagem`, {
+                const envioImagem = await requisicao(`http://localhost:8080/animais/${dados.idAnimal}/imagem`, {
                     method: "POST",
                     body: formularioImagem
                 });
+                if (!envioImagem.ok) { alert("Animal cadastrado, mas a imagem não foi enviada. Use JPG, PNG ou WebP de até 5 MB."); return; }
             }
 
             console.log("Animal cadastrado:", dados);
@@ -203,6 +205,9 @@ function FormularioCadastroAnimal() {
 
                 <input
                     name="peso"
+                    required
+                    min="0.001"
+                    step="any"
                     type="number"
                     placeholder="Ex: 10"
                     value={animal.peso}

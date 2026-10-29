@@ -12,6 +12,7 @@ import com.projetoong.backend.repository.FavoritoRepository;
 import com.projetoong.backend.repository.UsuarioRepository;
 
 @Service
+@org.springframework.transaction.annotation.Transactional
 public class FavoritoService {
 
     private final FavoritoRepository favoritoRepository;
@@ -30,13 +31,14 @@ public class FavoritoService {
 
     public Favorito adicionar(Long idUsuario, Long idAnimal) {
 
+        usuarioRepository.bloquear(idUsuario).orElseThrow();
         if (favoritoRepository
             .existsByUsuarioIdUsuarioAndAnimalIdAnimal(
                 idUsuario,
                 idAnimal
             )) {
 
-            throw new RuntimeException("Animal já está nos favoritos");
+            return favoritoRepository.findByUsuarioIdUsuario(idUsuario).stream().filter(f -> f.getAnimal().getIdAnimal().equals(idAnimal)).findFirst().orElseThrow();
         }
 
         Usuario usuario = usuarioRepository.findById(idUsuario)

@@ -20,10 +20,11 @@ import io.jsonwebtoken.JwtException;
 public class JwtService {
 
     private final SecretKey chave;
+    private final com.projetoong.backend.repository.UsuarioRepository usuarios;
 
-    public JwtService(@Value("${app.jwt.secret}") String secret) {
-        this.chave = Keys.hmacShaKeyFor(
-                secret.getBytes(StandardCharsets.UTF_8));
+    public JwtService(@Value("${app.jwt.secret}") String secret, com.projetoong.backend.repository.UsuarioRepository usuarios) {
+        this.usuarios = usuarios;
+        this.chave = secret.isBlank() ? Jwts.SIG.HS256.key().build() : Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public String gerarToken(Usuario usuario) {
@@ -39,29 +40,22 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean ehAdministrador(String authorization) {
-
-        if (authorization == null || !authorization.startsWith("Bearer ")) {
-            return false;
-        }
-
-        String token = authorization.substring(7);
-
+    public Usuario autenticar(String authorization) {
         try {
-            Claims claims = Jwts.parser()
-                    .verifyWith(chave)
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
-
-            String tipoUsuario = claims.get(
-                    "tipoUsuario",
-                    String.class);
-
-            return "ADMINISTRADOR".equals(tipoUsuario);
-
-        } catch (JwtException e) {
-            return false;
+            if (authorization == null || !authorization.startsWith("Bearer ")) throw new IllegalArgumentException();
+            Claims claims = Jwts.parser().verifyWith(chave).build().parseSignedClaims(authorization.substring(7)).getPayload();
+            return usuarios.findById(((Number) claims.get("idUsuario")).longValue())
+                .orElseThrow(() -> new IllegalArgumentException());
+        } catch (JwtException | IllegalArgumentException e) {
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.UNAUTHORIZED, "Sessão inválida ou expirada");
         }
+    }
+    public boolean ehAdministrador(String authorization) {
+        return autenticar(authorization).getTipoUsuario() == com.projetoong.backend.model.TipoUsuario.ADMINISTRADOR;
+    }
+    public void exigirProprioUsuario(String authorization, Long id) {
+        Usuario u = autenticar(authorization);
+        if (!u.getIdUsuario().equals(id) || u.getTipoUsuario() != com.projetoong.backend.model.TipoUsuario.USUARIO)
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.FORBIDDEN);
     }
 }

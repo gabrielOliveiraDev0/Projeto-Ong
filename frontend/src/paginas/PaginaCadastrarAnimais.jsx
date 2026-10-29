@@ -1,12 +1,11 @@
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
 import { Navigate } from "react-router-dom";
 import CadastrarAnimal from "../componentes/FormularioCadastro";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 
 function CadastrarAnimais() {
 
-    const usuarioLogado = JSON.parse(
-        localStorage.getItem("usuarioLogado")
-    );
+    const { usuario: usuarioLogado } = useAutenticacao();
 
     if (
         !usuarioLogado ||

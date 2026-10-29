@@ -1,11 +1,12 @@
+import { useConsulta } from "../servicos/useConsulta";
 
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 import CardAnimal from "../componentes/CardAnimais";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 function PaginaVerAnimais() {
-    const [animais, setAnimais] = useState([]);
+
     const [tipoSelecionado, setTipoSelecionado] = useState("Todos");
     const [sexoSelecionado, setSexoSelecionado] = useState("Todos");
     const [castradoSelecionado, setCastradoSelecionado] = useState("Todos");
@@ -13,16 +14,8 @@ function PaginaVerAnimais() {
     const [pesquisa, setPesquisa] = useState("");
     const [pesoSelecionado, setPesoSelecionado] = useState("Todos");
 
-    useEffect(() => {
-        fetch("http://localhost:8080/animais/disponiveis")
-            .then((resposta) => resposta.json())
-            .then((dados) => {
-                setAnimais(dados);
-            })
-            .catch((erro) => {
-                console.error("Erro ao buscar animais:", erro);
-            });
-    }, []);
+    const { dados: animais, erro } = useConsulta("/animais/disponiveis");
+
     const animaisFiltrados = animais.filter((animal) => {
 
         const tipoCorreto =
@@ -65,7 +58,7 @@ function PaginaVerAnimais() {
 
     return (
         <div>
-            <Cabecalho />
+            <Cabecalho />{erro && <p role="alert">{erro}</p>}
             <section className="pagina-buscar-ongs">
                 <div className="ComponenteFiltroPreselecionado">
                     <h1>Filtro de pesquisa </h1>

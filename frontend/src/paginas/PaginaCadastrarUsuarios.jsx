@@ -1,3 +1,4 @@
+import { requisicao } from "../servicos/api";
 import React from "react";
 import CabecalhoCriandoUsuario from "../cabecalhos/CabecalhoPadrao";
 import { useState } from "react";
@@ -28,7 +29,7 @@ function CadastrarUsuarios() {
         };
 
         try {
-            const resposta = await fetch("http://localhost:8080/usuarios", {
+            const resposta = await requisicao("http://localhost:8080/usuarios", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -182,7 +183,7 @@ function CadastrarUsuarios() {
             </div>
             <div className="jatem conta">
 
-                <a href="/login" className="link-login">
+                <a href="/Login" className="link-login">
                     Já tenho conta, fazer login.
                 </a>
             </div>

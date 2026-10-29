@@ -15,37 +15,90 @@ import com.projetoong.backend.model.StatusAnimal;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@org.springframework.transaction.annotation.Transactional
 public class AnimalService {
 
     private final AnimalRepository animalRepository;
+    private final EstoqueService estoque;
+    private final MovimentacaoAnimalService movimentacoesAnimais;
 
-    public AnimalService(AnimalRepository animalRepository) {
+    public AnimalService(AnimalRepository animalRepository, EstoqueService estoque, MovimentacaoAnimalService movimentacoesAnimais) {
+        this.estoque = estoque;
         this.animalRepository = animalRepository;
+        this.movimentacoesAnimais = movimentacoesAnimais;
     }
 
     public List<Animal> listarAnimais() {
-        return animalRepository.findAll();
+        return animalRepository.findAll().stream().filter(a -> !a.isRemovido()).toList();
     }
 
+    public void remover(Long id) {
+        estoque.encerrar(id);
+        Animal a = buscarAnimalPorId(id);
+        movimentacoesAnimais.registrarSaida(a, "Remoção administrativa");
+        a.setRemovido(true);
+        animalRepository.save(a);
+    }
+    public Animal veterinario(Long id, com.projetoong.backend.model.VeterinarioRequest d) {
+        Animal a = buscarAnimalPorId(id);
+
+        if (d.statusAnimal() != null && d.statusAnimal() != a.getStatusAnimal()) {
+            if (d.statusAnimal() == StatusAnimal.ADOTADO) {
+                throw new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.FORBIDDEN,
+                        "Veterinário não pode marcar animal como adotado");
+            }
+
+            boolean transicaoValida =
+                    a.getStatusAnimal() == StatusAnimal.RESGATADO && d.statusAnimal() == StatusAnimal.EM_TRATAMENTO
+                    || a.getStatusAnimal() == StatusAnimal.EM_TRATAMENTO && d.statusAnimal() == StatusAnimal.DISPONIVEL;
+
+            if (!transicaoValida) {
+                throw new org.springframework.web.server.ResponseStatusException(
+                        org.springframework.http.HttpStatus.BAD_REQUEST,
+                        "Transição de status inválida");
+            }
+
+            estoque.processarAntesAlteracao();
+            a.setStatusAnimal(d.statusAnimal());
+        }
+
+        a.setEstadoSaudeAnimal(d.estadoSaudeAnimal());
+        a.setCastracaoAnimal(d.castracaoAnimal());
+        a.setTratamentoAnimal(d.tratamentoAnimal());
+        a.setVacinacaoAnimal(d.vacinacaoAnimal());
+
+        return animalRepository.save(a);
+    }
+    private void validar(Animal a) {
+        if(a.getNomeAnimal()==null || a.getNomeAnimal().isBlank() || a.getPesoAnimal()==null || !Double.isFinite(a.getPesoAnimal()) || a.getPesoAnimal()<=0)
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST,"Informe nome e peso positivo");
+    }
     public Animal salvarAnimal(Animal animal) {
+        validar(animal);
+        animal.setRemovido(false);
 
         if (animal.getStatusAnimal() == null) {
             animal.setStatusAnimal(StatusAnimal.RESGATADO);
         }
 
-        return animalRepository.save(animal);
+        Animal salvo = animalRepository.save(animal);
+        movimentacoesAnimais.registrarEntrada(salvo);
+        return salvo;
     }
 
     public Animal salvarImagem(Long idAnimal, MultipartFile imagem) throws IOException {
 
         Animal animal = animalRepository.findById(idAnimal)
-                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND,"Animal não encontrado"));
 
         Path pasta = Paths.get("../uploads/animais");
 
         Files.createDirectories(pasta);
 
-        String nomeArquivo = UUID.randomUUID() + "_" + imagem.getOriginalFilename();
+        if (imagem.isEmpty() || imagem.getSize() > 5 * 1024 * 1024 || !java.util.Set.of("image/jpeg", "image/png", "image/webp").contains(imagem.getContentType() == null ? "" : imagem.getContentType()))
+            throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST, "Envie JPG, PNG ou WebP até 5 MB");
+        String nomeArquivo = UUID.randomUUID() + ("image/png".equals(imagem.getContentType()) ? ".png" : "image/webp".equals(imagem.getContentType()) ? ".webp" : ".jpg");
 
         Path caminhoArquivo = pasta.resolve(nomeArquivo);
 
@@ -61,31 +114,44 @@ public class AnimalService {
 
     public Animal buscarAnimalPorId(Long idAnimal) {
         return animalRepository.findById(idAnimal)
-                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND,"Animal não encontrado"));
     }
 
     public List<Animal> listarAnimaisDisponiveis() {
         return animalRepository.findByStatusAnimal(
-                StatusAnimal.DISPONIVEL);
+                StatusAnimal.DISPONIVEL).stream().filter(a -> !a.isRemovido()).toList();
     }
 
     public Animal atualizarStatusAnimal(
             Long idAnimal,
             StatusAnimal novoStatus) {
+        if(novoStatus == null) throw new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.BAD_REQUEST);
+        estoque.processarAntesAlteracao();
+        if(novoStatus == StatusAnimal.ADOTADO) estoque.encerrar(idAnimal);
 
         Animal animal = animalRepository.findById(idAnimal)
-                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND,"Animal não encontrado"));
 
         animal.setStatusAnimal(novoStatus);
+        Animal salvo = animalRepository.save(animal);
 
-        return animalRepository.save(animal);
+        if (novoStatus == StatusAnimal.ADOTADO) {
+            movimentacoesAnimais.registrarSaida(salvo, "Adoção");
+        }
+
+        return salvo;
     }
 
     public Animal atualizarAnimal(Long idAnimal, Animal dadosAtualizados) {
+        validar(dadosAtualizados);
+        estoque.processarAntesAlteracao();
+        if(dadosAtualizados.getStatusAnimal()==StatusAnimal.ADOTADO) estoque.encerrar(idAnimal);
 
         Animal animal = animalRepository.findById(idAnimal)
-                .orElseThrow(() -> new RuntimeException("Animal não encontrado"));
+                .orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(org.springframework.http.HttpStatus.NOT_FOUND,"Animal não encontrado"));
 
+        animal.setTratamentoAnimal(dadosAtualizados.getTratamentoAnimal());
+        animal.setVacinacaoAnimal(dadosAtualizados.getVacinacaoAnimal());
         animal.setNomeAnimal(dadosAtualizados.getNomeAnimal());
         animal.setTipoAnimal(dadosAtualizados.getTipoAnimal());
         animal.setSexoAnimal(dadosAtualizados.getSexoAnimal());
@@ -99,8 +165,13 @@ public class AnimalService {
         animal.setPessoaParaContatoAnimal(
                 dadosAtualizados.getPessoaParaContatoAnimal());
 
-        animal.setStatusAnimal(dadosAtualizados.getStatusAnimal());
+        if(dadosAtualizados.getStatusAnimal()!=null) animal.setStatusAnimal(dadosAtualizados.getStatusAnimal());
 
-        return animalRepository.save(animal);
+        Animal salvo = animalRepository.save(animal);
+        if (salvo.getStatusAnimal() == StatusAnimal.ADOTADO) {
+            movimentacoesAnimais.registrarSaida(salvo, "Adoção");
+        }
+
+        return salvo;
     }
 }

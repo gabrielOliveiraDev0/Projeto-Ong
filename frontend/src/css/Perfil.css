@@ -1,0 +1,192 @@
+.pagina-perfil-edicao,
+.pagina-configuracoes {
+    width: min(1180px, calc(100% - 40px));
+    margin: 38px auto 70px;
+}
+
+.voltar-perfil {
+    width: fit-content;
+    margin-bottom: 24px;
+    padding: 10px 16px;
+    border: 0;
+    border-radius: 9px;
+    background: #1597f3;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.perfil-edicao-grid {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.cartao-foto-perfil,
+.cartao-dados-perfil,
+.cartao-configuracoes {
+    border: 1px solid #e1e8ee;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgba(25, 45, 65, 0.07);
+}
+
+.cartao-foto-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 24px;
+    text-align: center;
+}
+
+.foto-perfil-grande {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    border: 5px solid #1597f3;
+    border-radius: 50%;
+    background: #f4f9fd;
+    color: #1597f3;
+    font-size: 52px;
+    font-weight: 800;
+}
+
+.foto-perfil-grande img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cartao-foto-perfil h2 {
+    margin: 18px 0 4px;
+}
+
+.cartao-foto-perfil p {
+    margin: 0 0 20px;
+    color: #758390;
+    font-size: 13px;
+}
+
+.seletor-foto {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 11px 16px;
+    border-radius: 9px;
+    background: #1597f3;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.seletor-foto input {
+    display: none;
+}
+
+.cartao-foto-perfil button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.botao-remover-foto {
+    background: #fff1f1;
+    color: #d93636;
+    border: 1px solid #ffcaca;
+}
+
+.cartao-dados-perfil {
+    padding: 30px;
+}
+
+.titulo-edicao-perfil {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 28px;
+}
+
+.titulo-edicao-perfil span,
+.cartao-configuracoes > span {
+    color: #1597f3;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.titulo-edicao-perfil h1,
+.cartao-configuracoes h1 {
+    margin: 4px 0 0;
+    font-size: 30px;
+}
+
+.titulo-edicao-perfil button {
+    background: #f0f8fe;
+    color: #1597f3;
+    border: 1px solid #cce8fb;
+}
+
+.campos-perfil-duplos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.cartao-dados-perfil form,
+.cartao-configuracoes form {
+    gap: 18px;
+}
+
+.cartao-dados-perfil input,
+.cartao-configuracoes input {
+    min-height: 48px;
+    border: 1px solid #d7e2ea;
+    background: #fbfdfe;
+}
+
+.salvar-perfil {
+    width: fit-content;
+    min-width: 180px;
+    background: #1597f3;
+    color: #fff;
+}
+
+.mensagem-perfil {
+    margin: 0;
+    padding: 11px 14px;
+    border-radius: 9px;
+    background: #eef7ff;
+    color: #24618c;
+    font-weight: 600;
+}
+
+.cartao-configuracoes {
+    width: min(680px, 100%);
+    padding: 32px;
+}
+
+.cartao-configuracoes > p {
+    color: #6f7d88;
+    line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+    .perfil-edicao-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .campos-perfil-duplos {
+        grid-template-columns: 1fr;
+    }
+
+    .titulo-edicao-perfil {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

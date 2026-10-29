@@ -1,3 +1,5 @@
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
+import { requisicao } from "../servicos/api";
 import { useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
@@ -9,9 +11,7 @@ function PaginaEditarAnimal() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const usuarioLogado = JSON.parse(
-        localStorage.getItem("usuarioLogado")
-    );
+    const { usuario: usuarioLogado } = useAutenticacao();
 
     const [animal, setAnimal] = useState(null);
 
@@ -20,7 +20,7 @@ function PaginaEditarAnimal() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:8080/animais/${id}`)
+        requisicao(`http://localhost:8080/animais/${id}`)
             .then((resposta) => resposta.json())
             .then((dados) => {
                 setAnimal(dados);
@@ -68,7 +68,7 @@ function PaginaEditarAnimal() {
 
         try {
 
-            const resposta = await fetch(
+            const resposta = await requisicao(
                 `http://localhost:8080/animais/${id}`,
                 {
                     method: "PUT",
@@ -202,6 +202,8 @@ function PaginaEditarAnimal() {
                             </select>
                         </label>
 
+                        <label>Tratamento<textarea maxLength={4000} name="tratamentoAnimal" value={animal.tratamentoAnimal || ""} onChange={alterarCampo} /></label>
+                        <label>Vacinação<textarea maxLength={4000} name="vacinacaoAnimal" value={animal.vacinacaoAnimal || ""} onChange={alterarCampo} /></label>
                         <label>
                             Status
                             <select

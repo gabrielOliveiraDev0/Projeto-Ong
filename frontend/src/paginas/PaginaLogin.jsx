@@ -1,8 +1,11 @@
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
+import { requisicao } from "../servicos/api";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function Login() {
+    const { entrar } = useAutenticacao();
 
     const navigate = useNavigate();
 
@@ -15,7 +18,7 @@ function Login() {
         evento.preventDefault();
 
         try {
-            const resposta = await fetch("http://localhost:8080/login", {
+            const resposta = await requisicao("http://localhost:8080/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -37,12 +40,7 @@ function Login() {
 
             const dados = await resposta.json();
 
-            localStorage.setItem("token", dados.token);
-
-            localStorage.setItem(
-                "usuarioLogado",
-                JSON.stringify(dados.usuario)
-            );
+            entrar(dados);
 
             alert("Login realizado com sucesso!");
 

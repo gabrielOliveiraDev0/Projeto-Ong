@@ -1,3 +1,6 @@
+import { useConsulta } from "../servicos/useConsulta";
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
+import { requisicao } from "../servicos/api";
 import { useEffect, useState } from "react";
 
 import { BotaoDetalheAnimais } from "./Botoes";
@@ -5,47 +8,23 @@ import ImgExemplo from "../assets/ImgExemplo.png";
 
 function Animais({ animal }) {
 
-    const usuario = JSON.parse(
-        localStorage.getItem("usuarioLogado")
-    );
+    const { usuario } = useAutenticacao();
 
     const [favorito, setFavorito] = useState(false);
 
-    useEffect(() => {
-
-        if (!usuario) {
-            return;
-        }
-
-        fetch(
-            `http://localhost:8080/favoritos/usuario/${usuario.idUsuario}`
-        )
-            .then((resposta) => resposta.json())
-            .then((dados) => {
-
-                const existe = dados.some(
-                    (item) =>
-                        item.animal.idAnimal === animal.idAnimal
-                );
-
-                setFavorito(existe);
-            })
-            .catch((erro) => {
-                console.error("Erro ao buscar favoritos:", erro);
-            });
-
-    }, [usuario?.idUsuario, animal.idAnimal]);
+    const { dados: favoritos } = useConsulta(usuario?.tipoUsuario === "USUARIO" ? `/favoritos/usuario/${usuario.idUsuario}` : null);
+    useEffect(() => { setFavorito(favoritos.some(f => f.animal.idAnimal === animal.idAnimal)); }, [favoritos, animal.idAnimal]);
 
     async function alternarFavorito() {
 
-        if (!usuario) {
+        if (usuario?.tipoUsuario !== "USUARIO") {
             alert("Faça login para favoritar um animal.");
             return;
         }
 
         if (favorito) {
 
-            const resposta = await fetch(
+            const resposta = await requisicao(
                 `http://localhost:8080/favoritos?idUsuario=${usuario.idUsuario}&idAnimal=${animal.idAnimal}`,
                 {
                     method: "DELETE"
@@ -59,7 +38,7 @@ function Animais({ animal }) {
             return;
         }
 
-        const resposta = await fetch(
+        const resposta = await requisicao(
             `http://localhost:8080/favoritos?idUsuario=${usuario.idUsuario}&idAnimal=${animal.idAnimal}`,
             {
                 method: "POST"
@@ -85,13 +64,13 @@ function Animais({ animal }) {
                     alt={`Imagem de ${animal.nomeAnimal}`}
                 />
 
-                <button
+                {(!usuario || usuario.tipoUsuario === "USUARIO") && <button
                     className="favorito"
                     type="button"
                     onClick={alternarFavorito}
                 >
                     {favorito ? "♥" : "♡"}
-                </button>
+                </button>}
 
                 <span className="status">
                     Disponível

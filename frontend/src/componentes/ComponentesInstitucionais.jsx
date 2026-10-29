@@ -23,27 +23,33 @@ function IconeImpacto({ tipo }) {
     );
 }
 
-export function Indicadores({ valor = "65 641" }) {
+function formatarNumero(valor, casas = 0) {
+    return Number(valor || 0).toLocaleString("pt-BR", {
+        minimumFractionDigits: casas,
+        maximumFractionDigits: casas
+    });
+}
+
+export function Indicadores({ dados = {} }) {
     return (
-        <section className="institucional-impacto" aria-label="Indicadores ilustrativos do protótipo">
+        <section className="institucional-impacto" aria-label="Indicadores atualizados da ONG">
             <div className="institucional-indicadores">
                 <article className="institucional-indicador">
                     <IconeImpacto tipo="pata" />
-                    <strong>1 456</strong>
-                    <p>Os pequeninos<br />encontraram o seu lar</p>
+                    <strong>{formatarNumero(dados.adotados)}</strong>
+                    <p>Animais que encontraram<br />um novo lar</p>
                 </article>
                 <article className="institucional-indicador">
                     <IconeImpacto tipo="apoio" />
-                    <strong>{valor} R$</strong>
-                    <p>Coletado para servir<br />de alimento a animais</p>
+                    <strong>{formatarNumero(dados.racaoKg, 1)} kg</strong>
+                    <p>Ração disponível<br />no estoque da ONG</p>
                 </article>
                 <article className="institucional-indicador">
                     <IconeImpacto tipo="lar" />
-                    <strong>48</strong>
-                    <p>Aguardando um lar</p>
+                    <strong>{formatarNumero(dados.disponiveis)}</strong>
+                    <p>Animais aguardando<br />um novo lar</p>
                 </article>
             </div>
-            
         </section>
     );
 }
@@ -60,8 +66,6 @@ export function RodapeInstitucional() {
             </nav>
             <div><span>Amigos de quatro patas</span><p>Juntos por um lar seguro e cheio de amor.</p></div>
             <div><span>Faça parte</span><Link to="/CadastrarUsuarios">Cadastrar-se</Link><Link to="/Login">Entrar na conta</Link></div>
-         
         </footer>
-        
     );
 }

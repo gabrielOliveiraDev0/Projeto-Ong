@@ -1,3 +1,5 @@
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
+import { requisicao } from "../servicos/api";
 import { useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 
@@ -9,9 +11,9 @@ function PaginaSolicitarAdocao() {
     const { idAnimal } = useParams();
     const navigate = useNavigate();
 
-    const usuario = JSON.parse(
-        localStorage.getItem("usuarioLogado")
-    );
+    const { usuario } = useAutenticacao();
+
+    const [holerite, setHolerite] = useState(null);
 
     const [questionario, setQuestionario] = useState({
         tipoMoradia: "Casa",
@@ -64,18 +66,26 @@ function PaginaSolicitarAdocao() {
                     Number(questionario.rendaMensal)
             };
 
-            console.log("Enviando:", dadosParaEnviar);
+            if (!holerite) {
+                alert("Envie uma imagem do holerite.");
+                return;
+            }
 
-            const resposta = await fetch(
-                "http://localhost:8080/adocoes",
+            const formulario = new FormData();
+            formulario.append(
+                "dados",
+                new Blob(
+                    [JSON.stringify(dadosParaEnviar)],
+                    { type: "application/json" }
+                )
+            );
+            formulario.append("holerite", holerite);
+
+            const resposta = await requisicao(
+                "http://localhost:8080/adocoes/com-holerite",
                 {
                     method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify(dadosParaEnviar)
+                    body: formulario
                 }
             );
 
@@ -171,6 +181,23 @@ function PaginaSolicitarAdocao() {
                                 onChange={alterarCampo}
                                 required
                             />
+                        </label>
+
+                        <label>
+                            Holerite
+
+                            <input
+                                type="file"
+                                accept="image/jpeg,image/png,image/webp"
+                                onChange={(evento) =>
+                                    setHolerite(evento.target.files?.[0] || null)
+                                }
+                                required
+                            />
+
+                            <small>
+                                Envie uma imagem JPG, PNG ou WebP de até 5 MB.
+                            </small>
                         </label>
 
                         <label>

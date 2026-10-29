@@ -1,3 +1,5 @@
+import { useConsulta } from "../servicos/useConsulta";
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -14,13 +16,12 @@ function CabecalhoPadrao() {
 
     const navigate = useNavigate();
 
-    const usuarioLogado = JSON.parse(
-        localStorage.getItem("usuarioLogado")
-    );
+    const { usuario: usuarioLogado, sair: encerrarSessao } = useAutenticacao();
 
+    const { dados: conversas } = useConsulta(usuarioLogado ? "/chat/conversas" : null);
+    const naoLidas = conversas.reduce((total, c) => total + c.naoLidas, 0);
     function sair() {
-        localStorage.removeItem("usuarioLogado");
-        localStorage.removeItem("token");
+        encerrarSessao();
         navigate("/PaginaInicial");
     }
 
@@ -40,6 +41,7 @@ function CabecalhoPadrao() {
 
             {usuarioLogado ? (
                 <>
+                    <button type="button" onClick={() => navigate("/Chat")}>Chat{naoLidas > 0 ? ` (${naoLidas})` : ""}</button>
                     <span className="nome-usuario">
                         Olá, {usuarioLogado.nomeUsuario}
                     </span>

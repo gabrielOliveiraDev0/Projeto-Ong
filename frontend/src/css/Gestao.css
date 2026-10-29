@@ -1,0 +1,710 @@
+.gestao { max-width:1200px; margin:32px auto; padding:24px; }
+.gestao article,.gestao form,.gestao .cartao { background:var(--azul-suave); border-radius:16px; padding:22px; margin:16px 0; }
+.gestao label { display:grid; gap:6px; margin:12px 0; }
+.gestao input,.gestao select,.gestao textarea { padding:10px; border:1px solid #b3c7d5; border-radius:8px; max-width:100%; }
+.gestao input[type=checkbox] { width:auto; }
+.gestao button { padding:10px 16px; border-radius:8px; border:0; background:var(--azul); color:white; margin:4px; }
+.gestao button.secundario { background:#526579; }
+.gestao .grade { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+.gestao .rolagem { overflow-x:auto; }
+.gestao table { width:100%; border-collapse:collapse; }
+.gestao th,.gestao td { text-align:left; padding:12px; border-bottom:1px solid #ccdce6; }
+.gestao .aviso { background:#fff2ce; color:#713e00; padding:14px; border-radius:8px; }
+.gestao .acoes { display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
+.gestao .barra { height:24px; background:var(--azul); border-radius:4px; min-width:1px; }
+.gestao .grafico article { margin:6px 0; padding:12px; }
+.gestao .chat { display:grid; grid-template-columns:minmax(220px,1fr) 2fr; gap:20px; }
+.gestao .mensagens { max-height:480px; overflow:auto; }
+.gestao .mensagem { background:#edf1ed; padding:12px; border-radius:12px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.gestao .minha { background:#d3eaff; margin-left:20%; }
+.gestao .noticia-imagem { max-height:320px; object-fit:contain; }
+@media(max-width:700px) { .gestao { padding:16px; } .gestao .chat { grid-template-columns:1fr; } }
+
+.gestao .filtro-veterinario {
+    display:flex;
+    justify-content:flex-end;
+    margin:18px 0 24px;
+}
+.gestao .filtro-veterinario label {
+    width:min(320px,100%);
+    margin:0;
+    font-weight:700;
+    color:#2d4050;
+}
+.gestao .secao-veterinario {
+    background:#fff;
+    border:1px solid #dce7ee;
+    border-radius:18px;
+    padding:22px;
+    margin:20px 0;
+    box-shadow:0 5px 18px rgba(28,52,72,.06);
+}
+.gestao .secao-veterinario-titulo {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    margin-bottom:18px;
+}
+.gestao .secao-veterinario-titulo h2 {
+    margin:0 0 5px;
+    color:#223645;
+}
+.gestao .secao-veterinario-titulo p {
+    margin:0;
+    color:#6b7b87;
+}
+.gestao .secao-veterinario-titulo > span {
+    min-width:38px;
+    height:38px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#e5f4ff;
+    color:#0d84d6;
+    font-weight:800;
+}
+.gestao .grade-veterinario {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:16px;
+}
+.gestao .card-veterinario {
+    display:grid;
+    grid-template-columns:92px minmax(0,1fr);
+    gap:16px;
+    align-items:start;
+    margin:0;
+    padding:16px;
+    background:#f8fbfd;
+    border:1px solid #e2ebf0;
+    border-radius:14px;
+}
+.gestao .card-veterinario-imagem {
+    width:92px;
+    height:92px;
+    object-fit:cover;
+    border-radius:12px;
+}
+.gestao .card-veterinario-conteudo {
+    min-width:0;
+}
+.gestao .card-veterinario-id {
+    display:inline-block;
+    padding:3px 8px;
+    border-radius:6px;
+    background:#e5f4ff;
+    color:#0d84d6;
+    font-size:11px;
+    font-weight:800;
+}
+.gestao .card-veterinario h3 {
+    margin:7px 0 5px;
+    color:#1f3341;
+}
+.gestao .card-veterinario p {
+    margin:4px 0;
+    color:#60717d;
+    font-size:14px;
+}
+.gestao .acoes-veterinario {
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:12px;
+}
+.gestao .acoes-veterinario a,
+.gestao .acoes-veterinario button {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:38px;
+    padding:8px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    font-size:13px;
+    font-weight:700;
+}
+.gestao .acoes-veterinario a {
+    border:1px solid var(--azul);
+    color:var(--azul);
+    background:#fff;
+}
+.gestao .acoes-veterinario button {
+    margin:0;
+}
+.gestao .estado-veterinario-vazio {
+    padding:22px;
+    margin:0;
+    text-align:center;
+    border-radius:12px;
+    background:#f5f8fa;
+    color:#6c7d89;
+}
+.gestao .form-veterinario {
+    background:#fff;
+    border:1px solid #cfe1ed;
+    box-shadow:0 8px 24px rgba(28,52,72,.08);
+}
+.gestao .form-veterinario-topo {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:14px;
+}
+.gestao .form-veterinario-topo h2 {
+    margin:3px 0 0;
+}
+.gestao .form-veterinario-topo span {
+    color:#0d84d6;
+    font-size:12px;
+    font-weight:800;
+}
+.gestao .form-veterinario-grade {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+.gestao .acoes-veterinario-form {
+    display:flex;
+    gap:8px;
+    margin-top:14px;
+}
+.gestao .racoes-veterinario {
+    margin-top:28px;
+}
+.gestao .tabela-racoes-veterinario {
+    display:grid;
+    gap:10px;
+}
+.gestao .racao-veterinario-item {
+    display:grid;
+    grid-template-columns:minmax(180px,1fr) 180px auto;
+    gap:16px;
+    align-items:end;
+    margin:0;
+    padding:14px 16px;
+    background:#f8fbfd;
+    border:1px solid #e2ebf0;
+    border-radius:12px;
+}
+.gestao .racao-veterinario-item > div {
+    display:grid;
+    gap:4px;
+}
+.gestao .racao-veterinario-item strong {
+    color:#223645;
+}
+.gestao .racao-veterinario-item span {
+    color:#71818c;
+    font-size:13px;
+}
+.gestao .racao-veterinario-item label {
+    margin:0;
+    font-size:12px;
+    font-weight:700;
+    color:#526573;
+}
+.gestao .racao-veterinario-item button {
+    margin:0;
+    min-height:40px;
+}
+@media(max-width:700px) {
+    .gestao .filtro-veterinario {
+        justify-content:stretch;
+    }
+    .gestao .filtro-veterinario label {
+        width:100%;
+    }
+    .gestao .card-veterinario {
+        grid-template-columns:1fr;
+    }
+    .gestao .card-veterinario-imagem {
+        width:100%;
+        height:180px;
+    }
+    .gestao .form-veterinario-grade,
+    .gestao .racao-veterinario-item {
+        grid-template-columns:1fr;
+    }
+}
+
+.gestao .estoque-acoes-topo,
+.gestao .relatorio-acoes {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:18px 0 24px;
+}
+.gestao .estoque-acoes-topo a,
+.gestao .relatorio-acoes a {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:40px;
+    padding:9px 14px;
+    border:1px solid var(--azul);
+    border-radius:8px;
+    background:#fff;
+    color:var(--azul);
+    text-decoration:none;
+    font-weight:700;
+}
+.gestao .estoque-resumo,
+.gestao .relatorio-cards,
+.gestao .resumo-animais-grade {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:14px;
+    margin:20px 0 28px;
+}
+.gestao .estoque-resumo article,
+.gestao .relatorio-cards article,
+.gestao .resumo-animal-card {
+    display:grid;
+    gap:8px;
+    min-height:120px;
+    margin:0;
+    padding:18px;
+    background:#fff;
+    border:1px solid #dfe8ed;
+    border-radius:14px;
+    box-shadow:0 5px 16px rgba(32,58,75,.05);
+}
+.gestao .estoque-resumo span,
+.gestao .relatorio-cards span,
+.gestao .resumo-animal-card span {
+    color:#6e7e89;
+    font-size:13px;
+    font-weight:700;
+}
+.gestao .estoque-resumo strong,
+.gestao .relatorio-cards strong,
+.gestao .resumo-animal-card strong {
+    margin-top:auto;
+    color:#203a4b;
+    font-size:26px;
+}
+.gestao .estoque-resumo .estoque-resumo-alerta {
+    background:#fff8e8;
+    border-color:#f1d79b;
+}
+.gestao .estoque-resumo .estoque-resumo-alerta strong {
+    color:#a86400;
+}
+.gestao .estoque-formulario {
+    background:#fff;
+    border:1px solid #d7e5ec;
+    box-shadow:0 8px 22px rgba(32,58,75,.07);
+}
+.gestao .estoque-formulario-topo {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    margin-bottom:18px;
+}
+.gestao .estoque-formulario-topo span {
+    color:#0782d3;
+    font-size:12px;
+    font-weight:800;
+}
+.gestao .estoque-formulario-topo h2 {
+    margin:3px 0 0;
+}
+.gestao .estoque-form-grade {
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:4px 16px;
+}
+.gestao .estoque-form-grade-menor {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.gestao .estoque-nota {
+    padding:10px 12px;
+    border-radius:8px;
+    background:#edf6fb;
+    color:#587081;
+    font-size:13px;
+}
+.gestao .estoque-selecao-animais {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:10px;
+    margin:18px 0;
+}
+.gestao .estoque-selecao-animais label {
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    gap:10px;
+    margin:0;
+    padding:12px;
+    border:1px solid #dce8ee;
+    border-radius:10px;
+    background:#f8fbfd;
+    cursor:pointer;
+}
+.gestao .estoque-selecao-animais input[type="checkbox"] {
+    width:18px;
+    height:18px;
+    min-width:18px;
+    margin:0;
+    padding:0;
+    accent-color:var(--azul);
+}
+.gestao .estoque-selecao-animais label > span {
+    display:grid;
+    gap:3px;
+}
+.gestao .estoque-selecao-animais small {
+    color:#758590;
+}
+.gestao .estoque-secao,
+.gestao .relatorio-bloco,
+.gestao .secao-relatorio-animais {
+    margin:28px 0;
+    padding:22px;
+    background:#fff;
+    border:1px solid #dfe8ed;
+    border-radius:18px;
+    box-shadow:0 6px 20px rgba(32,58,75,.05);
+}
+.gestao .estoque-secao-titulo,
+.gestao .relatorio-bloco-titulo,
+.gestao .secao-relatorio-titulo {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    margin-bottom:20px;
+}
+.gestao .estoque-secao-titulo h2,
+.gestao .relatorio-bloco-titulo h2,
+.gestao .secao-relatorio-titulo h2 {
+    margin:0 0 5px;
+    color:#213c4d;
+}
+.gestao .estoque-secao-titulo p,
+.gestao .relatorio-bloco-titulo p,
+.gestao .secao-relatorio-titulo p,
+.gestao .relatorio-animais-intro {
+    margin:0;
+    color:#6f7f89;
+}
+.gestao .estoque-secao-titulo > span,
+.gestao .secao-relatorio-titulo > span {
+    display:grid;
+    place-items:center;
+    min-width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#e6f4fd;
+    color:#0b83d3;
+    font-weight:800;
+}
+.gestao .estoque-grade-itens {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
+    gap:16px;
+}
+.gestao .estoque-item-card {
+    margin:0;
+    padding:18px;
+    background:#f9fbfc;
+    border:1px solid #e1eaef;
+    border-radius:14px;
+}
+.gestao .estoque-item-topo {
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:12px;
+}
+.gestao .estoque-item-topo h3 {
+    margin:5px 0 0;
+    color:#203a4b;
+    font-size:20px;
+}
+.gestao .estoque-categoria {
+    color:#0a81d1;
+    font-size:11px;
+    font-weight:900;
+    letter-spacing:.5px;
+    text-transform:uppercase;
+}
+.gestao .estoque-situacao {
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:11px;
+    font-weight:800;
+    white-space:nowrap;
+}
+.gestao .estoque-situacao.baixo {
+    background:#fff2c9;
+    color:#945d00;
+}
+.gestao .estoque-situacao.esgotado {
+    background:#ffe1e1;
+    color:#b32d2d;
+}
+.gestao .estoque-item-numeros {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px;
+    margin:16px 0;
+}
+.gestao .estoque-item-numeros > div {
+    display:grid;
+    gap:4px;
+    padding:12px;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid #e4ebef;
+}
+.gestao .estoque-item-numeros span {
+    color:#7b8a94;
+    font-size:12px;
+}
+.gestao .estoque-item-numeros strong {
+    color:#203a4b;
+    font-size:18px;
+}
+.gestao .estoque-minimo-linha {
+    display:grid;
+    gap:7px;
+    margin:12px 0 16px;
+    color:#657681;
+    font-size:12px;
+}
+.gestao .estoque-minimo-linha > div,
+.gestao .barra-trilho {
+    height:8px;
+    overflow:hidden;
+    border-radius:999px;
+    background:#e7edf1;
+}
+.gestao .estoque-minimo-linha i {
+    display:block;
+    height:100%;
+    border-radius:999px;
+    background:#28a6d8;
+}
+.gestao .estoque-item-detalhes {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:5px 12px;
+    padding-top:12px;
+    border-top:1px solid #e3eaee;
+}
+.gestao .estoque-item-detalhes p,
+.gestao .estoque-racao-dados p {
+    margin:4px 0;
+    color:#61727d;
+    font-size:13px;
+}
+.gestao .estoque-racao-dados {
+    margin-top:15px;
+    padding:13px;
+    border-radius:10px;
+    background:#eef8fc;
+}
+.gestao .estoque-racao-resumo {
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:9px 0;
+}
+.gestao .estoque-racao-resumo span {
+    padding:5px 8px;
+    border-radius:6px;
+    background:#fff;
+    color:#315265;
+    font-size:12px;
+    font-weight:700;
+}
+.gestao .estoque-animais-vinculados {
+    display:grid;
+    gap:6px;
+    margin-top:10px;
+}
+.gestao .estoque-animais-vinculados > div {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:7px 9px;
+    border-radius:7px;
+    background:#fff;
+    font-size:12px;
+}
+.gestao .estoque-animais-vinculados button {
+    margin:0;
+    padding:5px 8px;
+    font-size:11px;
+}
+.gestao .estoque-item-acoes {
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:16px;
+}
+.gestao .estoque-item-acoes button {
+    margin:0;
+    font-size:12px;
+}
+.gestao .estoque-item-acoes .botao-estoque-excluir {
+    background:#fff0f0;
+    color:#c93636;
+    border:1px solid #f1bcbc;
+}
+.gestao .relatorio-bloco-titulo > strong {
+    color:#0c83d2;
+    font-size:20px;
+}
+.gestao .grafico-relatorio {
+    display:grid;
+    gap:10px;
+}
+.gestao .grafico-relatorio article {
+    margin:0;
+    padding:13px 15px;
+    background:#f8fbfd;
+    border:1px solid #e5edf1;
+    border-radius:10px;
+}
+.gestao .grafico-linha-cabecalho {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:9px;
+    color:#526570;
+    font-size:13px;
+}
+.gestao .grafico-linha-cabecalho strong {
+    color:#263f50;
+}
+.gestao .barra-trilho .barra {
+    height:100%;
+    min-width:0;
+    border-radius:999px;
+}
+.gestao .barra-trilho .barra-consumo {
+    background:#39a88d;
+}
+.gestao .grade-relatorio-animais {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:14px;
+}
+.gestao .relatorio-animal-item {
+    display:grid;
+    grid-template-columns:76px minmax(0,1fr);
+    gap:13px;
+    align-items:center;
+    margin:0;
+    padding:13px;
+    background:#f8fbfd;
+    border:1px solid #e2ebef;
+    border-radius:12px;
+}
+.gestao .relatorio-animal-item img {
+    width:76px;
+    height:76px;
+    object-fit:cover;
+    border-radius:10px;
+}
+.gestao .relatorio-animal-item span {
+    color:#0c83d2;
+    font-size:11px;
+    font-weight:800;
+}
+.gestao .relatorio-animal-item h3 {
+    margin:4px 0;
+    color:#213d4e;
+}
+.gestao .relatorio-animal-item p {
+    margin:0 0 4px;
+    color:#70808a;
+    font-size:13px;
+}
+.gestao .relatorio-animal-item strong {
+    color:#465d6b;
+    font-size:13px;
+}
+.gestao .movimento-animal {
+    display:inline-flex;
+    padding:4px 7px;
+    border-radius:6px;
+    font-size:11px;
+    font-weight:800;
+}
+.gestao .movimento-entrada {
+    background:#dff6e8;
+    color:#197647;
+}
+.gestao .movimento-saida {
+    background:#ffe6e6;
+    color:#b53636;
+}
+@media(max-width:850px) {
+    .gestao .estoque-form-grade {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+}
+@media(max-width:600px) {
+    .gestao .estoque-form-grade,
+    .gestao .estoque-form-grade-menor,
+    .gestao .estoque-item-detalhes,
+    .gestao .estoque-item-numeros {
+        grid-template-columns:1fr;
+    }
+    .gestao .estoque-grade-itens {
+        grid-template-columns:1fr;
+    }
+    .gestao .estoque-secao,
+    .gestao .relatorio-bloco,
+    .gestao .secao-relatorio-animais {
+        padding:16px;
+    }
+    .gestao .grafico-linha-cabecalho,
+    .gestao .estoque-secao-titulo,
+    .gestao .relatorio-bloco-titulo,
+    .gestao .secao-relatorio-titulo {
+        align-items:flex-start;
+        flex-direction:column;
+    }
+}
+
+.gestao > a {
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:10px 16px;
+    background:#1597f3;
+    color:#fff;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.2s;
+}
+.gestao > a::before {
+    content:"←";
+}
+.gestao > a:hover {
+    background:#087fd1;
+    transform:translateY(-1px);
+}
+.gestao > a:visited {
+    color:#fff;
+}
+.gestao input[type="checkbox"] {
+    width:18px;
+    height:18px;
+    min-width:18px;
+    padding:0;
+    accent-color:#1597f3;
+    cursor:pointer;
+}

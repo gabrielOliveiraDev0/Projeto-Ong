@@ -1,16 +1,23 @@
+import { useConsulta } from "../servicos/useConsulta";
 import { Link } from "react-router-dom";
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
-import { BotaoVerAnimais,BotaoCadastrarAnimal } from "../componentes/Botoes";
+import { BotaoVerAnimais } from "../componentes/Botoes";
 import { Indicadores, RodapeInstitucional } from "../componentes/ComponentesInstitucionais";
 import acolhimento from "../assets/prototipo/acolhimento.gif";
 import abrigo from "../assets/prototipo/abrigo.webp";
-import noticiaGato from "../assets/prototipo/noticia-gato.webp";
-import noticiaDescanso from "../assets/prototipo/noticia-descanso.webp";
-import noticiaAmigos from "../assets/prototipo/noticia-amigos.webp";
 import abracoGato from "../assets/prototipo/abraco-gato.webp";
 import "../css/PaginaInicial.css";
 
+function enderecoImagemNoticia(imagem) {
+    if (!imagem) return null;
+    return imagem.startsWith("http://") || imagem.startsWith("https://")
+        ? imagem
+        : `http://localhost:8080/uploads/noticias/${imagem}`;
+}
+
 function PaginaInicial() {
+    const { dados: noticias } = useConsulta("/noticias");
+    const { dados: indicadores } = useConsulta("/indicadores", { adotados: 0, racaoKg: 0, disponiveis: 0 });
     return (
         <section className="pagina-inicial institucional">
 
@@ -30,7 +37,7 @@ function PaginaInicial() {
 
                 </section>
 
-                <Indicadores />
+                <Indicadores dados={indicadores} />
 
                 <section className="inicial-abrigos" aria-labelledby="abrigos-titulo">
 
@@ -56,37 +63,8 @@ function PaginaInicial() {
                     <h2 id="noticias-titulo">Notícias</h2>
 
                     <div className="inicial-noticias-grade">
-
-                        <article>
-
-                            <h3>Gato teve uma mãe.</h3>
-                            <img src={noticiaGato} alt="Vitral colorido com o retrato de um gato" width="300" height="300" loading="lazy" />
-                            <time dateTime="2024-02-02">02.02.2024</time>
-                            <p>Os alunos do grupo PZ-12 decidiram criar um novo site para o departamento de software.</p>
-                            <Link to="/PaginaNoticias">Saber mais <span aria-hidden="true">→</span></Link>
-
-                        </article>
-
-                        <article>
-
-                            <h3>Gato deitado</h3>
-                            <img src={noticiaDescanso} alt="Ilustração de gatos descansando em uma poltrona" width="800" height="800" loading="lazy" />
-                            <time dateTime="2023-11-30">30 de novembro de 2023</time>
-                            <p>Os alunos do grupo PZ-12 decidiram criar um novo site para o departamento de software.</p>
-                            <Link to="/PaginaNoticias">Saber mais <span aria-hidden="true">→</span></Link>
-
-                        </article>
-
-                        <article>
-
-                            <h3>Inseparáveis</h3>
-                            <img src={noticiaAmigos} alt="Um cachorro e um gato juntos" width="724" height="345" loading="lazy" />
-                            <time dateTime="2024-02-02">2 de fevereiro de 2024</time>
-                            <p>Os alunos do grupo PZ-12 decidiram criar um novo site para o departamento de software.</p>
-                            <Link to="/PaginaNoticias">Saber mais <span aria-hidden="true">→</span></Link>
-
-                        </article>
-
+                        {noticias.slice(0,3).map(n => <article key={n.idNoticia}><h3>{n.tituloNoticia}</h3>{n.imagemNoticia && <img src={enderecoImagemNoticia(n.imagemNoticia)} alt={n.tituloNoticia} loading="lazy" />}<time>{new Date(n.dataPublicacao).toLocaleDateString("pt-BR")}</time><p>{n.descricaoNoticia.slice(0,180)}</p><Link to="/PaginaNoticias">Saber mais →</Link></article>)}
+                        {!noticias.length && <p>Nenhuma notícia publicada.</p>}
                     </div>
 
                 </section>

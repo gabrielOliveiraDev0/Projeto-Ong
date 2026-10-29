@@ -31,12 +31,26 @@ public class AnimalController {
 
     private final AnimalService animalService;
     private final JwtService jwtService;
+    private final com.projetoong.backend.service.MovimentacaoAnimalService movimentacaoAnimalService;
 
     public AnimalController(
             AnimalService animalService,
-            JwtService jwtService) {
+            JwtService jwtService,
+            com.projetoong.backend.service.MovimentacaoAnimalService movimentacaoAnimalService) {
         this.animalService = animalService;
         this.jwtService = jwtService;
+        this.movimentacaoAnimalService = movimentacaoAnimalService;
+    }
+
+    @org.springframework.web.bind.annotation.DeleteMapping("/animais/{id}")
+    public void remover(@PathVariable Long id) { animalService.remover(id); }
+    @PatchMapping("/animais/{id}/veterinario")
+    public Animal veterinario(@PathVariable Long id, @jakarta.validation.Valid @RequestBody com.projetoong.backend.model.VeterinarioRequest dados) {
+        return animalService.veterinario(id, dados);
+    }
+    @GetMapping("/animais/relatorio")
+    public java.util.Map<String,Object> relatorioAnimais() {
+        return movimentacaoAnimalService.relatorio();
     }
 
     @GetMapping("/animais")

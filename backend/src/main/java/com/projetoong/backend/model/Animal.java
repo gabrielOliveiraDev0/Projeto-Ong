@@ -20,6 +20,18 @@ public class Animal {
     @Enumerated(EnumType.STRING)
     private StatusAnimal statusAnimal;
 
+    @jakarta.persistence.Column(length = 4000)
+    private String tratamentoAnimal;
+    @jakarta.persistence.Column(length = 4000)
+    private String vacinacaoAnimal;
+    @jakarta.persistence.Column(nullable=false, columnDefinition="boolean default false")
+    private boolean removido;
+    public boolean isRemovido() { return removido; }
+    public void setRemovido(boolean valor) { removido = valor; }
+    public String getTratamentoAnimal() { return tratamentoAnimal; }
+    public void setTratamentoAnimal(String valor) { tratamentoAnimal = valor; }
+    public String getVacinacaoAnimal() { return vacinacaoAnimal; }
+    public void setVacinacaoAnimal(String valor) { vacinacaoAnimal = valor; }
     private String imagemAnimal;
     private Integer idadeAnimal;
     private String nomeAnimal;

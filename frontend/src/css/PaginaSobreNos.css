@@ -1,250 +1,249 @@
-/* Página 2 do protótipo: faixas azuis e fotos originais recortadas. */
-.pagina-sobre-nos.institucional {
-  min-height: 100vh;
-  background: #008cff;
+.pagina-sobre-nos {
+  background:#fff;
+  color:#263745;
 }
 
-.pagina-sobre-nos.institucional>.cabecalho {
-  background: #63a8db;
-}
-
-.pagina-sobre-nos.institucional .cabecalho-botoes button {
-  color: #fff;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.pagina-sobre-nos.institucional .BotaoInteracaoUsuario button {
-  background: transparent;
-  color: #fff;
-  font-weight: 400;
-  text-transform: uppercase;
-}
-
-.pagina-sobre-nos.institucional .BotaoInteracaoUsuario button:hover {
-  background: #ffffff26;
+.pagina-sobre-nos main {
+  overflow:hidden;
 }
 
 .pagina-sobre-nos .sobre-hero {
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: flex-start;
-  gap: 36px;
-  min-height: 300px;
-  padding: 20px 24px 80px;
-  overflow: hidden;
-  background: #63a8db;
-  border-radius: 0 0 280px 0;
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(340px,.75fr);
+  align-items:center;
+  min-height:520px;
+  padding:70px max(32px,calc((100% - 1180px)/2));
+  background:linear-gradient(135deg,#eaf9fb 0%,#d8f1f4 55%,#cbe9ee 100%);
+}
+
+.pagina-sobre-nos .sobre-hero-conteudo {
+  display:flex;
+  align-items:center;
+  gap:28px;
+  position:relative;
+  z-index:2;
 }
 
 .pagina-sobre-nos .sobre-logo {
-  width: clamp(140px, 15vw, 220px);
-  height: auto;
-  aspect-ratio: 1;
-  object-fit: contain;
-  padding: 14px;
-  border-radius: 50%;
-  background: #00b8d5;
-  flex-shrink: 0;
+  width:118px;
+  height:118px;
+  object-fit:contain;
+  padding:10px;
+  background:#fff;
+  border-radius:28px;
+  box-shadow:0 14px 35px rgba(20,77,95,.12);
+}
+
+.pagina-sobre-nos .sobre-etiqueta {
+  display:inline-block;
+  margin-bottom:10px;
+  color:#087f8a;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
 }
 
 .pagina-sobre-nos .sobre-hero h1 {
-  position: relative;
-  z-index: 1;
-  margin: 34px 0 0;
-  font-size: clamp(32px, 4vw, 60px);
-  font-weight: 500;
-  line-height: 1.12;
-  color: #9a8172;
-  letter-spacing: .5px;
-  max-width: 800px;
+  max-width:620px;
+  margin:0;
+  font-size:clamp(42px,5vw,72px);
+  line-height:1;
+  letter-spacing:-2px;
+  color:#17384c;
 }
 
-.pagina-sobre-nos .sobre-hero h1 span {
-  display: block;
-  margin-bottom: 10px;
-  color: #264e71;
-  font-size: 16px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+.pagina-sobre-nos .sobre-hero p {
+  max-width:630px;
+  margin:22px 0 0;
+  color:#496675;
+  font-size:19px;
+  line-height:1.55;
 }
 
 .pagina-sobre-nos .sobre-companheiros {
-  position: absolute;
-  z-index: 0;
-  width: 360px;
-  height: auto;
-  right: 17%;
-  bottom: -195px;
+  width:min(470px,100%);
+  justify-self:end;
+  align-self:end;
+  object-fit:contain;
 }
 
 .pagina-sobre-nos .institucional-impacto {
-  width: min(1160px, calc(100% - 80px));
-  margin-inline: auto;
-  padding: 105px 0 70px;
+  width:min(1180px,calc(100% - 48px));
+  margin:0 auto;
+  padding:76px 0;
 }
 
 .pagina-sobre-nos .institucional-indicador {
-  min-height: 250px;
+  min-height:280px;
 }
 
-.pagina-sobre-nos .institucional-indicador strong {
-  font-size: clamp(36px, 4vw, 52px);
+.pagina-sobre-nos .sobre-apresentacao,
+.pagina-sobre-nos .sobre-compromissos {
+  width:min(1120px,calc(100% - 48px));
+  margin:30px auto 100px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:64px;
+  align-items:center;
 }
 
-.pagina-sobre-nos .institucional-dados-nota {
-  color: #083d68;
-  margin-top: 25px;
+.pagina-sobre-nos .sobre-apresentacao-texto h2,
+.pagina-sobre-nos .sobre-fluxo h2,
+.pagina-sobre-nos .sobre-compromissos h2 {
+  margin:0 0 22px;
+  color:#193a4f;
+  font-size:clamp(32px,4vw,48px);
+  line-height:1.1;
 }
 
-.pagina-sobre-nos .sobre-missao {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  min-height: 260px;
-  padding: 42px max(22%, calc((100% - 760px) / 2));
-  border-radius: 260px 0 0 0;
-  background: #a0bdcb;
+.pagina-sobre-nos .sobre-apresentacao-texto p,
+.pagina-sobre-nos .sobre-compromissos p {
+  color:#60717d;
+  font-size:17px;
+  line-height:1.7;
 }
 
-.pagina-sobre-nos .sobre-missao-texto {
-  position: relative;
-  z-index: 1;
+.pagina-sobre-nos .sobre-apresentacao > img {
+  width:100%;
+  max-height:420px;
+  object-fit:contain;
+  padding:24px;
+  background:#eef8fb;
+  border-radius:36px;
 }
 
-.pagina-sobre-nos .sobre-missao p {
-  max-width: none;
-  margin: 0;
-  text-align: center;
-  color: #795640;
-  font-size: 18px;
-  line-height: 1.45;
+.pagina-sobre-nos .sobre-fluxo {
+  padding:90px max(32px,calc((100% - 1180px)/2));
+  background:#f5fafc;
 }
 
-.pagina-sobre-nos .sobre-missao p+p {
-  margin-top: 20px;
+.pagina-sobre-nos .sobre-secao-cabecalho {
+  max-width:680px;
+  margin-bottom:42px;
 }
 
-.pagina-sobre-nos .sobre-gato {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 420px;
-  height: auto;
-  z-index: -1;
+.pagina-sobre-nos .sobre-etapas {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:18px;
 }
 
-.pagina-sobre-nos .sobre-caes {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 240px;
-  height: auto;
-  z-index: -1;
+.pagina-sobre-nos .sobre-etapas article {
+  min-height:250px;
+  padding:28px;
+  border:1px solid #dae8ee;
+  border-radius:22px;
+  background:#fff;
+  box-shadow:0 10px 26px rgba(31,67,86,.05);
 }
 
-@media (min-width: 1600px) {
+.pagina-sobre-nos .sobre-etapas article > span {
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  margin-bottom:28px;
+  border-radius:14px;
+  background:#dff5f6;
+  color:#067c87;
+  font-weight:900;
+}
+
+.pagina-sobre-nos .sobre-etapas h3 {
+  margin:0 0 12px;
+  color:#1e3b4d;
+  font-size:22px;
+}
+
+.pagina-sobre-nos .sobre-etapas p {
+  margin:0;
+  color:#697983;
+  line-height:1.55;
+}
+
+.pagina-sobre-nos .sobre-compromissos {
+  grid-template-columns:.75fr 1.25fr;
+  margin-top:100px;
+}
+
+.pagina-sobre-nos .sobre-compromissos > img {
+  width:100%;
+  max-height:500px;
+  object-fit:contain;
+  padding:26px;
+  background:#fff4e9;
+  border-radius:36px;
+}
+
+.pagina-sobre-nos .sobre-compromissos-grade {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
+}
+
+.pagina-sobre-nos .sobre-compromissos-grade article {
+  padding:20px;
+  border-radius:16px;
+  background:#f7fafb;
+  border:1px solid #e1eaee;
+}
+
+.pagina-sobre-nos .sobre-compromissos-grade strong {
+  display:block;
+  margin-bottom:7px;
+  color:#087f8a;
+  font-size:17px;
+}
+
+.pagina-sobre-nos .sobre-compromissos-grade p {
+  margin:0;
+  font-size:14px;
+  line-height:1.5;
+}
+
+@media(max-width:900px) {
   .pagina-sobre-nos .sobre-hero {
-    padding-inline: max(24px, calc((100% - 1480px) / 2));
+    grid-template-columns:1fr;
+    padding-block:48px 0;
   }
-}
-
-@media (max-width: 1000px) {
-  .pagina-sobre-nos .sobre-hero {
-    min-height: 340px;
-    gap: 22px;
-    border-bottom-right-radius: 180px;
-  }
-
-  .pagina-sobre-nos .sobre-hero h1 {
-    margin-top: 24px;
-    max-width: 570px;
-  }
-
   .pagina-sobre-nos .sobre-companheiros {
-    right: 9%;
-    bottom: -140px;
-    width: 290px;
+    width:330px;
+    margin-top:28px;
+    justify-self:center;
   }
-
-  .pagina-sobre-nos .institucional-impacto {
-    padding-block: 64px 46px;
+  .pagina-sobre-nos .sobre-apresentacao,
+  .pagina-sobre-nos .sobre-compromissos {
+    grid-template-columns:1fr;
   }
-
-  .pagina-sobre-nos .sobre-missao {
-    padding: 48px 20%;
-    border-top-left-radius: 160px;
-  }
-
-  .pagina-sobre-nos .sobre-gato {
-    width: 280px;
-  }
-
-  .pagina-sobre-nos .sobre-caes {
-    width: 160px;
+  .pagina-sobre-nos .sobre-etapas {
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 }
 
-@media (max-width: 700px) {
+@media(max-width:600px) {
   .pagina-sobre-nos .sobre-hero {
-    display: grid;
-    grid-template-columns: 100px minmax(0, 1fr);
-    align-items: center;
-    min-height: 370px;
-    gap: 20px;
-    padding: 26px 20px 160px;
-    border-bottom-right-radius: 120px;
+    padding-inline:20px;
   }
-
+  .pagina-sobre-nos .sobre-hero-conteudo {
+    align-items:flex-start;
+    flex-direction:column;
+  }
   .pagina-sobre-nos .sobre-logo {
-    width: 100px;
-    padding: 6px;
+    width:90px;
+    height:90px;
   }
-
-  .pagina-sobre-nos .sobre-hero h1 {
-    margin: 0;
-    font-size: clamp(28px, 6vw, 40px);
+  .pagina-sobre-nos .institucional-impacto,
+  .pagina-sobre-nos .sobre-apresentacao,
+  .pagina-sobre-nos .sobre-compromissos {
+    width:calc(100% - 40px);
   }
-
-  .pagina-sobre-nos .sobre-hero h1 span {
-    font-size: 12px;
-    letter-spacing: 1px;
+  .pagina-sobre-nos .sobre-fluxo {
+    padding:60px 20px;
   }
-
-  .pagina-sobre-nos .sobre-companheiros {
-    right: 10%;
-    width: 230px;
-    bottom: -125px;
-  }
-
-  .pagina-sobre-nos .institucional-impacto {
-    width: calc(100% - 40px);
-    padding-block: 40px;
-  }
-
-  .pagina-sobre-nos .institucional-indicadores {
-    gap: 30px;
-  }
-
-  .pagina-sobre-nos .institucional-indicador {
-    min-height: 230px;
-  }
-
-  .pagina-sobre-nos .sobre-missao {
-    padding: 120px 28px 160px;
-    border-top-left-radius: 100px;
-  }
-
-  .pagina-sobre-nos .sobre-missao p {
-    font-size: 17px;
-  }
-
-  .pagina-sobre-nos .sobre-gato {
-    width: 220px;
-  }
-
-  .pagina-sobre-nos .sobre-caes {
-    width: 190px;
+  .pagina-sobre-nos .sobre-etapas,
+  .pagina-sobre-nos .sobre-compromissos-grade {
+    grid-template-columns:1fr;
   }
 }

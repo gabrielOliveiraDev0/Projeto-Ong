@@ -15,6 +15,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long idUsuario;
 
     @Enumerated(EnumType.STRING)
@@ -25,6 +26,7 @@ public class Usuario {
     private String emailUsuario;
     private String telefoneUsuario;
     private String regiaoUsuario;
+    private String imagemPerfilUsuario;
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senhaUsuario;
 
@@ -80,6 +82,15 @@ public class Usuario {
         this.regiaoUsuario = regiaoUsuario;
     }
 
+    public String getImagemPerfilUsuario() {
+        return imagemPerfilUsuario;
+    }
+
+    public void setImagemPerfilUsuario(String imagemPerfilUsuario) {
+        this.imagemPerfilUsuario = imagemPerfilUsuario;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     public String getSenhaUsuario() {
         return senhaUsuario;
     }

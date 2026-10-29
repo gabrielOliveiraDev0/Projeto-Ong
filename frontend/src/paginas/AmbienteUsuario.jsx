@@ -1,3 +1,6 @@
+import { api } from "../servicos/api";
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
+import { requisicao } from "../servicos/api";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -9,9 +12,7 @@ function AmbienteUsuario() {
 
     const navigate = useNavigate();
 
-    const usuarioLogado = JSON.parse(
-        localStorage.getItem("usuarioLogado")
-    );
+    const { usuario: usuarioLogado, sair: encerrarSessao } = useAutenticacao();
 
     const [animais, setAnimais] = useState([]);
     const [solicitacoesAdocao, setSolicitacoesAdocao] = useState([]);
@@ -21,98 +22,37 @@ function AmbienteUsuario() {
     const ehAdministrador =
         usuarioLogado?.tipoUsuario === "ADMINISTRADOR";
 
+    const idUsuarioLogado = usuarioLogado?.idUsuario;
+    const ehVeterinario = usuarioLogado?.tipoUsuario === "VETERINARIO";
     useEffect(() => {
-
-        if (!ehAdministrador) {
-            return;
-        }
-
-        fetch("http://localhost:8080/animais")
-            .then((resposta) => resposta.json())
-            .then((dados) => {
-                setAnimais(dados);
-            })
-            .catch((erro) => {
-                console.error("Erro ao buscar animais:", erro);
-            });
-
-    }, [ehAdministrador]);
-
-    useEffect(() => {
-
-        if (!usuarioLogado || ehAdministrador) {
-            return;
-        }
-
-        fetch(
-            `http://localhost:8080/adocoes/usuario/${usuarioLogado.idUsuario}`
-        )
-            .then((resposta) => resposta.json())
-            .then((dados) => {
-                setSolicitacoesAdocao(dados);
-            })
-            .catch((erro) => {
-                console.error("Erro ao buscar solicitações:", erro);
-            });
-
-    }, [usuarioLogado?.idUsuario, ehAdministrador]);
-
-    useEffect(() => {
-
-        if (!usuarioLogado || ehAdministrador) {
-            return;
-        }
-
-        fetch(
-            `http://localhost:8080/favoritos/usuario/${usuarioLogado.idUsuario}`
-        )
-            .then((resposta) => resposta.json())
-            .then((dados) => {
-                setFavoritos(dados);
-            })
-            .catch((erro) => {
-                console.error("Erro ao buscar favoritos:", erro);
-            });
-
-    }, [usuarioLogado?.idUsuario, ehAdministrador]);
-
-    useEffect(() => {
-
-        if (!usuarioLogado || !ehAdministrador) {
-            return;
-        }
-
-        const token = localStorage.getItem("token");
-
-        fetch(
-            "http://localhost:8080/adocoes/pendentes",
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
+        if (!idUsuarioLogado) return;
+        let ativo = true, ocupado = false;
+        async function atualizar() {
+            if (ocupado) return;
+            ocupado = true;
+            try {
+                const endpoints = ehAdministrador
+                    ? ["/animais", "/adocoes/pendentes"]
+                    : ehVeterinario
+                    ? ["/animais"]
+                    : [`/adocoes/usuario/${idUsuarioLogado}`, `/favoritos/usuario/${idUsuarioLogado}`];
+                const resultados = await Promise.all(endpoints.map(url => api(url)));
+                if (!ativo) return;
+                if (ehAdministrador) {
+                    setAnimais(resultados[0]);
+                    setSolicitacoesPendentes(resultados[1]);
+                } else if (ehVeterinario) {
+                    setAnimais(resultados[0]);
+                } else {
+                    setSolicitacoesAdocao(resultados[0]);
+                    setFavoritos(resultados[1]);
                 }
-            }
-        )
-            .then((resposta) => {
-
-                if (!resposta.ok) {
-                    throw new Error(
-                        "Erro ao buscar solicitações pendentes"
-                    );
-                }
-
-                return resposta.json();
-            })
-            .then((dados) => {
-                setSolicitacoesPendentes(dados);
-            })
-            .catch((erro) => {
-                console.error(
-                    "Erro ao buscar solicitações pendentes:",
-                    erro
-                );
-            });
-
-    }, [usuarioLogado?.idUsuario, ehAdministrador]);
+            } catch(e) { console.error(e); } finally { ocupado = false; }
+        }
+        atualizar();
+        const intervalo = setInterval(atualizar, 5000);
+        return () => { ativo = false; clearInterval(intervalo); };
+    }, [idUsuarioLogado, ehAdministrador, ehVeterinario]);
 
     if (!usuarioLogado) {
         return <Navigate to="/Login" replace />;
@@ -130,8 +70,7 @@ function AmbienteUsuario() {
 
     function sair() {
 
-        localStorage.removeItem("usuarioLogado");
-        localStorage.removeItem("token");
+        encerrarSessao();
 
         navigate("/PaginaInicial");
     }
@@ -140,7 +79,7 @@ function AmbienteUsuario() {
 
         try {
 
-            const resposta = await fetch(
+            const resposta = await requisicao(
                 `http://localhost:8080/favoritos?idUsuario=${usuarioLogado.idUsuario}&idAnimal=${idAnimal}`,
                 {
                     method: "DELETE"
@@ -172,7 +111,7 @@ function AmbienteUsuario() {
 
         try {
 
-            const resposta = await fetch(
+            const resposta = await requisicao(
                 `http://localhost:8080/adocoes/${idSolicitacao}/${acao}`,
                 {
                     method: "PATCH",
@@ -196,7 +135,7 @@ function AmbienteUsuario() {
                 )
             );
 
-            const respostaAnimais = await fetch(
+            const respostaAnimais = await requisicao(
                 "http://localhost:8080/animais"
             );
 
@@ -221,6 +160,35 @@ function AmbienteUsuario() {
         }
     }
 
+    async function abrirHolerite(idSolicitacao) {
+        const janela = window.open("", "_blank");
+
+        try {
+            const resposta = await requisicao(
+                `/adocoes/${idSolicitacao}/holerite`
+            );
+
+            if (!resposta.ok) {
+                const erro = await resposta.json().catch(() => ({}));
+                throw new Error(
+                    erro.detail || erro.message || "Não foi possível abrir o holerite"
+                );
+            }
+
+            const arquivo = await resposta.blob();
+            const endereco = URL.createObjectURL(arquivo);
+
+            if (janela) {
+                janela.location.href = endereco;
+            }
+
+            setTimeout(() => URL.revokeObjectURL(endereco), 60000);
+        } catch (erro) {
+            if (janela) janela.close();
+            alert(erro.message);
+        }
+    }
+
     async function removerAnimal(idAnimal) {
 
         const confirmar = window.confirm(
@@ -235,7 +203,7 @@ function AmbienteUsuario() {
 
         try {
 
-            const resposta = await fetch(
+            const resposta = await requisicao(
                 `http://localhost:8080/animais/${idAnimal}`,
                 {
                     method: "DELETE",
@@ -292,12 +260,12 @@ function AmbienteUsuario() {
                             <p>
                                 {ehAdministrador
                                     ? "Gerencie os animais e acompanhe as atividades da ONG."
-                                    : "Acompanhe suas adoções, solicitações e animais favoritos."}
+                                    : ehVeterinario ? "Acompanhe os animais e atualize as informações veterinárias." : "Acompanhe suas adoções, solicitações e animais favoritos."}
                             </p>
 
                         </div>
 
-                        {!ehAdministrador && (
+                        {!ehAdministrador && !ehVeterinario && (
 
                             <button
                                 className="botao-explorar"
@@ -350,9 +318,14 @@ function AmbienteUsuario() {
 
                     )}
 
+                    <section className="acoes-administrador">
+                        <button onClick={() => navigate("/Chat")}>Chat</button>
+                        {ehAdministrador && <><button onClick={() => navigate("/GerenciarUsuarios")}>Gerenciar usuários</button><button onClick={() => navigate("/Estoque")}>Estoque e alimentação</button><button onClick={() => navigate("/Relatorios")}>Relatórios</button><button onClick={() => navigate("/RelatorioAnimais")}>Relatório de animais</button><button onClick={() => navigate("/PaginaNoticias")}>Gerenciar notícias</button></>}
+                        {(ehVeterinario || ehAdministrador) && <button onClick={() => navigate("/Veterinario")}>Atendimento veterinário</button>}
+                    </section>
                     <section className="dashboard-listas">
 
-                        {!ehAdministrador && (
+                        {!ehAdministrador && !ehVeterinario && (
                             <>
 
                                 <article className="painel-lista">
@@ -711,6 +684,86 @@ function AmbienteUsuario() {
                             </>
                         )}
 
+                        {ehVeterinario && (
+                            <>
+                                <article className="painel-lista">
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">🩺</div>
+                                        <div>
+                                            <h2>Animais em tratamento</h2>
+                                            <p>Animais que estão recebendo atendimento veterinário.</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="lista-animais-admin">
+                                        {animais.filter(animal => animal.statusAnimal === "EM_TRATAMENTO").length === 0 ? (
+                                            <div className="estado-vazio">
+                                                <span>🩺</span>
+                                                <strong>Nenhum animal em tratamento</strong>
+                                            </div>
+                                        ) : (
+                                            animais
+                                                .filter(animal => animal.statusAnimal === "EM_TRATAMENTO")
+                                                .map(animal => (
+                                                    <div className="animal-admin-item" key={animal.idAnimal}>
+                                                        <img
+                                                            className="animal-admin-imagem"
+                                                            src={animal.imagemAnimal ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}` : ImgExemplo}
+                                                            alt={animal.nomeAnimal}
+                                                        />
+                                                        <div className="animal-admin-conteudo">
+                                                            <span className="animal-admin-id">ID #{animal.idAnimal}</span>
+                                                            <strong>{animal.nomeAnimal}</strong>
+                                                            <p>{animal.tipoAnimal}</p>
+                                                            <p>Peso: {animal.pesoAnimal} kg</p>
+                                                            <p>Status: EM TRATAMENTO</p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                        )}
+                                    </div>
+                                </article>
+
+                                <article className="painel-lista">
+                                    <div className="painel-titulo">
+                                        <div className="icone-painel">🐾</div>
+                                        <div>
+                                            <h2>Animais resgatados</h2>
+                                            <p>Animais recém-chegados que precisam de avaliação.</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="lista-animais-admin">
+                                        {animais.filter(animal => animal.statusAnimal === "RESGATADO").length === 0 ? (
+                                            <div className="estado-vazio">
+                                                <span>🐾</span>
+                                                <strong>Nenhum animal resgatado</strong>
+                                            </div>
+                                        ) : (
+                                            animais
+                                                .filter(animal => animal.statusAnimal === "RESGATADO")
+                                                .map(animal => (
+                                                    <div className="animal-admin-item" key={animal.idAnimal}>
+                                                        <img
+                                                            className="animal-admin-imagem"
+                                                            src={animal.imagemAnimal ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}` : ImgExemplo}
+                                                            alt={animal.nomeAnimal}
+                                                        />
+                                                        <div className="animal-admin-conteudo">
+                                                            <span className="animal-admin-id">ID #{animal.idAnimal}</span>
+                                                            <strong>{animal.nomeAnimal}</strong>
+                                                            <p>{animal.tipoAnimal}</p>
+                                                            <p>Peso: {animal.pesoAnimal} kg</p>
+                                                            <p>Status: RESGATADO</p>
+                                                        </div>
+                                                    </div>
+                                                ))
+                                        )}
+                                    </div>
+                                </article>
+                            </>
+                        )}
+
                         {ehAdministrador && (
                             <>
 
@@ -927,6 +980,20 @@ function AmbienteUsuario() {
                                                                 )}
                                                             </p>
 
+                                                            {solicitacao.holeriteImagem && (
+                                                                <button
+                                                                    className="botao-ver-holerite"
+                                                                    type="button"
+                                                                    onClick={() =>
+                                                                        abrirHolerite(
+                                                                            solicitacao.idSolicitacao
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    Ver holerite
+                                                                </button>
+                                                            )}
+
                                                         </div>
 
                                                         <div className="acoes-solicitacao">
@@ -997,8 +1064,7 @@ function AmbienteUsuario() {
                                         {animais
                                             .filter(
                                                 (animal) =>
-                                                    animal.statusAnimal !==
-                                                    "DISPONIVEL"
+                                                    ["RESGATADO", "EM_TRATAMENTO"].includes(animal.statusAnimal)
                                             )
                                             .map((animal) => (
 
@@ -1188,22 +1254,30 @@ function AmbienteUsuario() {
                     <section className="perfil-identidade">
 
                         <div className="avatar-usuario">
-
-                            {usuarioLogado.nomeUsuario
-                                ?.charAt(0)
-                                .toUpperCase()}
-
+                            {usuarioLogado.imagemPerfilUsuario ? (
+                                <img
+                                    src={`http://localhost:8080/uploads/perfis/${usuarioLogado.imagemPerfilUsuario}`}
+                                    alt={`Foto de ${usuarioLogado.nomeUsuario}`}
+                                />
+                            ) : (
+                                usuarioLogado.nomeUsuario
+                                    ?.charAt(0)
+                                    .toUpperCase()
+                            )}
                         </div>
 
                         <h2>
                             {usuarioLogado.nomeUsuario}
+                            {usuarioLogado.sobrenomeUsuario
+                                ? ` ${usuarioLogado.sobrenomeUsuario}`
+                                : ""}
                         </h2>
 
                         <span className="tipo-usuario">
 
                             {ehAdministrador
                                 ? "Administrador"
-                                : "Usuário"}
+                                : ehVeterinario ? "Veterinário" : "Usuário"}
 
                         </span>
 
@@ -1240,18 +1314,29 @@ function AmbienteUsuario() {
 
                         </div>
 
+                        <div className="informacao-item">
+                            <span>Região</span>
+                            <strong>
+                                {usuarioLogado.regiaoUsuario || "Não informada"}
+                            </strong>
+                        </div>
+
                     </section>
 
                     <button
                         className="botao-editar-perfil"
                         type="button"
+                        onClick={() => navigate("/EditarPerfil")}
                     >
                         Editar perfil
                     </button>
 
                     <section className="perfil-menu">
 
-                        <button type="button">
+                        <button
+                            type="button"
+                            onClick={() => navigate("/Configuracoes")}
+                        >
                             ⚙ Configurações
                         </button>
 

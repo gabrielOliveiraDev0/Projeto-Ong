@@ -9,7 +9,7 @@ function BotaoCadastrarUsuario() {
         <button
             className="botao-cadastraUsuario"
             type="button"
-            onClick={() => navigate("/cadastrarUsuarios")}
+            onClick={() => navigate("/CadastrarUsuarios")}
         >
             Cadastrar-se
         </button>

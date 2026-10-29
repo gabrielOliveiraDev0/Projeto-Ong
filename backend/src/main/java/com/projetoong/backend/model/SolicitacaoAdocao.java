@@ -35,6 +35,7 @@ public class SolicitacaoAdocao {
     private String motivoAdocao;
     private String experienciaComAnimais;
     private BigDecimal rendaMensal;
+    private String holeriteImagem;
 
     public Long getIdSolicitacao() {
         return idSolicitacao;
@@ -118,5 +119,13 @@ public class SolicitacaoAdocao {
 
     public void setRendaMensal(BigDecimal rendaMensal) {
         this.rendaMensal = rendaMensal;
+    }
+
+    public String getHoleriteImagem() {
+        return holeriteImagem;
+    }
+
+    public void setHoleriteImagem(String holeriteImagem) {
+        this.holeriteImagem = holeriteImagem;
     }
 }

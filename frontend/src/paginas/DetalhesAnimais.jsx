@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useConsulta } from "../servicos/useConsulta";
+import { useAutenticacao } from "../servicos/contextoAutenticacao";
 import { useNavigate, useParams } from "react-router-dom";
 
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
@@ -9,30 +10,14 @@ function DetalhesAnimais() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [animal, setAnimal] = useState(null);
 
-    useEffect(() => {
 
-        fetch(`http://localhost:8080/animais/${id}`)
-            .then((resposta) => {
+    const { dados: animal, erro } = useConsulta(`/animais/${id}`, null);
+    const { usuario } = useAutenticacao();
 
-                if (!resposta.ok) {
-                    throw new Error("Erro ao buscar animal");
-                }
-
-                return resposta.json();
-            })
-            .then((dados) => {
-                setAnimal(dados);
-            })
-            .catch((erro) => {
-                console.error("Erro ao buscar animal:", erro);
-            });
-
-    }, [id]);
 
     if (!animal) {
-        return <p>Carregando...</p>;
+        return <p>{erro || "Carregando..."}</p>;
     }
 
     return (
@@ -85,7 +70,9 @@ function DetalhesAnimais() {
                 </strong>
 
                 <strong>
-                    Alimentação:
+                    Tratamento: {animal.tratamentoAnimal || "Não informado"}
+                </strong>
+                <strong>Vacinação: {animal.vacinacaoAnimal || "Não informada"}
                 </strong>
 
                 <strong>
@@ -100,7 +87,7 @@ function DetalhesAnimais() {
                     Telefone: {animal.telefoneAnimal}
                 </strong>
 
-                {animal.statusAnimal === "DISPONIVEL" && (
+                {animal.statusAnimal === "DISPONIVEL" && !animal.removido && (!usuario || usuario.tipoUsuario === "USUARIO") && (
                     <button
                         type="button"
                         onClick={() =>
