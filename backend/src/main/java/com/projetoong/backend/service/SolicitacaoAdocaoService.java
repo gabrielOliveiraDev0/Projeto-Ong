@@ -153,10 +153,12 @@ public class SolicitacaoAdocaoService {
                 outra.getAnimal().getIdAnimal().equals(bloqueado.getIdAnimal())
             ) {
                 outra.setStatusSolicitacao(StatusSolicitacaoAdocao.RECUSADA);
+                outra.setDataDecisao(java.time.Instant.now());
             }
         }
 
         solicitacao.setStatusSolicitacao(StatusSolicitacaoAdocao.APROVADA);
+        solicitacao.setDataDecisao(java.time.Instant.now());
 
         Animal animal = solicitacao.getAnimal();
         animal.setStatusAnimal(StatusAnimal.ADOTADO);
@@ -178,6 +180,7 @@ public class SolicitacaoAdocaoService {
         }
 
         solicitacao.setStatusSolicitacao(StatusSolicitacaoAdocao.RECUSADA);
+        solicitacao.setDataDecisao(java.time.Instant.now());
         return solicitacaoRepository.save(solicitacao);
     }
 

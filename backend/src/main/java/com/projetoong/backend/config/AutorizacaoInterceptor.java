@@ -17,7 +17,11 @@ public class AutorizacaoInterceptor implements HandlerInterceptor {
         boolean estoqueVeterinario = p.equals("/estoque/racoes") && m.equals("GET")
             || p.matches("/estoque/racoes/\\d+/consumo") && m.equals("PATCH");
         boolean usuarioProprio = p.startsWith("/usuarios/me");
-        boolean admin = p.startsWith("/estoque") && !estoqueVeterinario
+        boolean relatorioDetalhado = handler instanceof org.springframework.web.method.HandlerMethod metodo
+            && (metodo.getBeanType() == com.projetoong.backend.controller.RelatorioController.class
+                || metodo.getBeanType() == com.projetoong.backend.controller.AnimalController.class && metodo.getMethod().getName().equals("relatorioAnimais")
+                || metodo.getBeanType() == com.projetoong.backend.controller.EstoqueController.class && metodo.getMethod().getName().equals("relatorio"));
+        boolean admin = relatorioDetalhado || p.startsWith("/relatorios") || p.startsWith("/estoque") && !estoqueVeterinario
             || p.equals("/animais/relatorio")
             || (p.startsWith("/usuarios") && !usuarioProprio && !m.equals("POST"))
             || (p.startsWith("/noticias") && !m.equals("GET"))
