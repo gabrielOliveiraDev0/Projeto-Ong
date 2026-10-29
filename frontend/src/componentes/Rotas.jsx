@@ -29,11 +29,7 @@ function Rota() {
                 <Route path="/" element={<PaginaInicial />} />
                 <Route
                     path="/cadastrarAnimais"
-                    element={
-                        ehAdministrador
-                            ? <CadastrarAnimais />
-                            : <Navigate to="/PaginaInicial" replace />
-                    }
+                    element={<CadastrarAnimais />}
                 />
                 <Route
                     path="/CadastrarUsuarios"

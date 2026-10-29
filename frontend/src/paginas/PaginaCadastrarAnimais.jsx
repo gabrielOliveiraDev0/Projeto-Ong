@@ -1,17 +1,24 @@
-
-
+import { Navigate } from "react-router-dom";
 import CadastrarAnimal from "../componentes/FormularioCadastro";
-
 import Cabecalho from "../cabecalhos/CabecalhoPadrao";
 
-
 function CadastrarAnimais() {
-    
+
+    const usuarioLogado = JSON.parse(
+        localStorage.getItem("usuarioLogado")
+    );
+
+    if (
+        !usuarioLogado ||
+        usuarioLogado.tipoUsuario !== "ADMINISTRADOR"
+    ) {
+        return <Navigate to="/PaginaInicial" replace />;
+    }
 
     return (
         <section className="cadastrar-animais">
 
-           <Cabecalho />
+            <Cabecalho />
 
             <section className="corpoCadastro">
 
@@ -21,7 +28,7 @@ function CadastrarAnimais() {
                         Insira os dados do animal
                     </h2>
 
-                   <CadastrarAnimal />
+                    <CadastrarAnimal />
 
                 </div>
 
@@ -32,4 +39,3 @@ function CadastrarAnimais() {
 }
 
 export default CadastrarAnimais;
-

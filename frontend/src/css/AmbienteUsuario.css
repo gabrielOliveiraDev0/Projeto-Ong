@@ -682,3 +682,143 @@
     color: #d93636;
     border: 1px solid #ffcaca;
 }
+.lista-animais-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.animal-admin-item {
+    width: 100%;
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    grid-template-areas:
+        "imagem dados"
+        "acoes acoes";
+
+    gap: 14px;
+
+    padding: 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e8ee;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.animal-admin-imagem {
+    grid-area: imagem;
+
+    width: 80px;
+    height: 80px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    align-self: center;
+}
+
+.animal-admin-conteudo {
+    grid-area: dados;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    min-width: 0;
+}
+
+.animal-admin-id {
+    width: fit-content;
+
+    padding: 4px 8px;
+
+    background: #e8f4ff;
+
+    color: #0787e8;
+
+    border-radius: 6px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+.animal-admin-conteudo strong {
+    display: block;
+
+    margin: 0;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    color: #17212b;
+
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+.animal-admin-conteudo p {
+    margin: 0;
+
+    font-size: 13px;
+
+    color: #6f7d88;
+
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: normal;
+}
+
+.acoes-animal-admin {
+    grid-area: acoes;
+
+    width: 100%;
+
+    display: flex;
+
+    gap: 10px;
+
+    padding-top: 12px;
+
+    border-top: 1px solid #edf0f2;
+}
+
+.acoes-animal-admin button {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 10px;
+
+    border-radius: 8px;
+    border: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.acoes-animal-admin button:first-child {
+    background: #1296f3;
+    color: #ffffff;
+}
+
+.botao-remover-animal {
+    background: #fff1f1 !important;
+    color: #df3333 !important;
+
+    border: 1px solid #ffc7c7 !important;
+}

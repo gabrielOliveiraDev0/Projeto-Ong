@@ -28,14 +28,7 @@ function AmbienteUsuario() {
         }
 
         fetch("http://localhost:8080/animais")
-            .then((resposta) => {
-
-                if (!resposta.ok) {
-                    throw new Error("Erro ao buscar animais");
-                }
-
-                return resposta.json();
-            })
+            .then((resposta) => resposta.json())
             .then((dados) => {
                 setAnimais(dados);
             })
@@ -54,22 +47,12 @@ function AmbienteUsuario() {
         fetch(
             `http://localhost:8080/adocoes/usuario/${usuarioLogado.idUsuario}`
         )
-            .then((resposta) => {
-
-                if (!resposta.ok) {
-                    throw new Error("Erro ao buscar solicitações");
-                }
-
-                return resposta.json();
-            })
+            .then((resposta) => resposta.json())
             .then((dados) => {
                 setSolicitacoesAdocao(dados);
             })
             .catch((erro) => {
-                console.error(
-                    "Erro ao buscar solicitações:",
-                    erro
-                );
+                console.error("Erro ao buscar solicitações:", erro);
             });
 
     }, [usuarioLogado?.idUsuario, ehAdministrador]);
@@ -83,25 +66,16 @@ function AmbienteUsuario() {
         fetch(
             `http://localhost:8080/favoritos/usuario/${usuarioLogado.idUsuario}`
         )
-            .then((resposta) => {
-
-                if (!resposta.ok) {
-                    throw new Error("Erro ao buscar favoritos");
-                }
-
-                return resposta.json();
-            })
+            .then((resposta) => resposta.json())
             .then((dados) => {
                 setFavoritos(dados);
             })
             .catch((erro) => {
-                console.error(
-                    "Erro ao buscar favoritos:",
-                    erro
-                );
+                console.error("Erro ao buscar favoritos:", erro);
             });
 
     }, [usuarioLogado?.idUsuario, ehAdministrador]);
+
     useEffect(() => {
 
         if (!usuarioLogado || !ehAdministrador) {
@@ -110,15 +84,20 @@ function AmbienteUsuario() {
 
         const token = localStorage.getItem("token");
 
-        fetch("http://localhost:8080/adocoes/pendentes", {
-            headers: {
-                Authorization: `Bearer ${token}`
+        fetch(
+            "http://localhost:8080/adocoes/pendentes",
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             }
-        })
+        )
             .then((resposta) => {
 
                 if (!resposta.ok) {
-                    throw new Error("Erro ao buscar solicitações pendentes");
+                    throw new Error(
+                        "Erro ao buscar solicitações pendentes"
+                    );
                 }
 
                 return resposta.json();
@@ -180,14 +159,14 @@ function AmbienteUsuario() {
             );
 
         } catch (erro) {
-
-            console.error(
-                "Erro ao remover favorito:",
-                erro
-            );
+            console.error("Erro ao remover favorito:", erro);
         }
     }
-    async function responderSolicitacao(idSolicitacao, acao) {
+
+    async function responderSolicitacao(
+        idSolicitacao,
+        acao
+    ) {
 
         const token = localStorage.getItem("token");
 
@@ -204,13 +183,16 @@ function AmbienteUsuario() {
             );
 
             if (!resposta.ok) {
-                throw new Error("Erro ao responder solicitação");
+                throw new Error(
+                    "Erro ao responder solicitação"
+                );
             }
 
             setSolicitacoesPendentes((atuais) =>
                 atuais.filter(
                     (solicitacao) =>
-                        solicitacao.idSolicitacao !== idSolicitacao
+                        solicitacao.idSolicitacao !==
+                        idSolicitacao
                 )
             );
 
@@ -219,7 +201,10 @@ function AmbienteUsuario() {
             );
 
             if (respostaAnimais.ok) {
-                const dadosAnimais = await respostaAnimais.json();
+
+                const dadosAnimais =
+                    await respostaAnimais.json();
+
                 setAnimais(dadosAnimais);
             }
 
@@ -230,9 +215,12 @@ function AmbienteUsuario() {
                 erro
             );
 
-            alert("Não foi possível atualizar a solicitação.");
+            alert(
+                "Não foi possível atualizar a solicitação."
+            );
         }
     }
+
     async function removerAnimal(idAnimal) {
 
         const confirmar = window.confirm(
@@ -270,9 +258,14 @@ function AmbienteUsuario() {
 
         } catch (erro) {
 
-            console.error(erro);
+            console.error(
+                "Erro ao remover animal:",
+                erro
+            );
 
-            alert("Não foi possível remover o animal.");
+            alert(
+                "Não foi possível remover o animal."
+            );
         }
     }
 
@@ -310,10 +303,12 @@ function AmbienteUsuario() {
                                 className="botao-explorar"
                                 type="button"
                                 onClick={() =>
-                                    navigate("/PaginaVerAnimais")
+                                    navigate(
+                                        "/PaginaVerAnimais"
+                                    )
                                 }
                             >
-                                Explorar animais
+                                Ver animais
                             </button>
 
                         )}
@@ -324,7 +319,9 @@ function AmbienteUsuario() {
                                 className="botao-explorar"
                                 type="button"
                                 onClick={() =>
-                                    navigate("/cadastrarAnimais")
+                                    navigate(
+                                        "/CadastrarAnimais"
+                                    )
                                 }
                             >
                                 + Cadastrar animal
@@ -341,13 +338,13 @@ function AmbienteUsuario() {
                             <button
                                 type="button"
                                 onClick={() =>
-                                    navigate("/cadastrarAnimais")
+                                    navigate(
+                                        "/CadastrarAnimais"
+                                    )
                                 }
                             >
                                 + Adicionar animal
                             </button>
-
-
 
                         </section>
 
@@ -406,13 +403,17 @@ function AmbienteUsuario() {
 
                                                     <div
                                                         className="solicitacao-item"
-                                                        key={solicitacao.idSolicitacao}
+                                                        key={
+                                                            solicitacao.idSolicitacao
+                                                        }
                                                     >
 
                                                         <img
                                                             className="solicitacao-animal-imagem"
                                                             src={
-                                                                solicitacao.animal.imagemAnimal
+                                                                solicitacao
+                                                                    .animal
+                                                                    .imagemAnimal
                                                                     ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
                                                                     : ImgExemplo
                                                             }
@@ -422,17 +423,24 @@ function AmbienteUsuario() {
                                                         <div className="solicitacao-animal-info">
 
                                                             <strong className="solicitacao-animal-nome">
-                                                                {solicitacao.animal.nomeAnimal}
+                                                                {
+                                                                    solicitacao
+                                                                        .animal
+                                                                        .nomeAnimal
+                                                                }
                                                             </strong>
 
                                                             <span className="solicitacao-animal-tipo">
-                                                                {solicitacao.animal.tipoAnimal}
+                                                                {
+                                                                    solicitacao
+                                                                        .animal
+                                                                        .tipoAnimal
+                                                                }
                                                             </span>
 
                                                             <span className="status-solicitacao status-aprovada">
                                                                 ADOTADO
                                                             </span>
-
                                                             <button
                                                                 type="button"
                                                                 onClick={() =>
@@ -504,13 +512,17 @@ function AmbienteUsuario() {
 
                                                     <div
                                                         className="solicitacao-item"
-                                                        key={solicitacao.idSolicitacao}
+                                                        key={
+                                                            solicitacao.idSolicitacao
+                                                        }
                                                     >
 
                                                         <img
                                                             className="solicitacao-animal-imagem"
                                                             src={
-                                                                solicitacao.animal.imagemAnimal
+                                                                solicitacao
+                                                                    .animal
+                                                                    .imagemAnimal
                                                                     ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
                                                                     : ImgExemplo
                                                             }
@@ -520,11 +532,19 @@ function AmbienteUsuario() {
                                                         <div className="solicitacao-animal-info">
 
                                                             <strong className="solicitacao-animal-nome">
-                                                                {solicitacao.animal.nomeAnimal}
+                                                                {
+                                                                    solicitacao
+                                                                        .animal
+                                                                        .nomeAnimal
+                                                                }
                                                             </strong>
 
                                                             <span className="solicitacao-animal-tipo">
-                                                                {solicitacao.animal.tipoAnimal}
+                                                                {
+                                                                    solicitacao
+                                                                        .animal
+                                                                        .tipoAnimal
+                                                                }
                                                             </span>
 
                                                             <span
@@ -587,8 +607,7 @@ function AmbienteUsuario() {
                                             </strong>
 
                                             <p>
-                                                Favorite animais para encontrá-los
-                                                rapidamente depois.
+                                                Favorite animais para encontrá-los rapidamente depois.
                                             </p>
 
                                             <button
@@ -613,13 +632,17 @@ function AmbienteUsuario() {
 
                                                     <div
                                                         className="solicitacao-item"
-                                                        key={favorito.idFavorito}
+                                                        key={
+                                                            favorito.idFavorito
+                                                        }
                                                     >
 
                                                         <img
                                                             className="solicitacao-animal-imagem"
                                                             src={
-                                                                favorito.animal.imagemAnimal
+                                                                favorito
+                                                                    .animal
+                                                                    .imagemAnimal
                                                                     ? `http://localhost:8080/uploads/animais/${favorito.animal.imagemAnimal}`
                                                                     : ImgExemplo
                                                             }
@@ -629,11 +652,19 @@ function AmbienteUsuario() {
                                                         <div className="solicitacao-animal-info">
 
                                                             <strong className="solicitacao-animal-nome">
-                                                                {favorito.animal.nomeAnimal}
+                                                                {
+                                                                    favorito
+                                                                        .animal
+                                                                        .nomeAnimal
+                                                                }
                                                             </strong>
 
                                                             <span className="solicitacao-animal-tipo">
-                                                                {favorito.animal.tipoAnimal}
+                                                                {
+                                                                    favorito
+                                                                        .animal
+                                                                        .tipoAnimal
+                                                                }
                                                             </span>
 
                                                             <div className="favorito-acoes">
@@ -653,7 +684,9 @@ function AmbienteUsuario() {
                                                                     type="button"
                                                                     onClick={() =>
                                                                         removerFavorito(
-                                                                            favorito.animal.idAnimal
+                                                                            favorito
+                                                                                .animal
+                                                                                .idAnimal
                                                                         )
                                                                     }
                                                                 >
@@ -686,207 +719,266 @@ function AmbienteUsuario() {
                                     <div className="painel-titulo">
 
                                         <div className="icone-painel">
+                                            📋
+                                        </div>
+
+                                        <div>
+
+                                            <h2>
+                                                Solicitações de adoção
+                                            </h2>
+
+                                            <p>
+                                                Analise as solicitações enviadas pelos usuários.
+                                            </p>
+
+                                        </div>
+
+                                    </div>
+
+                                    {solicitacoesPendentes.length === 0 ? (
+
+                                        <div className="estado-vazio">
+
+                                            <span>✓</span>
+
+                                            <strong>
+                                                Nenhuma solicitação pendente
+                                            </strong>
+
+                                            <p>
+                                                Novas solicitações aparecerão aqui.
+                                            </p>
+
+                                        </div>
+
+                                    ) : (
+
+                                        <div className="lista-solicitacoes-admin">
+
+                                            {solicitacoesPendentes.map(
+                                                (solicitacao) => (
+
+                                                    <div
+                                                        className="solicitacao-admin"
+                                                        key={
+                                                            solicitacao.idSolicitacao
+                                                        }
+                                                    >
+
+                                                        <div className="solicitacao-admin-topo">
+
+                                                            <img
+                                                                className="solicitacao-animal-imagem"
+                                                                src={
+                                                                    solicitacao
+                                                                        .animal
+                                                                        .imagemAnimal
+                                                                        ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
+                                                                        : ImgExemplo
+                                                                }
+                                                                alt={`Imagem de ${solicitacao.animal.nomeAnimal}`}
+                                                            />
+
+                                                            <div>
+
+                                                                <strong className="solicitacao-animal-nome">
+                                                                    {
+                                                                        solicitacao
+                                                                            .animal
+                                                                            .nomeAnimal
+                                                                    }
+                                                                </strong>
+
+                                                                <p>
+                                                                    {
+                                                                        solicitacao
+                                                                            .animal
+                                                                            .tipoAnimal
+                                                                    }
+                                                                </p>
+
+                                                                <span className="status-solicitacao status-pendente">
+                                                                    PENDENTE
+                                                                </span>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                        <div className="dados-solicitante">
+
+                                                            <h3>
+                                                                Solicitante
+                                                            </h3>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Nome:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao
+                                                                        .usuario
+                                                                        .nomeUsuario
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    E-mail:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao
+                                                                        .usuario
+                                                                        .emailUsuario
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Telefone:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao
+                                                                        .usuario
+                                                                        .telefoneUsuario ||
+                                                                    "Não informado"
+                                                                }
+                                                            </p>
+
+                                                        </div>
+
+                                                        <div className="questionario-adocao">
+
+                                                            <h3>
+                                                                Questionário
+                                                            </h3>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Moradia:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao.tipoMoradia
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Residência permite animais:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao.residenciaPermiteAnimais
+                                                                        ? "Sim"
+                                                                        : "Não"
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Possui outros animais:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao.possuiOutrosAnimais
+                                                                        ? "Sim"
+                                                                        : "Não"
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Tempo sozinho:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao.tempoAnimalSozinho
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Motivo:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao.motivoAdocao
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Experiência:
+                                                                </strong>{" "}
+                                                                {
+                                                                    solicitacao.experienciaComAnimais
+                                                                }
+                                                            </p>
+
+                                                            <p>
+                                                                <strong>
+                                                                    Renda:
+                                                                </strong>{" "}
+                                                                {Number(
+                                                                    solicitacao.rendaMensal
+                                                                ).toLocaleString(
+                                                                    "pt-BR",
+                                                                    {
+                                                                        style: "currency",
+                                                                        currency: "BRL"
+                                                                    }
+                                                                )}
+                                                            </p>
+
+                                                        </div>
+
+                                                        <div className="acoes-solicitacao">
+
+                                                            <button
+                                                                className="botao-aprovar"
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    responderSolicitacao(
+                                                                        solicitacao.idSolicitacao,
+                                                                        "aprovar"
+                                                                    )
+                                                                }
+                                                            >
+                                                                Aprovar
+                                                            </button>
+
+                                                            <button
+                                                                className="botao-recusar"
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    responderSolicitacao(
+                                                                        solicitacao.idSolicitacao,
+                                                                        "recusar"
+                                                                    )
+                                                                }
+                                                            >
+                                                                Recusar
+                                                            </button>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                )
+                                            )}
+
+                                        </div>
+
+                                    )}
+
+                                </article>
+
+                                <article className="painel-lista">
+
+                                    <div className="painel-titulo">
+
+                                        <div className="icone-painel">
                                             +
                                         </div>
 
                                         <div>
-                                            <article className="painel-lista">
-
-                                                <div className="painel-titulo">
-
-                                                    <div className="icone-painel">
-                                                        📋
-                                                    </div>
-
-                                                    <div>
-                                                        <h2>Solicitações de adoção</h2>
-
-                                                        <p>
-                                                            Analise as solicitações enviadas pelos usuários.
-                                                        </p>
-                                                    </div>
-
-                                                </div>
-
-                                                {solicitacoesPendentes.length === 0 ? (
-
-                                                    <div className="estado-vazio">
-
-                                                        <span>✓</span>
-
-                                                        <strong>
-                                                            Nenhuma solicitação pendente
-                                                        </strong>
-
-                                                        <p>
-                                                            Novas solicitações aparecerão aqui.
-                                                        </p>
-
-                                                    </div>
-
-                                                ) : (
-
-                                                    <div className="lista-solicitacoes-admin">
-
-                                                        {solicitacoesPendentes.map((solicitacao) => (
-
-                                                            <div
-                                                                className="solicitacao-admin"
-                                                                key={solicitacao.idSolicitacao}
-                                                            >
-
-                                                                <div className="solicitacao-admin-topo">
-
-                                                                    <img
-                                                                        className="solicitacao-animal-imagem"
-                                                                        src={
-                                                                            solicitacao.animal.imagemAnimal
-                                                                                ? `http://localhost:8080/uploads/animais/${solicitacao.animal.imagemAnimal}`
-                                                                                : ImgExemplo
-                                                                        }
-                                                                        alt={`Imagem de ${solicitacao.animal.nomeAnimal}`}
-                                                                    />
-
-                                                                    <div>
-
-                                                                        <strong className="solicitacao-animal-nome">
-                                                                            {solicitacao.animal.nomeAnimal}
-                                                                        </strong>
-
-                                                                        <p>
-                                                                            {solicitacao.animal.tipoAnimal}
-                                                                        </p>
-
-                                                                        <span className="status-solicitacao status-pendente">
-                                                                            PENDENTE
-                                                                        </span>
-
-                                                                    </div>
-
-                                                                </div>
-
-                                                                <div className="dados-solicitante">
-
-                                                                    <h3>Solicitante</h3>
-
-                                                                    <p>
-                                                                        <strong>Nome:</strong>{" "}
-                                                                        {solicitacao.usuario.nomeUsuario}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>E-mail:</strong>{" "}
-                                                                        {solicitacao.usuario.emailUsuario}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>Telefone:</strong>{" "}
-                                                                        {solicitacao.usuario.telefoneUsuario ||
-                                                                            "Não informado"}
-                                                                    </p>
-
-                                                                </div>
-
-                                                                <div className="questionario-adocao">
-
-                                                                    <h3>Questionário</h3>
-
-                                                                    <p>
-                                                                        <strong>Moradia:</strong>{" "}
-                                                                        {solicitacao.tipoMoradia}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>
-                                                                            Residência permite animais:
-                                                                        </strong>{" "}
-                                                                        {solicitacao.residenciaPermiteAnimais
-                                                                            ? "Sim"
-                                                                            : "Não"}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>
-                                                                            Possui outros animais:
-                                                                        </strong>{" "}
-                                                                        {solicitacao.possuiOutrosAnimais
-                                                                            ? "Sim"
-                                                                            : "Não"}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>
-                                                                            Tempo que o animal ficará sozinho:
-                                                                        </strong>{" "}
-                                                                        {solicitacao.tempoAnimalSozinho}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>Motivo da adoção:</strong>{" "}
-                                                                        {solicitacao.motivoAdocao}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>
-                                                                            Experiência com animais:
-                                                                        </strong>{" "}
-                                                                        {solicitacao.experienciaComAnimais}
-                                                                    </p>
-
-                                                                    <p>
-                                                                        <strong>Renda mensal:</strong>{" "}
-                                                                        {Number(
-                                                                            solicitacao.rendaMensal
-                                                                        ).toLocaleString(
-                                                                            "pt-BR",
-                                                                            {
-                                                                                style: "currency",
-                                                                                currency: "BRL"
-                                                                            }
-                                                                        )}
-                                                                    </p>
-
-                                                                </div>
-
-                                                                <div className="acoes-solicitacao">
-
-                                                                    <button
-                                                                        className="botao-aprovar"
-                                                                        type="button"
-                                                                        onClick={() =>
-                                                                            responderSolicitacao(
-                                                                                solicitacao.idSolicitacao,
-                                                                                "aprovar"
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        Aprovar
-                                                                    </button>
-
-                                                                    <button
-                                                                        className="botao-recusar"
-                                                                        type="button"
-                                                                        onClick={() =>
-                                                                            responderSolicitacao(
-                                                                                solicitacao.idSolicitacao,
-                                                                                "recusar"
-                                                                            )
-                                                                        }
-                                                                    >
-                                                                        Recusar
-                                                                    </button>
-
-                                                                </div>
-
-                                                            </div>
-
-                                                        ))}
-
-                                                    </div>
-
-                                                )}
-
-                                            </article>
 
                                             <h2>
                                                 Animais em tratamento
@@ -915,7 +1007,21 @@ function AmbienteUsuario() {
                                                     key={animal.idAnimal}
                                                 >
 
-                                                    <div>
+                                                    <img
+                                                        className="animal-admin-imagem"
+                                                        src={
+                                                            animal.imagemAnimal
+                                                                ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                                                                : ImgExemplo
+                                                        }
+                                                        alt={`Imagem de ${animal.nomeAnimal}`}
+                                                    />
+
+                                                    <div className="animal-admin-conteudo">
+
+                                                        <span className="animal-admin-id">
+                                                            ID #{animal.idAnimal}
+                                                        </span>
 
                                                         <strong>
                                                             {animal.nomeAnimal}
@@ -949,7 +1055,9 @@ function AmbienteUsuario() {
                                                             className="botao-remover-animal"
                                                             type="button"
                                                             onClick={() =>
-                                                                removerAnimal(animal.idAnimal)
+                                                                removerAnimal(
+                                                                    animal.idAnimal
+                                                                )
                                                             }
                                                         >
                                                             Remover
@@ -1002,7 +1110,21 @@ function AmbienteUsuario() {
                                                     key={animal.idAnimal}
                                                 >
 
-                                                    <div>
+                                                    <img
+                                                        className="animal-admin-imagem"
+                                                        src={
+                                                            animal.imagemAnimal
+                                                                ? `http://localhost:8080/uploads/animais/${animal.imagemAnimal}`
+                                                                : ImgExemplo
+                                                        }
+                                                        alt={`Imagem de ${animal.nomeAnimal}`}
+                                                    />
+
+                                                    <div className="animal-admin-conteudo">
+
+                                                        <span className="animal-admin-id">
+                                                            ID #{animal.idAnimal}
+                                                        </span>
 
                                                         <strong>
                                                             {animal.nomeAnimal}
@@ -1010,6 +1132,11 @@ function AmbienteUsuario() {
 
                                                         <p>
                                                             {animal.tipoAnimal}
+                                                        </p>
+
+                                                        <p>
+                                                            Status:{" "}
+                                                            {animal.statusAnimal}
                                                         </p>
 
                                                     </div>
@@ -1031,7 +1158,9 @@ function AmbienteUsuario() {
                                                             className="botao-remover-animal"
                                                             type="button"
                                                             onClick={() =>
-                                                                removerAnimal(animal.idAnimal)
+                                                                removerAnimal(
+                                                                    animal.idAnimal
+                                                                )
                                                             }
                                                         >
                                                             Remover
