@@ -1,3 +1,4 @@
+import MenuRelatorios from "../componentes/MenuRelatorios";
 import Painel from "../componentes/Painel";
 import ImgExemplo from "../assets/ImgExemplo.png";
 import { useConsulta } from "../servicos/useConsulta";
@@ -22,6 +23,7 @@ export default function PaginaRelatorioAnimais() {
     if (!relatorio) {
         return (
             <Painel titulo="Relatório de animais" erro={erro}>
+            <MenuRelatorios />
                 <p>Carregando...</p>
             </Painel>
         );
@@ -39,6 +41,7 @@ export default function PaginaRelatorioAnimais() {
 
     return (
         <Painel titulo="Relatório de animais" erro={erro}>
+            <MenuRelatorios />
             <p className="relatorio-animais-intro">
                 Acompanhe o estoque atual de animais da ONG e o histórico de entradas e saídas.
             </p>

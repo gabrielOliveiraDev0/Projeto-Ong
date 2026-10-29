@@ -1,3 +1,4 @@
+import PaginaRelatorioMensal from "../paginas/PaginaRelatorioMensal";
 import PaginaRelatorioAnimais from "../paginas/PaginaRelatorioAnimais";
 import PaginaEditarPerfil from "../paginas/PaginaEditarPerfil";
 import PaginaConfiguracoes from "../paginas/PaginaConfiguracoes";
@@ -36,6 +37,7 @@ function Rota() {
     return (
         <BrowserRouter>
             <Routes>
+                <Route path="/RelatorioMensal" element={<Protegida tipos={["ADMINISTRADOR"]}><PaginaRelatorioMensal /></Protegida>} />
                 <Route path="/EditarPerfil" element={<Protegida><PaginaEditarPerfil /></Protegida>} />
                 <Route path="/Configuracoes" element={<Protegida><PaginaConfiguracoes /></Protegida>} />
                 <Route path="/Chat" element={<Protegida><PaginaChat /></Protegida>} />
