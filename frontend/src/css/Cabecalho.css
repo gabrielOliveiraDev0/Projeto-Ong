@@ -1,91 +1,339 @@
-/* Navegação em fluxo normal para evitar sobreposição em telas menores. */
 .cabecalho {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 28px;
-  min-height: 96px;
-  padding: 10px max(32px, calc((100% - 1200px) / 2));
-  background: var(--azul);
+    width: 100%;
+    min-height: 88px;
+
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    gap: 32px;
+
+    box-sizing: border-box;
+
+    padding: 8px max(
+        28px,
+        calc((100% - 1300px) / 2)
+    );
+
+    background: linear-gradient(
+        135deg,
+        #078ef0,
+        #159df5
+    );
+
+    box-shadow:
+        0 3px 14px rgba(0, 85, 155, 0.14);
+
+    position: relative;
+    z-index: 100;
 }
 
-.logo {
-  display: block;
-  width: 65px;
-  height: 72px;
-  object-fit: contain;
+.cabecalho-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cabecalho .logo {
+    display: block;
+
+    width: 58px;
+    height: 66px;
+
+    object-fit: contain;
+
+    transition: transform 0.2s ease;
+}
+
+.cabecalho .botao-home:hover .logo {
+    transform: scale(1.05);
 }
 
 .cabecalho-botoes {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  flex: 1;
-}
-
-.BotaoInteracaoUsuario {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-  width: auto;
-  flex: 0 0 auto;
-}
-@media (max-width: 900px) {
-  .cabecalho {
-    padding-inline: 24px;
-    gap: 18px;
-  }
-
-  .cabecalho-botoes {
-    gap: 8px;
-  }
-
-  .BotaoInteracaoUsuario {
-    gap: 8px;
-  }
-}
-
-@media (max-width: 700px) {
-  .cabecalho {
-    flex-wrap: wrap;
-    padding: 12px 16px;
-    gap: 10px 16px;
-  }
-
-  .logo {
-    width: 48px;
-    height: 56px;
-  }
-
-  .cabecalho-botoes {
-    order: 3;
-    width: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-  }
 
-  .BotaoInteracaoUsuario {
-    margin-left: auto;
-  }
+    gap: 12px;
+
+    min-width: 0;
 }
+
+.cabecalho-botoes button {
+    min-height: 42px;
+
+    padding: 9px 14px;
+
+    background: transparent;
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.cabecalho-botoes button:hover {
+    background: rgba(255, 255, 255, 0.16);
+
+    transform: translateY(-1px);
+}
+
+.cabecalho-acoes {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 9px;
+
+    min-width: 0;
+}
+
 .nome-usuario {
-  color: white;
-  font-weight: 600;
+    max-width: 170px;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin: 0 4px;
+}
+
+.cabecalho-acoes button {
+    min-height: 40px;
+
+    padding: 9px 16px;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.cabecalho-acoes button:hover {
+    transform: translateY(-1px);
+}
+
+.cabecalho-chat {
+    position: relative;
+
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.cabecalho-chat:hover {
+    background: rgba(255, 255, 255, 0.23);
+}
+
+.chat-contador {
+    position: absolute;
+
+    top: -7px;
+    right: -7px;
+
+    min-width: 19px;
+    height: 19px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0 5px;
+
+    box-sizing: border-box;
+
+    background: #ff3f3f;
+    color: #ffffff;
+
+    border: 2px solid #1597f3;
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.botao-perfil {
+    background: #ffffff;
+    color: #0787e8;
+
+    border: 1px solid #ffffff;
+}
+
+.botao-perfil:hover {
+    background: #eef8ff;
+
+    box-shadow:
+        0 5px 14px rgba(0, 66, 115, 0.12);
 }
 
 .botao-sair {
-  background: var(--roxo);
-  font-size: 14px;
-  padding: 10px 22px;
+    background: #6550ff;
+    color: #ffffff;
+
+    border: 1px solid #6550ff;
 }
 
 .botao-sair:hover {
-  background: #5140d5;
+    background: #5140d5;
 }
-.botao-perfil {
-  padding: 10px 22px;
-  font-size: 14px;
+
+.cabecalho-acoes .botao-entrar {
+    background: #ffffff;
+    color: #0787e8;
+
+    border: 1px solid #ffffff;
+}
+
+.cabecalho-acoes .botao-entrar:hover {
+    background: #eef8ff;
+}
+
+.cabecalho-acoes .botao-cadastraUsuario {
+    background: #6550ff;
+    color: #ffffff;
+
+    border: 1px solid #6550ff;
+}
+
+.cabecalho-acoes .botao-cadastraUsuario:hover {
+    background: #5140d5;
+}
+
+@media (max-width: 1100px) {
+
+    .cabecalho {
+        gap: 16px;
+
+        padding-inline: 20px;
+    }
+
+    .cabecalho-botoes {
+        gap: 4px;
+    }
+
+    .cabecalho-botoes button {
+        padding-inline: 9px;
+
+        font-size: 14px;
+    }
+
+    .nome-usuario {
+        max-width: 110px;
+    }
+
+    .cabecalho-acoes button {
+        padding-inline: 12px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .cabecalho {
+        grid-template-columns: auto 1fr;
+        grid-template-areas:
+            "logo acoes"
+            "menu menu";
+
+        gap: 8px 16px;
+
+        padding:
+            10px 18px 12px;
+    }
+
+    .cabecalho-logo {
+        grid-area: logo;
+
+        justify-content: flex-start;
+    }
+
+    .cabecalho-acoes {
+        grid-area: acoes;
+    }
+
+    .cabecalho-botoes {
+        grid-area: menu;
+
+        width: 100%;
+
+        justify-content: center;
+
+        border-top:
+            1px solid rgba(255, 255, 255, 0.2);
+
+        padding-top: 7px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "logo"
+            "acoes"
+            "menu";
+
+        justify-items: center;
+
+        padding: 12px;
+    }
+
+    .cabecalho-logo {
+        justify-content: center;
+    }
+
+    .cabecalho .logo {
+        width: 50px;
+        height: 56px;
+    }
+
+    .cabecalho-acoes {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+    }
+
+    .nome-usuario {
+        max-width: 150px;
+    }
+
+    .cabecalho-botoes {
+        flex-wrap: wrap;
+
+        gap: 4px 8px;
+    }
+
+    .cabecalho-botoes button {
+        min-height: 38px;
+
+        padding: 7px 10px;
+
+        font-size: 13px;
+    }
 }

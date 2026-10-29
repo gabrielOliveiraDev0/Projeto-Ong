@@ -582,3 +582,163 @@
     max-height: 220px;
   }
 }
+.pagina-inicial .inicial-botao-doacao,
+.pagina-inicial .inicial-doacao-principal {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 22px;
+    background: #00aeba;
+    color: #ffffff;
+    border: 1px solid #00aeba;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.pagina-inicial .inicial-botao-doacao:hover,
+.pagina-inicial .inicial-doacao-principal:hover {
+    background: #008f99;
+    border-color: #008f99;
+    transform: translateY(-1px);
+}
+
+.pagina-inicial .inicial-doacao-principal {
+    margin-top: 4px;
+}
+
+.doacao-modal-fundo {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(12, 31, 43, 0.65);
+    backdrop-filter: blur(4px);
+}
+
+.doacao-modal {
+    position: relative;
+
+    width: min(400px, 100%);
+
+    box-sizing: border-box;
+
+    padding: 34px;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe7ed;
+    border-radius: 22px;
+
+    text-align: center;
+
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+}
+
+.doacao-modal-fechar {
+    position: absolute;
+
+    top: 12px;
+    right: 14px;
+
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    background: #eff5f7;
+    color: #456170;
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+.doacao-modal-fechar:hover {
+    background: #e1ecef;
+}
+
+.doacao-modal-etiqueta {
+    display: inline-flex;
+
+    padding: 7px 12px;
+
+    background: #dcf7f5;
+    color: #008e98;
+
+    border-radius: 999px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+}
+
+.doacao-modal h2 {
+    margin: 16px 0 8px;
+
+    color: #17384c;
+
+    font-size: 28px;
+}
+
+.doacao-modal p {
+    margin: 0 0 22px;
+
+    color: #687d89;
+
+    text-align: center;
+    line-height: 1.5;
+}
+
+.doacao-qrcode {
+    width: fit-content;
+
+    margin: 0 auto;
+    padding: 16px;
+
+    display: flex;
+
+    background: #ffffff;
+
+    border: 1px solid #dbe7ec;
+    border-radius: 15px;
+
+    box-shadow: 0 7px 20px rgba(34, 65, 84, 0.08);
+}
+
+.doacao-codigo {
+    display: block;
+
+    margin: 18px 0 8px;
+
+    color: #294858;
+
+    font-size: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+.doacao-modal small {
+    display: block;
+
+    color: #8999a2;
+
+    font-size: 11px;
+}

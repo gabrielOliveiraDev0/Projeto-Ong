@@ -11,10 +11,50 @@ function IconeImpacto({ tipo }) {
                 <ellipse cx="65" cy="31" rx="6" ry="8" transform="rotate(30 65 31)" />
                 <path d="M21 62c-6-8 3-19 9-26 5-7 13-7 19 0 8 8 17 18 12 26-5 8-12 7-20 7s-15 1-20-7Z" />
             </>}
-            {tipo === "apoio" && <>
-                <path d="M9 24h62v36H9zM10 35c8 0 12-4 12-11m37 0c0 7 4 11 12 11M9 49c8 0 12 4 12 11m39 0c0-7 4-11 11-11M16 17l8-10 12 8M63 67l-7 8-13-8" />
-                <ellipse cx="40" cy="42" rx="10" ry="12" />
-            </>}
+            {tipo === "apoio" && (
+                <g
+                    stroke="currentColor"
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="none"
+                >
+                    <path d="M10 38H70L64 61C63 66 59 69 54 69H26C21 69 17 66 16 61Z" />
+
+                    <path d="M14 38C18 27 27 21 40 21C53 21 62 27 66 38" />
+
+                    <circle cx="21" cy="31" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="27" cy="26" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="34" cy="23" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="41" cy="23" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="48" cy="24" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="55" cy="27" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="61" cy="32" r="3.5" fill="currentColor" stroke="none" />
+
+                    <circle cx="25" cy="35" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="32" cy="31" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="39" cy="30" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="46" cy="31" r="3.5" fill="currentColor" stroke="none" />
+                    <circle cx="53" cy="34" r="3.5" fill="currentColor" stroke="none" />
+
+                    <circle cx="33" cy="51" r="2.5" />
+                    <circle cx="38" cy="47" r="2.5" />
+                    <circle cx="43" cy="47" r="2.5" />
+                    <circle cx="48" cy="51" r="2.5" />
+
+                    <path
+                        d="
+                M34 58
+                C34 53 37 50 40 50
+                C43 50 46 53 46 58
+                C46 61 44 63 40 62
+                C36 63 34 61 34 58
+                Z
+            "
+                    />
+                </g>
+            )}
+
             {tipo === "lar" && <>
                 <path d="m6 32 34-24 34 24M16 28v44h48V28" />
                 <path d="M40 58 27 45c-10-11 6-23 13-10 8-13 23-1 13 10Z" />
